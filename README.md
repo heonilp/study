@@ -1,5 +1,9 @@
 # 2021년도 Study
 
+# 알고리즘 공부
+- leetcode 풀기, 현재 진행중이며 하루에 1~3문제 풀기
+- https://github.com/heonilp/study/tree/master/leetcode
+
 # 자바 공부
 - 2021년도는 C++에서 JAVA로 주언어 바꾸기
 
