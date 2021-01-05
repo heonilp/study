@@ -1,7 +1,7 @@
 # 2021년도 Study
 
 # 알고리즘 공부
-- leetcode 풀기, 현재 진행중이며 하루에 1~3문제 풀기
+- leetcode 사람들과 함께 온라인 풀이 스터디 중, 현재 진행중이며 하루에 1~3문제 풀기
 - https://github.com/heonilp/study/tree/master/leetcode
 
 # 자바 공부
