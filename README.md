@@ -5,7 +5,7 @@
 - https://github.com/heonilp/study/tree/master/leetcode
 
 # 자바 공부
-- 2021년도는 C++에서 JAVA로 주언어 바꾸기
+- 2021년도는 C++, JAVA 둘다 열심히 공부하기
 
 # 자바 디자인패턴 공부
 - 인프런 자바 디자인패턴 강의 들으면서 정리, 깃에 코드 올리기
