@@ -31,9 +31,12 @@
 - GoodGid님 스프링 정리 개념정리한거 계속 보기
 - https://github.com/goodGid/Interview/tree/main/Spring
 
+- 코딩의신 Spring Boot , Restful API 등 보기
+- https://www.youtube.com/channel/UCdgj6CLA8xpOjJUu_PTPxXw/videos
+
 - 사이드 프로젝트 1~2개 주제잡고 혼자해보기
-- 1.
-- 2.
+- 1. 게시판 서비스 하나만들어보기
+- 2. 데이터 모니터링 서비스 하나만들어보기 (에너지나 시스템모니터링)
 
 # JPA 공부
 - 자바 ORM 표준 JPA 프로그래밍 - 기본편 강의 들으면서 정리(김영한님, 현재 수강중)
