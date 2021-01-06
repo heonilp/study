@@ -44,13 +44,17 @@
 
 # CS(컴퓨터공학) 전공 정리하기
 - 자료구조, 알고리즘, 네트워크, 운영체제, 데이터베이스 등
+- https://github.com/JaeYeopHan/Interview_Question_for_Beginner
+- https://github.com/WeareSoft/tech-interview
+- https://github.com/gyoogle/tech-interview-for-developer
+- https://goodgid.github.io/Prepared-for-Computer-Science/
 
 # 네트워크 공부
 - HTTP 공부, 인터넷강의 듣고 하기
 - 모든 개발자를 위한 HTTP 웹 기본 지식 강의 들음 (김영한님, 100% 수강)
 - https://www.inflearn.com/course/http-%EC%9B%B9-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/dashboard
 
-# 레디스 공부
+# 데이터베이스 및 레디스 공부
 - 레디스 캐시 처럼 쓰는 것과 동기화 하는 DB로 쓰는 것해보기
 
 # Golang 공부
@@ -91,5 +95,7 @@
 
 # C++ IOCP, Boost Asio strand공부
 - IOCP, Boost Asio strand 공부(면접 질문때 대답못한 것 정리)
+- https://developstudy.tistory.com/63
+
 - TCP 서버/클라 함수,소켓옵션, 니글알고리즘, 용어(RTT, MSS, MTU)
 
