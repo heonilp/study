@@ -55,9 +55,13 @@
 
 # Golang 공부
 - 클라우드에 Golang이 많으니 문법공부와 서버사이드 정리하기, AWS lambda 다시 해보기
+- Go 루틴, 채널 알기
+- http://golang.site/
 
 # 퍼블릭 클라우드 실습
 - AWS, GCP 등
+- 스케일 업 vs 스케일 아웃
+- MSA 관련 서비스 생각해보기 (GATEWAY API)
 
 # CI/CD, MSA 실습/공부
 - 젠킨스 ,도커, 쿠버네티스 공부
@@ -70,16 +74,22 @@
 # 카프카, 레빗MQ 공부
 - 카프카 강의로 기초 공부하기
 - https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=183
+- 왜 카프카를 쓸지 생각해보기
+- ex)DB에 데이터가 쌓여있다고 가정하고 배치처리를 어떻게할것인지?/ 병렬로 처리할 것인지?
 
 # Spark, Hadoop 에코시스템 공부
 - Spark RDD 유명 논문 정리
 - 스파크 기초강의 듣기
 - https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=193
 - https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=115
+
 # C++ 모던 공부
 - 현재 C++ 모던 어디까지 나왔는지 한번 정리해보기
 - 이펙티브 C++ 공부하기
+- More C++ Idioms 공부하기
+- https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms
 
 # C++ IOCP, Boost Asio strand공부
 - IOCP, Boost Asio strand 공부(면접 질문때 대답못한 것 정리)
+- TCP 서버/클라 함수,소켓옵션, 니글알고리즘, 용어(RTT, MSS, MTU)
 
