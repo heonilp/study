@@ -36,6 +36,8 @@
 
 - 사이드 프로젝트 1~2개 주제잡고 혼자해보기
 - 1. 게시판 서비스 하나만들어보기
+- https://github.com/heonilp/springboot/tree/main/myhome
+
 - 2. 데이터 모니터링 서비스 하나만들어보기 (에너지나 시스템모니터링)
 
 # JPA 공부
