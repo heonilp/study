@@ -21,7 +21,7 @@ public class Application {
 
 		circle1.a.x = 1;
 
-		//복사
+		//복사, 이렇게 하지않고 바로 넣으면 동일한 주소값을 가리켜서 동일한게 나온다.
 		Circle circle2 = (Circle) circle1.copy();
 
 		System.out.println(circle1.a.x);
