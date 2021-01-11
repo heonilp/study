@@ -31,6 +31,8 @@
 
 #### 4-1 실행_HellowWord
 
+1. HelloWorldApp **자바프로젝트**로 이클립스에서 컴파일후 실행, 
+
 ``` java
 public class HelloWorldApp {
     public static void main(String args[]) {
@@ -41,8 +43,21 @@ public class HelloWorldApp {
 
 ## 생각해보기  
 ### 1) 클래스 파일은 왜 필요할까요?
+- .java 파일과 .class 파일 사이에 관계는 다음과 같습니다.
+- .java - 컴파일러 - .class파일 - JVM -Hello
+- 즉, .class파일은 .java파일을 컴파일하여 생성됩니다.
+- .java파일은 규칙에 맞게 작성한 모든 소스코드 파일을 말하며 특징은 사람이 읽을수 있는 TEXT로 되있습니다.
+- .class파일는 java bytecode로 구성된 파일입니다.
+- bytecode란 자바의 실행환경에서 실행되기 위한 최적화된 코드의 집합입니다.
+- JVM을 위한 코드이며 자바를 실행할수 있는 모든 장치에서 실행을 가능하게합니다.
 
 ### 2) 이번 강의와 같은 과정을 이클립스 없이 하려면 어떻게 해야 할까요?
+**자바의 컴파일 명령어는 javac , 실행명령어는 java** 입니다.
+1. 윈도우면 cmd, 리눅스면 해당 경로 프로젝트 디렉토리에 감
+2. 패키지 시작부분으로 이동
+3. javac 이름.java, 이름.class 파일이 만들어지면 컴파일에 성공한거임 
+4. 실행방법 java 이름
+5. 자바 내 한글이 있을경우 java -encoding utf-8 이름.java하면 됨
 
 #### 4-2. AS 강의 Editor dose not contain a main type
 
