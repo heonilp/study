@@ -1,17 +1,14 @@
 # 2021년도 Study
 
 ## 알고리즘 공부
-- leetcode 사람들과 함께 온라인 풀이 스터디 중, 현재 진행중이며 하루에 1~3문제 풀기
-- https://github.com/heonilp/study/tree/master/leetcode
+- [leetcode study](https://github.com/heonilp/study/tree/master/leetcode) 사람들과 함께 온라인 풀이 스터디 중, 현재 진행중이며 하루에 1~3문제 풀기
 
 ## 자바 공부
 - 2021년도는 C++, JAVA 둘다 열심히 공부하기
-- 1월 10일부터 쉽게 배우는 자바1 스터디를 하기로 했습니다.
-- https://github.com/heonilp/study/tree/master/JAVA%20study
+- 1월 10일부터 쉽게 배우는 [자바1 스터디](https://github.com/heonilp/study/tree/master/JAVA%20study)를 하기로 했습니다.
 
 ## 자바 디자인패턴 공부
-- 인프런 자바 디자인패턴 강의 들으면서 정리, 깃에 코드 올리기
-- https://www.inflearn.com/course/%EC%9E%90%EB%B0%94-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/dashboard
+- 인프런 자바 디자인패턴 [강의](https://www.inflearn.com/course/%EC%9E%90%EB%B0%94-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/dashboard) 들으면서 정리, 깃에 [코드](https://github.com/heonilp/study/tree/master/Java%20Gof%20Design%20Pattern) 올리기
 
 ## 스프링/스프링부트 공부
 - 스프링(Spring) 프레임워크에 대해서 개념정리 하기
