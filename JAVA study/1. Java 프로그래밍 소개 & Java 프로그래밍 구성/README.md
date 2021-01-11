@@ -31,6 +31,19 @@
 
 #### 4-1 실행_HellowWord
 
+``` java
+public class HelloWorldApp {
+    public static void main(String args[]) {
+        System.out.println("Hello World!!");
+    }
+}
+```
+
+## 생각해보기  
+### 1) 클래스 파일은 왜 필요할까요?
+
+### 2) 이번 강의와 같은 과정을 이클립스 없이 하려면 어떻게 해야 할까요?
+
 #### 4-2. AS 강의 Editor dose not contain a main type
 
 #### 4-3. 실행_Java의 동작원리
