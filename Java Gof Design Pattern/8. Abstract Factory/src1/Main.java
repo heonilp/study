@@ -4,6 +4,8 @@ import abst.Body;
 import abst.Wheel;
 import gt.GtBikeFactory;
 
+//학습목표
+//관련있는 객체의 생성을 가상화할수 있다.
 public class Main {
 
 	public static void main(String[] args) {
