@@ -118,6 +118,11 @@ public class HelloWorldApp {
 ### QUiZ 1 정리
 
 #### Quiz 1 10문항
+
+<div>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/quiz1.JPG" width="30%"></img>
+</div>
+
 1. 다음 중 Java 프로그램 개발을 위한 개발 환경을 제공해주는 프로그램은 어떤 것일까요? Eclipse
 2. 다음 중 HelloWorldApp.java 파일 안에 있는 Class 이름은 어떻게 생성되어야 할까요? HelloWorldApp
 3. 다음 중 Java 프로그램이 맨먼저 실행하는 메서드는 무엇일까요? main
