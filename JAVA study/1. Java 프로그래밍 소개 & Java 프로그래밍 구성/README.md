@@ -369,17 +369,118 @@ public class Variable {
 
 #### 8-2. 변수의 효용
 
+- 코드의 가독성과 재사용을 위해서 여러 방법이 쓰일 수 있지만 변수를 이용하는 것이 그 중에서도 중요한 수단 중 하나입니다.
+
+##### 핵심 단어
+- 코드의 재사용성 :어떤 데이터는 한 두 번 사용되지만, 수백 번 이상 훨씬 많이 사용될 수 있습니다. 이럴 경우 변수로 만들어서 만들면 편리하게 사용할 수 있습니다.
+- 코드의 가독성 : 변수의 이름을 잘 지으면 코드의 의미를 파악할 때 도움이 됩니다.
+
+``` java
+public class Letter {
+    public static void main(String[] args) {
+        String name = "leezche";
+        System.out.println("Hello, "+name+" ... "+name+" ... egoing ... bye");
+         
+        double VAT = 10.0;
+        System.out.println(VAT);
+    }
+```
+
+## 생각해보기 
+
+### 1) 변수의 효용과 변수를 어떻게 사용하면 좋을지 댓글로 공유해 주세요.
+
 #### 8-3. 데이터 타입의 변환 - casting
 
+- 자바에서 변수를 만들 경우에는 데이터 타입을 명시적으로 알려주어야 합니다.
+
+##### 핵심 단어
+
+- 데이터 타입 변환(Casting) : 다른 데이터 타입으로 컨버팅 해주는 것이다.
+
+- Data_and_operation 프로젝트에서 Casting 클래스를 생성합니다.
+
+``` java
+public class Casting {
+    public static void main(String[] args) {       
+        double a = 1.1;
+        double b = 1; //1.0으로 담김
+        double b2 = (double) 1; 
+
+        System.out.println(b);
+         
+        // int c = 1.1; // 정수값이므로 실수값은 버린다.
+        double d = 1.1;
+        int e = (int) 1.1;
+        //실수 1.1을 정수로 변환하기 위해서는 데이터 타입을 명시적으로 변경해 주어야 합니다.
+        System.out.println(e);
+         
+        // 1 to String 
+        String f = Integer.toString(1);
+        //이렇게 Integer 객체의 toString 메소드를 이용하면 숫자를 문자열로 변환할 수 있습니다.
+        System.out.println(f.getClass());
+    }
+}
+```
+
+## 생각해보기 
+
+### 1) Casting에 대해서 알게 된 것을 댓글로 정리해 보세요.
+
+### 2) 실수를 문자열로 변환하려면 어떻게 해야 할까요?
+
+### 3) 정수 1과 정수 2를 나누었을 때 우리가 원하는 값이 나오게 하려면 어떻게 해야 할까요?
 
 ## CHAPTER 9, 10
 
 #### 9-1. 프로그래밍이란 무엇인가
 
-#### 9-2. 프로그램 만들기 - IoT 라이브러리 설치하기
+- 해당 프로그램은 1, 2 ,3 순차적으로 실행
+``` java
+public class Program {
+    public static void main(String[] args) {
+        System.out.println(1);
+        System.out.println(2);
+        System.out.println(3);
+    }
+}
+```
+## 생각해보기 
 
-#### 9-3. IoT 프로그램 만들기
+### 1) Progamming의 의미를 댓글로 공유해 보세요.
+```
+컴퓨터에서 프로그램도 마찬가지로 시간에 따라 실행할 작업들의 순서를 의미합니다.
+이렇게 시간에 따라 컴퓨터가 정해진 순서에 작업을 실행하게 된다면 우리는 업무를 자동적으로 처리할 수 있게 됩니다.
+컴퓨터 언어를 이용해서 프로그램을 만드는 것은 업무의 자동화된 처리를 위해서라고 할 수 있습니다.
+```
 
 #### 10. 디버거
 
+- 이클립스에서 디버거를 사용하는 법을 알아봅니다.
+
+## 생각해보기 
+
+### 1) 디버거와 관련된 아이콘들의 역할을 댓글로 정리해 보세요
+
 ### QUiZ 2 정리
+
+1. 다음 Java 메서드는 어떤 결과값을 출력할까요? System.out.println("10" + "0") -> 답 : 100
+2. 다음 중 Java 에서 사칙 연산자가 아닌 것은 무엇일까요? 답 : x
+3. Java 에서 사용하는 문자열을 관리하기 위한 타입은 무엇일까요? 답 : Sring
+4. 다음 코드는 어떤 결과를 출력하게 될까요? System.out.println("Hello" + "Nice\n" + "To meet you"); 답 : Hello Nice (줄바꿈) To meet you
+5. 다음 코드는 어떤 결과를 출력하게 될까요? System.out.println("Hello! [name]. Do you know \"Java\"?".replace("[name]", "John")); 답: Hello! John. Do you know "Java"?
+6. 다음 중 Java 가 정수를 다루기 위해 사용하는 타입은 무엇일까요? 답 : int
+7. 다음 코드의 출력 결과는 어떻게 될까요? 답 : boostcourse (줄바꿈) hello, 메모 ) System.out.println은 줄바꿈 출력이다.
+``` java 
+String name = "boostcourse";
+System.out.println(name);
+name = "hello";
+System.out.println(name);
+```
+8. 다음 중 Java 가 실수를 다루기 위해 사용하는 타입은 무엇일까요? 답: double
+9. 프로그래밍에서 버그는 수정하기 위한 행위를 뭐라고 할까요? 답: 디버그
+10. 디버그에서 중요한 기능으로 중간에서 흐름을 멈추기 위한 기능은 무엇일까요? 답: breakpoint
+
+
+
+
