@@ -162,6 +162,50 @@ public class HelloWorldApp {
 
 #### 6-2. 데이터 타입
 
+#### 숫자와 문자 데이터 타입과 연산
+
+#### 숫자
+- 자바에서 숫자는 다른 기호와 함께 입력하지 않고 그대로 입력합니다.
+- + 연산자는 덧셈의 연산을 수행합니다.
+ 
+#### 문자
+- 자바에서 문자열은 쌍따옴표("") 안에 적습니다.
+- + 연산자는 결합의 연산을 수행합니다.
+- 문자열 간에는 * 연산자를 사용할 수 없습니다.
+- length 연산은 문자열의 길이를 반환합니다.
+
+1. Data_and_operation **자바프로젝트**로 이클립스에서 컴파일후 실행
+- Datatype.java
+
+``` java
+public class Datatype{
+    public static void main(String[] args) {
+        System.out.println(6); // Number
+        System.out.println("six"); // String
+         
+        System.out.println("6"); // String 6
+         
+        System.out.println(6+6); // 12
+        System.out.println("6"+"6"); // 66
+         
+        System.out.println(6*6); // 36
+//      System.out.println("6"*"6");
+         
+        System.out.println("1111".length()); // 4
+//      System.out.println(1111.length());
+    }
+}
+```
+
+## 생각해보기 
+
+### 1) 숫자에서는 +와 *와 같은 연산자를 사용했는데 문자열에서는 연산은 수행하기 위해 .length()와 같은 형식을 사용했습니다. 숫자에도 연산자 이외의 형식을 가지는 연산 종류가 있을까요?
+- 위에서 말하지 않은 절대값, 제곱, -(뺴기) /(니누기) %(몫), 버림, 반올림, 올림 등 여러가지 있습니다.
+- 자바는 ^라는 기호를 제곱을 구할 때 쓰지 않기 때문데 Math.pow를 사용합니다.
+
+### 2) 문자열에서 쓸 수 있는 다른 연산은 어떤 것들이 있을까요?
+- String을 쓸때, a + b 묶으면 문자열이 두개가 묶여진다.
+
 #### 6-3. 숫자와 연산
 
 #### 6-4. 문자열의 표현
