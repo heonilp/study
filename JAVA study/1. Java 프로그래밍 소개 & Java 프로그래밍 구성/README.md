@@ -108,13 +108,26 @@ public class HelloWorldApp {
 
 - 다음과 같이 실습 하였습니다.
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/swing.JPG" width="30%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/swing.JPG" width="50%"></img>
 </div>
 
 #### 5-3. 안드로이드 애플리케이션 만들기
 
+- 실습이 아니므로 강의보고 넘어갔습니다.
 
 ### QUiZ 1 정리
+
+#### Quiz 1 10문항
+1. 다음 중 Java 프로그램 개발을 위한 개발 환경을 제공해주는 프로그램은 어떤 것일까요? Eclipse
+2. 다음 중 HelloWorldApp.java 파일 안에 있는 Class 이름은 어떻게 생성되어야 할까요? HelloWorldApp
+3. 다음 중 Java 프로그램이 맨먼저 실행하는 메서드는 무엇일까요? main
+4. 다음 코드는 어떤 결과를 출력하게 될까요? System.out.println("Java with me!"); Java with me!
+5. 다음 중 Java 라는 언어 문법에 만들어진 소스 코드 파일은 어떤 것일까요? main.java
+6. Java 파일을 기계가 이해할 수 있도록 .class 파일로 바꾸는 과정을 무엇이라 할까요? 컴파일
+7. 다음 중 Java 프로그램을 동작시키도록 실행환경을 만들어주는 프로그램은 무엇일까요? Java Virtual Machine (JVM)
+8. 다음 중 Java 로 만들 수 있는 것은 무엇이 있을까요? 항목전부 (데스크탑 프로그램, 모바일 어플, IoT제어 프로그램)
+9. 사물을 프로그램으로 제어할 수 있는 기술을 뭐라고 할까요? Internet of Things
+10. 다음 중 안드로이드 어플리케이션을 기본으로 개발할 수 있는 툴은 무엇일까요? Android Studio
 
 
 # JAVA 프로그래밍 구성
