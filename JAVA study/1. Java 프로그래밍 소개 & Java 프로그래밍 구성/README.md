@@ -229,7 +229,6 @@ public class Datatype{
 - 전에 생성했던 Data_and_operation 프로젝트에서 진행
 ``` java
 public class Number {
- 
     public static void main(String[] args) {
         // Operator
         System.out.println(6 + 2); // 8
@@ -250,6 +249,53 @@ public class Number {
 - max, min pow, sqrt, sin cos, tan random, abs 등 제공하는 기능 들 이 많습니다.[Math 클래스 기능들](http://www.tcpschool.com/java/java_api_math)
 
 #### 6-4. 문자열의 표현
+
+##### 핵심 단어
+- 문자(character) 자료형
+- 문자열 리터럴
+- 이스케이프 
+
+> 문자열(String)과 문자(Character)
+```
+문자열은 문자의 나열입니다. 문자는 따옴표('') 안에 입력하여 표현하는데, 한 개의 문자만 포함할 수 있습니다.
+문자는 오직 한 개의 문자만 포함될 수 있지만, 문자열은 1개 이상의 문자들도 포함할 수 있습니다.
+```
+ 
+> 이스케이프 기호
+``` 
+이스케이프 기호는 줄바꿈 기호나 쌍따옴표와 같은 특수한 기호를 문자열에 넣기 위해 사용합니다.
+이스케이프 기호는 역슬래시(\)로 입력할 때는 키보드 상의 원화 기호(\)로 입력하면 됩니다.
+이스케이프 기호는 특정 문자와 결합하여 제어문자로 기능하기도 하고, 쌍따옴표와 같은 특수한 문자와 결합하여 특수한 문자가 일반 문자라고 나타내 주는 역할을 합니다.
+문자열에서 줄바꿈을 하고 싶을 때 문자열 사이에서 바로 줄바꿈을 하면 문법상의 오류가 생기게 됩니다.
+그렇다면 줄바꿈을 하기 위해서는 어떻게 해야 할까요? \n을 줄을 바꾸고 싶은 위치에 삽입하면 됩니다.
+쌍따옴표를 문자열에 입력하고자 할 때에도 쌍따옴표 앞에 역슬래시를 삽입합니다.
+```
+
+``` java
+public class StringApp {
+    public static void main(String[] args) {
+         
+        // Character VS String 
+        System.out.println("Hello World"); // String
+        System.out.println('H'); // Character
+        System.out.println("H"); 
+     
+        System.out.println("Hello "+ "World");
+         
+        // new line
+        System.out.println("Hello \nWorld");
+         
+        // escape
+        System.out.println("Hello \"World\"");// Hello "World"
+    }
+}
+```
+
+## 생각해보기 
+
+### 1) \n과 같은 제어문자들은 왜 생겨나게 된 것일까요?
+
+### 2) \n 이외의 다른 제어문자들은 어떤 것이 있을까요?
 
 #### 6-5. 문자열 다루기
 
