@@ -63,6 +63,23 @@ public class HelloWorldApp {
 5. 자바 내 한글이 있을경우 java -encoding utf-8 이름.java하면 됨
 
 
+### 기타적으로 public static void 선언 이유를 면접에서 많이 물어봅니다.
+#### Java의 Main 
+- Java는 Main에서 시작해서 Main에서 끝난다
+- Main은 여러 클래스와 연결될 수 있는 중심부의 역할이다.
+ 
+#### 매인의 public
+- Main을 실행하는데 있어, Main에서는 다른 클래스의 메소드 등을 호출해야하는데, 막상 Main 자체가 다른 곳에서 접근을 허용하지 않는다면 문제가 생길 수 밖에 없어 Main의 접근제한자를 public으로 선언한 것입니다.
+ 
+#### 메인의 static
+- static은 프로그램이 시작하면 따로 인스턴스화 하지 않아도 method 영역 메모리에 호출되어 진다. 이렇게 호출되어진 것들은 프로그램이 종료되기 까지 유지된다.
+- 즉, 프로그램의 시작과 끝을 함께하는 Main 메소드는 프로그램이 종료되는 시점까지 유지해야하기 때문에 static으로 선언된 것이다.
+ 
+#### 메인의 void
+- Main 메소드는 프로그램이 종료되는 시점까지 유지가 된다. 즉, 만약 반환 타입이 선언되어 있다면 프로그램이 종료될 때 어떤 값을 반환하겠다라는 것인데, 이는 우리가 추구하는 목적과는 상관없는 로직이다.
+- 우리는 프로그램을 사용할 때 프로그램이 구동되는 그 시점에서만 메시지를 주고 받으므로, 프로그램이 종료되는 시점에서 반환되는 값은 전혀 의미가 없는 값이다.
+ 
+
 #### 4-2. AS 강의 Editor dose not contain a main type
 
 ##### 오류의 원인
@@ -201,12 +218,35 @@ public class Datatype{
 
 ### 1) 숫자에서는 +와 *와 같은 연산자를 사용했는데 문자열에서는 연산은 수행하기 위해 .length()와 같은 형식을 사용했습니다. 숫자에도 연산자 이외의 형식을 가지는 연산 종류가 있을까요?
 - 위에서 말하지 않은 절대값, 제곱, -(뺴기) /(니누기) %(몫), 버림, 반올림, 올림 등 여러가지 있습니다.
-- 자바는 ^라는 기호를 제곱을 구할 때 쓰지 않기 때문데 Math.pow를 사용합니다.
+- 자바는 ^라는 기호를 제곱을 구할 때 쓰지 않기 때문에 Math.pow를 사용합니다.
 
 ### 2) 문자열에서 쓸 수 있는 다른 연산은 어떤 것들이 있을까요?
 - String을 쓸때, a + b 묶으면 문자열이 두개가 묶여진다.
 
 #### 6-3. 숫자와 연산
+
+- 핵심 단어 : Math 클래스
+- 전에 생성했던 Data_and_operation 프로젝트에서 진행
+``` java
+public class Number {
+ 
+    public static void main(String[] args) {
+        // Operator
+        System.out.println(6 + 2); // 8
+        System.out.println(6 - 2); // 4
+        System.out.println(6 * 2); // 12
+        System.out.println(6 / 2); // 3
+ 
+        System.out.println(Math.PI); // 3.141592653589793
+        System.out.println(Math.floor(Math.PI));
+        System.out.println(Math.ceil(Math.PI));
+    }
+}
+```
+
+## 생각해보기 
+
+### 1) PI, floor, ceil이외에 Math에서 제공하는 기능이 어떤 것들이 있는지 찾아보고 댓글로 공유해 보세요
 
 #### 6-4. 문자열의 표현
 
