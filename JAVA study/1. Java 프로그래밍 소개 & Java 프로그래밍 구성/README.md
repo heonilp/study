@@ -85,6 +85,10 @@ public class HelloWorldApp {
 
 ## 생각해보기  
 ### 1) 자바의 동작 원리를 설명하시오.
+
+<img src="
+https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/javarun.jpg" width="90%"></img>
+
 - java 파일의 형태로 소스 코드를 작성하면, 컴파일 과정을 거쳐 JVM(Java Virtual Machine, 자바 가상 머신)이 알아들을 수 있는 class 파일로 변환됩니다.
 - 이클립스에서는 자바 파일을 저장할 때 컴파일을 하여 class 파일로 저장합니다.
 - 이클립스에서 실행 버튼을 누르게 되면 JVM에서 class 파일을 읽어들입니다.
