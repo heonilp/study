@@ -332,12 +332,40 @@ public class StringOperation {
 
 ### 2) 이러한 명령들로 어떤 일을 할 수 있을까요?
 
-#### 7. 작심삼일공학
-
-
 ## CHAPTER 8
 
 #### 8-1. 변수의 정의
+
+##### 핵심 단어
+- **변수**(variable)
+- 데이터 타입
+
+- Data_and_operation 프로젝트에서 Variable 클래스를 생성합니다.
+
+``` java
+public class Variable {
+    public static void main(String[] args) {    
+        int a = 1; // Number -> integer  ... -2, -1 , 0, 1, 2 ...
+        System.out.println(a);
+         
+        double b = 1.1; // real number -> double ... -2.0, -1.0, 0, 1.0, 2.0 ...
+        System.out.println(b);
+         
+        String c = "Hello World";
+        System.out.println(c);
+    } 
+}
+```
+
+## 생각해보기 
+
+### 1) 컴퓨터 프로그래밍 언어에서 변수는 수학에서의 변수와 어떻게 다른가요?
+
+### 2) 자바에서는 왜 변수의 데이터 타입을 지정하는지 댓글로 설명해 보세요.
+
+### 3) 자바에서 숫자 데이터의 세부적인 분류에 대해 더 알아보세요.
+
+### 4) 자바에서 변수의 데이터 타입을 바로바로 판단할 수 있다는 것은 어떤 편의성을 가질 수 있을까요?
 
 #### 8-2. 변수의 효용
 
