@@ -104,6 +104,9 @@ public class HelloWorldApp {
 
 #### 5-1. 데스크톱 애플리케이션 만들기
 
+- swing 패키지로 GUI 창에 Hello World!! 띄우기 실습
+
+
 #### 5-3. 안드로이드 애플리케이션 만들기
 
 
