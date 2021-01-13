@@ -247,6 +247,7 @@ public class Number {
 ## 생각해보기 
 
 ### 1) PI, floor, ceil이외에 Math에서 제공하는 기능이 어떤 것들이 있는지 찾아보고 댓글로 공유해 보세요
+- max, min pow, sqrt, sin cos, tan random, abs 등 제공하는 기능 들 이 많습니다.[Math 클래스 기능들](http://www.tcpschool.com/java/java_api_math)
 
 #### 6-4. 문자열의 표현
 
