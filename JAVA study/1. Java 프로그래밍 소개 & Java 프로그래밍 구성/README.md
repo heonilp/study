@@ -299,6 +299,39 @@ public class StringApp {
 
 #### 6-5. 문자열 다루기
 
+##### 핵심 단어
+- String
+- length 메소드
+- replace 메소드
+
+> length와 replace
+```
+length는 지난 시간에서도 잠깐 보았듯이 문자열의 길이를 산출합니다. 
+replace는 두 개의 인자 oldChar, newChar를 받습니다.
+oldChar에는 기존의 문자열에서 바꾸고 싶은 부분을 입력하고 newChar에는 바꾸고자 하는 문자열을 입력합니다.
+```
+ 
+
+- Data_and_operation 프로젝트에서 StringOperation 클래스를 생성합니다.
+
+``` java
+public class StringOperation {
+    public static void main(String[] args) {
+         
+        System.out.println("Hello World".length()); // 11
+        System.out.println("Hello, [[[name]]] ... bye. ".replace("[[[name]]]", "duru"));
+        //즉 이 경우 기존의 "Hello, [[[name]]] ... bye" 문자열에서 "[[[name]]]" 부분을 "duru" 문자열로 치환합니다.
+        //이렇게 문자열에서는 문자열의 길이를 알아내거나, 문자열의 일부를 조작하는 등의 연산을 수행할 수 있습니다.
+    }
+}
+```
+
+## 생각해보기  
+
+### 1) length와 replace외에 String 데이터에서 처리할 수 있는 명령들을 댓글로 공유해 보세요.
+
+### 2) 이러한 명령들로 어떤 일을 할 수 있을까요?
+
 #### 7. 작심삼일공학
 
 
