@@ -106,6 +106,10 @@ public class HelloWorldApp {
 
 - swing 패키지로 GUI 창에 Hello World!! 띄우기 실습
 
+- 다음과 같이 실습 하였습니다.
+<div>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/swing.JPG" width="30%"></img>
+</div>
 
 #### 5-3. 안드로이드 애플리케이션 만들기
 
