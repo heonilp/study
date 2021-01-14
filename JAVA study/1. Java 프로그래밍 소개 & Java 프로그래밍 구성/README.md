@@ -17,7 +17,7 @@
 1. 컴퓨터 프로그래밍 언어 중 하나, **자바**
 2. 1991년 **제임스 고슬링**(James Gosling) 에 대해서 만들어짐
 3. 자바가 설치된 컴퓨터라면 **어디서든 실행**이 가능하다는 특징
-4. 2019년 기준 티오베(www.tiobe.com)의 프로그래밍 언어 인기 순위에서 자바는 1위를 차지
+4. 2019년 기준 티오베 www.tiobe.com 의 프로그래밍 언어 인기 순위에서 자바는 1위를 차지
 5. 인기있는 언어인 자바는 웹 및 안드로이드의 애플리케이션 소프트웨어 개발에 활용
 
 ## 생각해보기 
@@ -247,9 +247,10 @@ public class Number {
 
 ### 1) PI, floor, ceil이외에 Math에서 제공하는 기능이 어떤 것들이 있는지 찾아보고 댓글로 공유해 보세요
 ```
-[Math 클래스 기능들](http://www.tcpschool.com/java/java_api_math)
 - max, min pow, sqrt, sin cos, tan random, abs 등 제공하는 기능 들 이 많습니다.
 ```
+[Math 클래스 기능들 참고](http://www.tcpschool.com/java/java_api_math)
+
 #### 6-4. 문자열의 표현
 
 ##### 핵심 단어
@@ -394,8 +395,8 @@ public class Variable {
 - 실수형 : float, double
 - 문자형 : char
 - 논리형 : boolean
-[각각의 정수형 타입 범위와 메모리 크기값 참고](http://www.tcpschool.com/java/java_datatype_basic)
 ```
+[각각의 정수형 타입 범위와 메모리 크기값 참고](http://www.tcpschool.com/java/java_datatype_basic)
 
 ### 4) 자바에서 변수의 데이터 타입을 바로바로 판단할 수 있다는 것은 어떤 편의성을 가질 수 있을까요?
 - 2번과 동일한 답이라고 생각합니다.
