@@ -113,9 +113,10 @@ public class HelloWorldApp {
 - JVM은 class 파일을 읽고서 그대로 컴퓨터를 동작시키게 됩니다.
  
 ### 2) 왜 자바의 실행 과정 중에 JVM이 끼어있는 것일까요? 컴파일을 거쳐 바로 컴퓨터를 실행시키는 것은 안될까요?
-
+- [자바 메모리 구조 뿌시기  JVM이란? 강의 추천](https://www.youtube.com/watch?v=AWXPnMDZ9I0)
+- [🐥엘리의 GC - 가비지 컬렉션 강의 추천](https://www.youtube.com/watch?v=Fe3TVCEJhzo&t=3s)
 #### 참고
-- https://asfirstalways.tistory.com/158
+- [본강의의 추천 사이트](https://asfirstalways.tistory.com/158)
 
 ## CHAPTER 5 Hello Java World
 
@@ -476,7 +477,7 @@ public class Casting {
 ## 생각해보기 
 
 ### 1) Casting에 대해서 알게 된 것을 댓글로 정리해 보세요.
-- 캐스팅은 하나의 변수타입을 다른 변수 타입으로 변화게 해주는 것이빈다.
+- 캐스팅은 하나의 변수타입을 다른 변수 타입으로 변화게 해주는 것입니다.
 
 ### 2) 실수를 문자열로 변환하려면 어떻게 해야 할까요?
 
