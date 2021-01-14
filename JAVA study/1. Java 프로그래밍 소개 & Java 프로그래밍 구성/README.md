@@ -321,6 +321,32 @@ CR, LF는 타자기에서 나온 용어입니다. 타자기에서 줄바꿈을 �
 - length 메소드
 - replace 메소드
 
+### String StringBuilder StringBuffer 차이 면접에서 물어 보는 질문
+* String
+    * 새로운 값을 할당할 때마다 새로 클래스에 대한 객체가 생성된다.
+    * String에서 저장되는 문자열은 private final char[]의 형태이기 때문에 String 값은 바꿀수 없다.
+        * private: 외부에서 접근 불가
+        * final: 초기값 변경 불가
+    * String + String + String...
+        * 각각의 String 주솟값이 Stack에 쌓이고, Garbage Collector가 호출되기 전까지 생성된 String 객체들은 Heap에 쌓이기 때문에 메모리 관리에 치명적이다.
+    * String을 직접 더하는 것보다는 StringBuffer나 StringBuilder를 사용하는 것이 좋다.
+* StringBuilder, StringBuffer
+    * memory에 append하는 방식으로, 클래스에 대한 객체를 직접 생성하지 않는다.
+    * StringBuilder
+        * 변경가능한 문자열
+        * 비동기 처리
+    * StringBuffer
+        * 변경가능한 문자열
+        * 동기 처리
+        * multiple thread 환경에서 안전한 클래스(thread safe)
+* Java 버전별 String Class 변경 사항
+    * JDK 1.5 버전 이전에서는 문자열 연산(+, concat)을 할 때 조합된 문자열을 새로운 메모리에 할당하여 참조해 성능상의 이슈 존재
+    * JDK 1.5 버전 이후에는 컴파일 단계에서 String 객체를 StringBuilder로 컴파일 되도록 변경됨
+    * 그래서 JDK 1.5 이후 버전에서는 String 클래스를 사용해도 StringBuilder와 성능 차이가 없어짐
+    * 하지만 반복 루프를 사용해서 문자열을 더할 때에는 객체를 계속 새로운 메모리에 할당함
+    * String 클래스를 사용하는 것 보다는 스레드와 관련이 있으면 StringBuffer, 스레드 안전 여부와 상관이 없으면 StringBuilder를 사용하는 것을 권장
+
+
 > length와 replace
 ```
 length는 지난 시간에서도 잠깐 보았듯이 문자열의 길이를 산출합니다. 
