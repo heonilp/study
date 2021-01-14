@@ -246,8 +246,10 @@ public class Number {
 ## 생각해보기 
 
 ### 1) PI, floor, ceil이외에 Math에서 제공하는 기능이 어떤 것들이 있는지 찾아보고 댓글로 공유해 보세요
-- max, min pow, sqrt, sin cos, tan random, abs 등 제공하는 기능 들 이 많습니다.[Math 클래스 기능들](http://www.tcpschool.com/java/java_api_math)
-
+```
+[Math 클래스 기능들](http://www.tcpschool.com/java/java_api_math)
+- max, min pow, sqrt, sin cos, tan random, abs 등 제공하는 기능 들 이 많습니다.
+```
 #### 6-4. 문자열의 표현
 
 ##### 핵심 단어
@@ -294,8 +296,21 @@ public class StringApp {
 ## 생각해보기 
 
 ### 1) \n과 같은 제어문자들은 왜 생겨나게 된 것일까요?
+```
+CR, LF는 타자기에서 나온 용어입니다. 타자기에서 줄바꿈을 하려면 종이를 오른쪽으로 쭉 밀고, 다시 종이를 한 줄 만큼 위로 올립니다. 
+이렇게 종이를 오른쪽으로 밀어서 처음으로 오게 하는 행동을 복귀(Carriage Return)라고 하고, 종이를 위로 올리는 행동을 개행(Line Feed)이라고 합니다.
 
+이제 타자기는 사라지고 컴퓨터와 키보드로 대체되었지만 타자기의 흔적이 완전히 사라지지 않고 남은 것이 CR(\r)과 LF(\n)입니다.
+컴퓨터에서 CR, LF는 둘 다 새 줄, 줄바꿈으로 사용되고 있으며 운영체제 별로 조금씩 차이가 있습니다.
+```
 ### 2) \n 이외의 다른 제어문자들은 어떤 것이 있을까요?
+```
+\n	개행 ( 줄바꿈 )
+\t	탭 ( 8 공백 )
+\'	작은 따옴표 ( 싱글쿼테이션 ) 표시
+\"	큰 따옴표 ( 더블쿼테이션 ) 표시 
+\\	역슬래쉬 표시
+```
 
 #### 6-5. 문자열 다루기
 
@@ -329,8 +344,11 @@ public class StringOperation {
 ## 생각해보기  
 
 ### 1) length와 replace외에 String 데이터에서 처리할 수 있는 명령들을 댓글로 공유해 보세요.
-
 ### 2) 이러한 명령들로 어떤 일을 할 수 있을까요?
+char charAt(int index), int compareTo(String str), String trim(), isEmpty(), String toUpperCase() 등 많습니다.
+자세한 설명은 아래 사이트에서 참조해서 알아봅시자.
+[참고하기](http://www.tcpschool.com/java/java_api_string)
+
 
 ## CHAPTER 8
 
@@ -360,12 +378,27 @@ public class Variable {
 ## 생각해보기 
 
 ### 1) 컴퓨터 프로그래밍 언어에서 변수는 수학에서의 변수와 어떻게 다른가요?
-
+```
+- 수학에서 변수는 x라고 x^2 -2x+1 = 0; 이라고 가정하면 x의 값을 구하는 값이라고 생각하면됩니다. (x-1)^2여서 x=1값이라는 것을 구하는 것이지요.
+- 컴퓨터에서 변수란 변수(variable) 란 데이터(data)를 저장하기 위해 프로그램에 의해 이름을 할당받은 메모리 공간을 의미합니다.
+즉, 변수란 데이터(data)를 저장할 수 있는 메모리 공간을 의미하며, 이렇게 저장된 값은 변경될 수 있습니다.
+```
 ### 2) 자바에서는 왜 변수의 데이터 타입을 지정하는지 댓글로 설명해 보세요.
+- 컴퓨터의 판단에서, 변수에 타입에 따라서 값이 정해지고 값이 버려지고 어떤 문자인지 숫자인지, 참인지, 거짓인지 판단을 할 수 있습니다.
 
 ### 3) 자바에서 숫자 데이터의 세부적인 분류에 대해 더 알아보세요.
+``` java
+자바에서는 다음과 같이 8가지 종류의 기본형 변수를 제공하고 있습니다. 
+
+- 정수형 : byte, short, int, long
+- 실수형 : float, double
+- 문자형 : char
+- 논리형 : boolean
+[각각의 정수형 타입 범위와 메모리 크기값 참고](http://www.tcpschool.com/java/java_datatype_basic)
+```
 
 ### 4) 자바에서 변수의 데이터 타입을 바로바로 판단할 수 있다는 것은 어떤 편의성을 가질 수 있을까요?
+- 2번과 동일한 답이라고 생각합니다.
 
 #### 8-2. 변수의 효용
 
@@ -389,7 +422,23 @@ public class Letter {
 ## 생각해보기 
 
 ### 1) 변수의 효용과 변수를 어떻게 사용하면 좋을지 댓글로 공유해 주세요.
+```
+- 변수는 클린코드 같은 책에서 변수를 왜썼는지 이름이 매우 중요하다고 생각합니다. 변수만 보고 왜 썼는지 가독성(명시성)이 있어야합니다.
+- 변수를 재사용성도 좋지만 딱 쓸것만 선언하여서 다른쪽에 사용못하게 priavte이나 final을 써주어 명시적으로 막는게 좋을것 같습니다.
 
+상수(constant)
+상수는 변수와 마찬가지로 이름을 가지고 있는 메모리 공간으로, 이러한 상수는 선언과 동시에 반드시 초기화해야 합니다.
+C++에서는 const 키워드를 사용하여 상수를 선언하지만, 자바에서는 final 키워드를 사용하여 선언합니다.
+
+변수의 이름 생성 규칙
+
+자바에서는 변수뿐만 아니라 클래스, 메소드 등의 이름을 짓는데 반드시 지켜야 하는 공통된 규칙이 있습니다.
+자바에서 이름을 생성할 때에 반드시 지켜야 하는 규칙은 다음과 같습니다.
+1. 변수의 이름은 영문자(대소문자), 숫자, 언더스코어(_), 달러($)로만 구성할 수 있습니다.
+2. 변수의 이름은 숫자로 시작할 수 없습니다.
+3. 변수의 이름 사이에는 공백을 포함할 수 없습니다.
+4. 변수의 이름으로 자바에서 미리 정의된 키워드(keyword)는 사용할 수 없습니다.
+```
 #### 8-3. 데이터 타입의 변환 - casting
 
 - 자바에서 변수를 만들 경우에는 데이터 타입을 명시적으로 알려주어야 합니다.
@@ -426,11 +475,60 @@ public class Casting {
 ## 생각해보기 
 
 ### 1) Casting에 대해서 알게 된 것을 댓글로 정리해 보세요.
+- 캐스팅은 하나의 변수타입을 다른 변수 타입으로 변화게 해주는 것이빈다.
 
 ### 2) 실수를 문자열로 변환하려면 어떻게 해야 할까요?
 
-### 3) 정수 1과 정수 2를 나누었을 때 우리가 원하는 값이 나오게 하려면 어떻게 해야 할까요?
+-  문자 -> 숫자 
+``` java
+1. String to Int
+String s_num = "10";
+int i_num = Integer.parseInt(s_num); //String -> Int 1번방식
+int i_num2 = Integer.valueOf(s_num); //String -> Int 2번방식
 
+
+2. String to Double, Float
+String s_num = "10";
+double d_num = Double.valueOf(s_num); //String -> Double
+float f_num = Float.valueOf(s_num); //String -> Float
+
+3. String to Long, Short 
+String s_num = "10";
+long l_num = Long.parseLong(s_num); //String -> Long
+short sh_num = Short.parseShort(s_num); //String -> Short
+```
+
+- 숫자 -> 문자 
+``` java
+1. Int to String
+int i_num = 10;
+String s_num;
+		
+s_num = String.valueOf(i_num); //문자 -> 숫자 1번방식
+s_num = Integer.toString(i_num); //문자 -> 숫자 2번방식
+s_num = ""+i_num; //문자 -> 숫자 3번방식
+
+2. Double Float to String
+float f_num = 10.10;
+double d_num = 10.10;
+		
+String s_num;
+
+s_num = String.valueOf(f_num); //Float -> String 1번방식
+s_num = Float.toString(f_num); //Float -> String 2번방식
+		
+s_num = String.valueOf(d_num); //Double -> String 1번방식
+s_num = Double.toString(d_num); //Double -> String 2번방식
+```
+
+### 3) 정수 1과 정수 2를 나누었을 때 우리가 원하는 값이 나오게 하려면 어떻게 해야 할까요?
+- 아마 0.5가 나와야합니다. 따라서 실수형인 double을 써주어야합니다.
+``` java
+double num= 0;
+double a = 1.0;
+double b = 2.0;
+num = a/b;
+```
 ## CHAPTER 9, 10
 
 #### 9-1. 프로그래밍이란 무엇인가
@@ -461,6 +559,7 @@ public class Program {
 ## 생각해보기 
 
 ### 1) 디버거와 관련된 아이콘들의 역할을 댓글로 정리해 보세요
+- 툴이 다다르고 강의에서 설명이 되어있으므로 제외하겠습니다.
 
 ### QUiZ 2 정리
 
