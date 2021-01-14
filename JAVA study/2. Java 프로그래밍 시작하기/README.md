@@ -99,11 +99,12 @@ public class HelloWorldApp{
 <summary>예제보기 - char를 입력 받을 때는 (char)System.in.read 메서드를 이용</summary>
 
 ``` java
+import java.io.IOException; // read는 throws IOException를 써주지않으면 에러가 난다.
 public class HelloWorldApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
          
         //char를 입력 받을 때는 (char)System.in.read 메서드를 이용한다.
-        char ch;
+        char ch; //int형 으로 해서 아스키코드 같은 것 받으면 좋다.
         ch = (char)System.in.read();
         System.out.println(ch);        
     }
