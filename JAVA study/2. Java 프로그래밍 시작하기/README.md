@@ -21,7 +21,9 @@ JOptionPane
 
 - 프로그램의 입력과 출력 : 아래 도식과 같이 프로그램은 입력정보를 받아서 출력을 하는 것이라고 할 수 있습니다.
 
-> 예제 OkJavaGoInHomeInput.java
+<details>
+<summary>예제 보기 OkJavaGoInHomeInput.java</summary>
+
 ``` java
 import javax.swing.JOptionPane;
 import org.opentutorials.iot.DimmingLights;
@@ -56,6 +58,7 @@ public class OkJavaGoInHomeInput {
     
 }
 ```
+</details>
 
 ## 생각해보기 
 
