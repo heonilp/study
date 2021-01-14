@@ -75,12 +75,17 @@
 - [강의 2](https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=115)
 
 ## C++ 모던 공부
+
+- [면접 정리 위주 정리](https://github.com/heonilp/study/tree/master/cpp%20study)
 - 현재 C++ 모던 어디까지 나왔는지 한번 정리해보기
 - 이펙티브 C++ 공부하기
 - [More C++ Idioms](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms) 공부하기
 
 
-## C++ IOCP, Boost Asio strand공부
+## C++ 네트워크, IOCP, Boost Asio strand공부
+
+- [면접 정리 위주 정리](https://github.com/heonilp/study/tree/master/cpp%20Network)
+
 - IOCP, Boost Asio strand 공부(면접 질문때 대답못한 것 정리) [참고 사이트](https://developstudy.tistory.com/63)
 
 - TCP 서버/클라 함수,소켓옵션, 니글알고리즘, 용어(RTT, MSS, MTU)
