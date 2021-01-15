@@ -37,9 +37,16 @@
 
 - RTT (Round-Trip Time) :  네트워크 시작 지점에서 대상 지점으로 이동하고 시작 지점으로 다시 이동하는 데 걸리는 시간 (밀리 초 ms)입니다. 
 
-- MSS(Maximum Segment Size) 
+- MTU(Maximum Transmission Unit) : TCP/IP네트워크 등과 같이 패킷 또는 프레임 기반의 네트웍에서 전송될 수 있는 최대 크기의 패킷 또는 프레임을 말합니다.
 
-- MTU (Maximum Transmission Unit)
+- MSS (Maximum Segment Size) : TCP상( TCP/UDP 가 아니라 그냥 TCP입니다 )에서의 전송할 수 있는 사용자 데이타의 최대크기입니다.
+
+```
+MSS 값은 기본적으로 설정된 MTU 값에 의해 결정됩니다.
+
+MSS= MTU-(IP header크기) - (TCP header크기)
+
+```
 
 - CCU (Concurrent User) : 특정 시점에 접속한 동시 접속자 수
 
