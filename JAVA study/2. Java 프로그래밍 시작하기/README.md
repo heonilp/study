@@ -111,3 +111,46 @@ public class HelloWorldApp {
 }
 ```
 </details>
+
+### 11-2. 입력과 출력 - arguments & parameter
+
+- 핵심 단어
+```
+아규먼트(argument)
+파라미터(parameter)
+배열(array)
+```
+
+- Run 버튼의 팝업 버튼을 클릭하여 Run Configurations 메뉴를 클릭합니다.
+- Argument 탭에서 Program arguments에 위와 같이 입력합니다.
+- 만약 작은따옴표로 동작하지 않는다면 큰따옴표로 시도합니다.
+
+- 아규먼트를 입력하게 되면 main 메소드의 args 파라미터는 아규먼트 값을 받아서 동작하게 됩니다.
+- args는 문자열 배열(array)로 여러 개의 String 데이터가 들어있을 수 있습니다.
+- 인덱스를 통해 배열의 데이터를 꺼내 쓸 수 있고, 인덱스는 0번부터 시작합니다.
+
+## 생각해보기 
+
+### 1) argument와 parameter에 대해서 댓글로 토론해 보세요
+
+- 매개변수(parameter, 파라미터)
+``` java 
+int sum(int a, int b){ // 파라미터
+
+    return a+b;
+}
+```
+
+- 전달인자(argument, 아규먼트)
+``` java
+void sum
+{
+    sum(10 ,20); //전달인자 : 매개변수에 대입하는 값
+}
+```
+
+### 2) 배열은 무엇일까요?
+
+[Array 배열 참고 사이트- 점프 투 자바](https://wikidocs.net/206)
+
+
