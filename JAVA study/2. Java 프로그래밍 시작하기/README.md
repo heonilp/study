@@ -27,8 +27,8 @@ JOptionPane
 
 - 프로그램의 입력과 출력 : 아래 도식과 같이 프로그램은 입력정보를 받아서 출력을 하는 것이라고 할 수 있습니다.
 
-<details>
-<summary>예제 보기 OkJavaGoInHomeInput.java</summary>
+
+- 예제 보기 OkJavaGoInHomeInput.java
 
 ``` java
 import javax.swing.JOptionPane;
@@ -64,7 +64,7 @@ public class OkJavaGoInHomeInput {
     
 }
 ```
-</details>
+
 
 ## 생각해보기 
 
@@ -80,8 +80,8 @@ public class OkJavaGoInHomeInput {
 - Data로 시작하는 클래스 : 자바의 원시 자료형을 출력하기 위한 클래스
 - Buffered로 시작하는 클래스 : 시스템의 버퍼를 사용하는 클래스
 
-<details>
-<summary>예제 보기 - Scanner 사용</summary>
+
+- 예제 보기 - Scanner 사용
 
 ``` java
 import java.util.Scanner;
@@ -100,10 +100,9 @@ public class HelloWorldApp{
     }
 }
 ```
-</details>
-<details>
 
-<summary>예제보기 - char를 입력 받을 때는 (char)System.in.read 메서드를 이용</summary>
+
+- 예제보기 - char를 입력 받을 때는 (char)System.in.read 메서드를 이용
 
 ``` java
 import java.io.IOException; // read는 throws IOException를 써주지않으면 에러가 난다.
@@ -117,7 +116,7 @@ public class HelloWorldApp {
     }
 }
 ```
-</details>
+
 
 ### 11-2. 입력과 출력 - arguments & parameter
 
@@ -300,7 +299,7 @@ Date, Math, PrintWriter 등 다양한 도구들이 있습니다.
 ```
 
 - 클래스: 서로 연관된 변수와 메소드로 구성되고 연관된 클래스를 묶어서 정리한 것을 패키지라는 것을 알았습니다.
-
+- 자바에서는 수학과 관련된 Math 클래스를 제공합니다.
 - ClassApp 클래스
 
 ``` java 
@@ -320,4 +319,54 @@ public class ClassApp {
 
 ### 13-4. 자바 문서 보는 법 - 인스턴스
 
+-핵심 단어
+```
+인스턴스(Instance)
+```
+
+- 인스턴스란: 인스턴스는 클래스를 컴퓨터 상에서 실체화한 것입니다. 
+
+- Math 클래스와 달리 PrintWriter 객체는 new 키워드를 통해 인스턴스를 생성하여 사용합니다.
+``` java
+PrintWriter p1 = new PrintWriter("result1.txt");
+```
+
+``` java
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class InstanceApp {
+ 
+    public static void main(String[] args) throws IOException{
+         
+        PrintWriter p1 = new PrintWriter("result1.txt");
+        p1.write("Hello 1");
+        p1.close();
+         
+        PrintWriter p2 = new PrintWriter("result2.txt");
+        p2.write("Hello 2");
+        p2.close();
+
+    }
+ 
+}
+```
+
+## 생각해보기 
+
+### 1) 인스턴스와 클래스는 무슨 관계인가요?
+
+
 ### 13-5. 자바 문서 보는 법 - 상속
+
+- 클래스 사이에도 계층적인 관계가 존재합니다.
+
+- 핵심 단어
+```
+상속(Inheritance)
+```
+
+
+## 생각해보기 
+
+### 1) 상속이란 무엇인지 댓글로 적어 보세요
