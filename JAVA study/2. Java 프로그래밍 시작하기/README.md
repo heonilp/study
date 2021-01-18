@@ -378,7 +378,7 @@ public class InstanceApp {
 - PrintWriter는 Writer를 확장해서 만들어진 클래스이고, Writer는 Object를 확장해서 만들어진 클래스입니다.
  
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/3.png" width="50%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/3.PNG" width="50%"></img>
 </div>
 
 - 그래서 PrintWriter 클래스는 Writer의 write 메소드를 사용할 수 있고, Object의 toString 메소드를 사용할 수 있습니다.
