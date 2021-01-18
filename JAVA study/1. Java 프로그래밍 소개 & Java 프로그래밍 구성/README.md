@@ -79,7 +79,8 @@
 <img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/javarun.jpg" width="30%"></img>
 </div>
 
-- java 파일의 형태로 소스 코드를 작성하면, 컴파일 과정을 거쳐 JVM(Java Virtual Machine, 자바 가상 머신)이 알아들을 수 있는 class 파일로 변환됩니다.
+- java 파일의 형태로 소스 코드를 작성하면, 컴파일 과정을 거쳐
+- JVM(Java Virtual Machine, 자바 가상 머신)이 알아들을 수 있는 class 파일로 변환됩니다.
 - 이클립스에서는 자바 파일을 저장할 때 컴파일을 하여 class 파일로 저장합니다.
 - 이클립스에서 실행 버튼을 누르게 되면 JVM에서 class 파일을 읽어들입니다.
 - JVM은 class 파일을 읽고서 그대로 컴퓨터를 동작시키게 됩니다.
@@ -96,6 +97,7 @@
 ```
 
 ### 전체적인 흐름
+
 - 자바 소스파일을 Java Complier 가 클래스 파일로 변환하고, Class Loader 가 Runtime Data Area 에 클래스 파일을 적재 시킵니다.
 - Execution Engine 이 자바 메모리에 적재된 클래스 들을 기계어로 변환해 명령어 단위로 실행하고
 - Garbage Collector 는 Heap 영역에 적재된 객체들 중에서 참조되지 않은 객체를 제거합니다.
@@ -105,7 +107,7 @@
 JVM 은 크게 4가지로 구분됩니다.
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/4.png" width="100%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/4.png" width="60%"></img>
 </div>
 
 - Class Loader
@@ -123,12 +125,14 @@ JVM 은 크게 4가지로 구분됩니다.
 Execution Engine 은 Class Loader에 의해 Runtime Data Area 에 적재된 클래스(바이트 코드)들을
 컴퓨터가 이해할 수 있는 기계어로 변경해 명령어 단위로 실행하는 역할을 합니다.
 이때 명령어를 하나씩 실행하는 인터프리터 방식이 있고, 바이트 코드를 네이티브 코드로 변환하는 JIT Compiler 방식이 있습니다.
-
+```
 - Interpreter
+```
 Execution Engine(실행 엔진)은 바이트코드를 명령어 단위 별로 읽어와서 실행한다.
 하지만 인터프리터의 단점을 그대로 가지고 있기 때문에 한 줄 씩 수행하고, 그 때문에 속도가 느리다는 단점을 가지고 있다.
-
+```
 - JIT Compiler
+```
 JIT compiler는 이러한 인터프리터의 단점을 고치기 위해서 도입된 컴파일러이다. 
 적절한 시간에 전체 바이트 코드를 네이티브 코드로 변경해서 Execution Engine이 네이티브로 컴파일된 코드를 실행하는 방식으로 되어 성능을 높일 수 있다.
 ```
@@ -137,7 +141,7 @@ JIT compiler는 이러한 인터프리터의 단점을 고치기 위해서 도�
 
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/5.png" width="100%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/5.png" width="70%"></img>
 </div>
 
 
