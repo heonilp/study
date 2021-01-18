@@ -62,3 +62,39 @@ public:
        }
     }
 };
+
+
+#define _CRT_SECURE_NO_WARNINGS 
+#include <algorithm>
+#include <functional>
+#include <iostream>
+#include <vector>
+
+int main() {
+	std::vector<int> v{ 9, 6, 4, 3, 2, 6, 7, 5, 3 };
+
+	/*
+	std::nth_element(v.begin(), v.begin(), v.end());
+
+	
+	for (int i = 0; i < v.size(); i++)
+	{
+		std::cout << "값은 " << v[i] << '\n';
+	}
+	*/
+
+	std::nth_element(v.begin(), v.begin() + v.size() / 2, v.end());
+	std::cout << "중간값은 " << v[v.size() / 2] << '\n';
+
+	for (int i = 0; i < v.size(); i++)
+	{
+		std::cout << "값은 " << v[i] << '\n';
+	}
+
+
+	std::nth_element(v.begin(), v.begin() + 1, v.end(), std::greater<int>());
+	std::cout << "두 번째로 큰 원소는 " << v[1] << '\n';
+
+	
+	return 0;
+}
