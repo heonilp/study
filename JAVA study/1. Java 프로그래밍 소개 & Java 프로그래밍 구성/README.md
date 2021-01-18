@@ -30,7 +30,6 @@
 
 ## 5. String StringBuilder StringBuffer 차이 설명해주세요.
 
-
 * String
     * 새로운 값을 할당할 때마다 새로 클래스에 대한 객체가 생성된다.
     * String에서 저장되는 문자열은 private final char[]의 형태이기 때문에 String 값은 바꿀수 없다.
@@ -55,9 +54,44 @@
     * 하지만 반복 루프를 사용해서 문자열을 더할 때에는 객체를 계속 새로운 메모리에 할당함
     * String 클래스를 사용하는 것 보다는 스레드와 관련이 있으면 StringBuffer, 스레드 안전 여부와 상관이 없으면 StringBuilder를 사용하는 것을 권장
 
-## 6. final 키워드에 대해서 설명해주세요.
+## 6. Call by value와 Call by reference 차이를 설명해주세요.
 
-## 7. public static void 선언 이유를 면접에서 많이 물어봅니다.
+
+
+## 7. final 키워드에 대해서 설명해주세요.
+
+* **final 키워드**
+  * 개념: 변수나 메서드 또는 클래스가 '변경 불가능'하도록 만든다.
+  * 원시(Primitive) 변수에 적용 시
+    * 해당 변수의 값은 변경이 불가능하다.
+  * 참조(Reference) 변수에 적용 시
+    * 참조 변수가 힙(heap) 내의 다른 객체를 가리키도록 변경할 수 없다.
+  * 메서드에 적용 시
+    * 해당 메서드를 오버라이드할 수 없다.
+  * 클래스에 적용 시
+    * 해당 클래스의 하위 클래스를 정의할 수 없다.
+
+* **finally 키워드**
+  * 개념: try/catch 블록이 종료될 때 항상 실행될 코드 블록을 정의하기 위해 사용한다.
+  * finally는 선택적으로 try 혹은 catch 블록 뒤에 정의할 때 사용한다.
+  * finally 블록은 예외가 발생하더라도 항상 실행된다.
+    * 단, JVM이 try 블록 실행 중에 종료되는 경우는 제외한다.
+  * finally 블록은 종종 뒷마무리 코드를 작성하는 데 사용된다.
+  * finally 블록은 try와 catch 블록 다음과, 통제권이 이전으로 다시 돌아가기 전 사이에 실행된다.
+
+* **finalize() 메서드**
+  * 개념: 쓰레기 수집기(GC, Garbage Collector)가 더 이상의 참조가 존재하지 않는 객체를 메모리에서 삭제하겠다고 결정하는 순간 호출된다.
+  * Object 클래스의 finalize() 메서드를 오버라이드해서 맞춤별 GC를 정의할 수 있다.
+    * `protected void finalize() throws Throwable { // 파일 닫기, 자원 반환 등등 }
+
+
+## 8. JAVA의 public static void 선언 이유를 면접에서 많이 물어봅니다.
+
+``` java
+ public static void main(String[] args){...}
+```
+- public static void 는 java에서의 main() 관례이다. 위와 같은 시그니처를 가진 메소드가 없으면 실행되지 않는다.
+- JVM은 인스턴스가 없는 클래스의 main()을 호출해야하기 때문에 static이어야 한다.
 
 #### Java의 Main 
 - Java는 Main에서 시작해서 Main에서 끝난다
