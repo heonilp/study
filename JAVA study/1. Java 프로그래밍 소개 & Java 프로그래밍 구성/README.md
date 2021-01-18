@@ -181,6 +181,11 @@ Native Method Stack : 자바 언어 이외의 언어로 작성된 코드를 저�
 ```
 
 ## 4. GC(Garbage collection) 설명해주세요
+- [🐥엘리의 GC - 가비지 컬렉션 강의 추천](https://www.youtube.com/watch?v=Fe3TVCEJhzo&t=3s)
+<div>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/6.png" width="50%"></img>
+</div>
+
 
 ### java의 가비지 컬렉션 처리 방법
 * java의 가비지 컬렉션(Garbage Collection) 처리 방법
@@ -193,7 +198,11 @@ Native Method Stack : 자바 언어 이외의 언어로 작성된 코드를 저�
     * Stop the World는 모든 애플리케이션 스레드의 작업이 멈추는 상태
     * 어떤 GC 알고리즘을 사용하더라도, Stop the World는 불가피하며 최소화하기 위해 GC 튜닝을 진행
   
-  ![jvmheap](./images/JVMHeap.png)
+<div>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/8.png" width="50%"></img>
+</div>
+
+
   * 가비지 콜렉터가 들르는 메모리 영역은 Young 영역에 포함되는 Eden, Survivor1, Survivor2와 Old 영역 (Permanent 영역은 Java 1.8 부터 제거)
   * Young 영역에 있는 객체는 각 하위 영역이 가득 차면 Miner GC가 동작하여 더이상 참조되지 않는 객체 제거
   * Old 영역에 있는 객체는 영역이 가득 차면 Major GC(Full GC)가 동작하여 더이상 참조되지 않는 객체 제거
@@ -225,8 +234,11 @@ Native Method Stack : 자바 언어 이외의 언어로 작성된 코드를 저�
   - 따라서 큰 힙 크기를 가질 경우 유리
 - 영역의 참조를 관리할 목적으로 remember set을 만들어 사용(set은 전체 힙의 5% 미만 크기)
 
-![g1gc](./images/g1gc.png)
-- **회색** : 빈 영역 / **빨간색** : Eden 영역 / **빨간색 S** : Survivor 영역 / **파란색** : Old 영역(파란색 H는 크기가 커서 여러 영역 차지하는 객체)
+<div>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/9.png" width="70%"></img>
+</div>
+
+- **회색** : 빈 영역 / **연두색** : Eden 영역 / **노란색 S** : Survivor 영역 / **파란색** : Old 영역(파란색 H는 크기가 커서 여러 영역 차지하는 객체)
 - Young과 Old 영역의 구분 없이 사용
 - 비어있는 영역에 새로 할당한 객체 위치
 - STW 시간 최소화를 위해 병렬 GC 작업 처리(각 스레드가 자신만의 영역을 잡고 작업)
