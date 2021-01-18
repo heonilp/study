@@ -3,9 +3,17 @@
 ## 알고리즘 공부
 - [leetcode study](https://github.com/heonilp/study/tree/master/leetcode) 사람들과 함께 온라인 풀이 스터디 중, 현재 진행중이며 하루에 1~3문제 풀기
 
-## 자바 공부
+## 언어-자바, C++ 공부
 - 2021년도는 C++, JAVA 둘다 열심히 공부하기
+- [오브젝트, 김영호님 저](http://www.yes24.com/Product/Goods/74219491?OzSrank=4) 책 추천 받은 것 읽기 
+### JAVA 
 - 1월 10일부터 쉽게 배우는 [자바1 스터디](https://github.com/heonilp/study/tree/master/JAVA%20study)를 하기로 했습니다.
+
+### C++
+- [면접 정리 위주 정리](https://github.com/heonilp/study/tree/master/cpp%20study)
+- 현재 C++ 모던 어디까지 나왔는지 한번 정리해보기
+- 이펙티브 C++ 공부하기
+- [More C++ Idioms](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms) 공부하기
 
 ## 자바 디자인패턴 공부
 - 인프런 자바 디자인패턴 [강의](https://www.inflearn.com/course/%EC%9E%90%EB%B0%94-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/dashboard) 들으면서 정리, 깃에 [코드](https://github.com/heonilp/study/tree/master/Java%20Gof%20Design%20Pattern) 올리기
@@ -73,14 +81,6 @@
 - [강의 1](https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=193)
 
 - [강의 2](https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=115)
-
-## C++ 모던 공부
-
-- [면접 정리 위주 정리](https://github.com/heonilp/study/tree/master/cpp%20study)
-- 현재 C++ 모던 어디까지 나왔는지 한번 정리해보기
-- 이펙티브 C++ 공부하기
-- [More C++ Idioms](https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms) 공부하기
-
 
 ## C++ 네트워크, IOCP, Boost Asio strand공부
 
