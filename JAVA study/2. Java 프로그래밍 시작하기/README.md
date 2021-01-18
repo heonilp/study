@@ -190,7 +190,7 @@ Arrays.fill(i,1);//i의 모든 index값을 1로 초기화
 	
 //for문을 통해 값을 대입
 for(int m=0;i<i.length;m++) {
-    i[i]=m;
+    i[m]=m;
 }
 
 //foreach문을 통한 배열출력
