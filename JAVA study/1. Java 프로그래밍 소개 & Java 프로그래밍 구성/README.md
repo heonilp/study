@@ -199,7 +199,7 @@ Native Method Stack : 자바 언어 이외의 언어로 작성된 코드를 저�
     * 어떤 GC 알고리즘을 사용하더라도, Stop the World는 불가피하며 최소화하기 위해 GC 튜닝을 진행
 
  
-##### Mark and Sweep, 그리고 Compact
+##### **Mark and Sweep, 그리고 Compact**
 - Mark : GC는 GC Root로 부터 모든 변수를 스캔하면서 각각 어떤 객체를 참조하고 있는지 찾아서 마킹한다.
 - Sweep : Unreachable 객체들을 Heap에서 제거한다.
 - 그리고 Compact Sweep 후에 분산된 객체들을 Heap의 시작 주소로 모아 메모리가 할당된 부분과 그렇지 않는 부분으로 나눈다. 
@@ -207,7 +207,7 @@ Native Method Stack : 자바 언어 이외의 언어로 작성된 코드를 저�
 
 - 힙의 구조
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/8.png" width="50%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/jvm8.png" width="50%"></img>
 </div>
 
 
