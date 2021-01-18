@@ -21,7 +21,7 @@ JOptionPane
 - 프로그램의 입력과 출력
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/1.png" width="30%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/1.png" width="50%"></img>
 </div>
 
 
@@ -240,13 +240,14 @@ UI(User Interface)
 * 우리가 자바 프로그램을 만들고 사용할 때의 단계는 아래 도식과 같습니다.
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/2.png" width="30%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/2.png" width="50%"></img>
 </div>
 
 ## 생각해보기 
 
 ### 1) 자바 API는 무엇인가요?
 ### 2) API와 UI의 차이점은 무엇인가요?
+
 #### 강의내용
 
 ```
@@ -271,7 +272,51 @@ Date, Math, PrintWriter 등 다양한 도구들이 있습니다.
 
 ### 13-2. 자바 문서 보는 법 - 패키지, 클래스, 변수, 메소드
 
+- 핵심 단어
+```
+패키지(Package)
+클래스(Class)
+변수(Variable)
+메소드(Method)
+```
+- JAVA 7문서 보는 방법을 위주로 강의하고 있습니다. 이 부분은 듣기만했습니다.
+- 그리고 패키지, 클래스, 변수 메소드는 중요한 개념이기 때문에 정리하겠습니다.
+
+## 생각해보기 
+
+### 1) 패키지, 클래스, 변수, 메소드에 대해서 댓글로 토론해 보세요
+
 ### 13-3. 자바 문서 보는 법 - 클래스
+
+- 학습 목표
+
+* 클래스의 개념에 대해서 알아봅니다.
+
+- 핵심 단어
+```
+클래스(Class)
+변수(Variable/Field)
+메소드(Method)
+```
+
+- 클래스: 서로 연관된 변수와 메소드로 구성되고 연관된 클래스를 묶어서 정리한 것을 패키지라는 것을 알았습니다.
+
+- ClassApp 클래스
+
+``` java 
+public class ClassApp {
+ 
+    public static void main(String[] args) {
+         //Math 클래스에는 수학과 관련된 여러 변수들과 메소드들이 있습니다
+        System.out.println(Math.PI); //우선 PI 변수는 원주율이 적절한 정밀도로 저장되어 있는 변수입니다.
+        System.out.println(Math.floor(1.6)); //floor 메소드는 특정 소수점 이하에 대해서 버림한 값을 산출합니다.
+        System.out.println(Math.ceil(1.6)); //ceil 메소드는 특정 소수점 이하에 대해서 올림한 값을 산출합니다
+    } 
+}
+```
+## 생각해보기 
+### 1) 클래스가 무엇인지 댓글로 토론해 보세요
+
 
 ### 13-4. 자바 문서 보는 법 - 인스턴스
 
