@@ -85,6 +85,83 @@
 - JVM은 class 파일을 읽고서 그대로 컴퓨터를 동작시키게 됩니다.
 
 ## 3. JVM(JAVA Virtual Machine) 설명해주세요
+### 개념
+- 자바 가상 머신(JVM) 은 자바 바이트 코드(.class 파일)를 OS 에 특화된 코드로 변환(인터프리터와 JIT 컴파일러)하여 실행합니다. 
+- 따라서 자바 가상머신은 자바와 달리 플랫폼 종속적이며, JVM 에 의해 자바가 플랫폼 독립적이게 됩니다.
+
+```
+즉, JVM은 운영체제(OS)와 JAVA 언어간의 중개자 역할을 하면서 어떤 운영체제를 사용하더라도
+같은 JAVA 코드를 이용해서 실행 할 수 있도록 도와준다.
+또한 가장 중요한 메모리 관리를 담당하므로써 개발자가 일일히 객체의 할당된 메모리를 해제하지 않아도 Garbage Collector가 Garbage Collection을 수행한다.
+```
+
+### 전체적인 흐름
+- 자바 소스파일을 Java Complier 가 클래스 파일로 변환하고, Class Loader 가 Runtime Data Area 에 클래스 파일을 적재 시킵니다.
+- Execution Engine 이 자바 메모리에 적재된 클래스 들을 기계어로 변환해 명령어 단위로 실행하고
+- Garbage Collector 는 Heap 영역에 적재된 객체들 중에서 참조되지 않은 객체를 제거합니다.
+
+### JVM 구조
+
+JVM 은 크게 4가지로 구분됩니다.
+- Class Loader
+- Execution Engine
+- **Runtime Data Area** = memory
+- Native
+
+- 클래스 로더(Class Loader) : 로딩, 링크, 초기화 순서로 진행됩니다. 
+```
+클래스 로더라는 이름 그대로 클래스 파일을 적재(Runtime Data Area) 하는 역할을 합니다.
+```
+
+-Execution Engine
+```
+Execution Engine 은 Class Loader에 의해 Runtime Data Area 에 적재된 클래스(바이트 코드)들을
+컴퓨터가 이해할 수 있는 기계어로 변경해 명령어 단위로 실행하는 역할을 합니다.
+이때 명령어를 하나씩 실행하는 인터프리터 방식이 있고, 바이트 코드를 네이티브 코드로 변환하는 JIT Compiler 방식이 있습니다.
+
+- Interpreter
+Execution Engine(실행 엔진)은 바이트코드를 명령어 단위 별로 읽어와서 실행한다.
+하지만 인터프리터의 단점을 그대로 가지고 있기 때문에 한 줄 씩 수행하고, 그 때문에 속도가 느리다는 단점을 가지고 있다.
+
+- JIT Compiler
+JIT compiler는 이러한 인터프리터의 단점을 고치기 위해서 도입된 컴파일러이다. 
+적절한 시간에 전체 바이트 코드를 네이티브 코드로 변경해서 Execution Engine이 네이티브로 컴파일된 코드를 실행하는 방식으로 되어 성능을 높일 수 있다.
+```
+
+그리고 Runtime Data Area 는 5가지로 구성됩니다.
+- Method Area (= Class Area, Code Area, Static Area)
+- Heap Area
+- Stack Area
+- PC registers
+- Native Method stack
+
+```
+메서드 영역(Method Area) : 클래스 멤버 변수 이름, 데이터 타입, 리턴타입, 상수풀, static 변수 등이 저장됩니다. 
+클래스 수준의 정보가 저장됩니다. 여기에 저장된 정보들은 공유 됩니다.
+```
+```
+힙 영역(Heap Area) : new 연산자로 생성된 객체와 배열이 저장됩니다. ex) Event event = new Event(); 로 생성한 event 는 
+스택영역에 저장되며 new 연산자로 생성한 Event() 가 힙 영역에 저장됩니다. event 변수는 힙 영역의 주소값을 가지고 있습니다. 
+여기에 저장된 정보들은 공유 됩니다.
+```
+```
+스택 영역(Stack Area) : 스레드가 생성될 때 마다 생성되는 영역으로, 대표적으로 지역변수가 여기에 저장됩니다. 
+메서드를 호출할 때마다 스택이 개별적으로 생성됩니다.
+따라서 동시성(concurrency) 문제를 해결하기 위해서 메서드에 동기화 블럭(synchronized) 를 지정하는데,
+동기화 블럭 없이 동시성 문제를 해결하는 방법중 하나가, 지역 변수를 이용하는 방법이 있습니다.
+
+```
+```
+PC Register : 쓰레드가 생성될 때마다 생성되는 영역으로 Program Counter 현재 쓰레드가 실행되는 부분의 주소와 명령을 저장하고 있는 영역입니다. 
+이것을 이용해서 쓰레드를 돌아가면서 수행할 수 있게 합니다. 
+쓰레드가 생성되었을때 메서드와 힙 영역은 모든 스레드가 공유하며, PC Register, 스택 영역, Native Stack Area 는 공유되지 않습니다.
+즉, 현재 수행 중인 JVM의 명령 주소를 갖는 부분으로 메모리에 데이터 전달 전에 저장 한다
+```
+```
+Native Method Stack : 자바 언어 이외의 언어로 작성된 코드를 저장하는 메모리 영역입니다.
+즉, Java가 아닌 언어로 작성된 네이티브 코드들을 저장하기 위한 Stack이다. JNI, JNA 모두 이 부분을 이용하여 C/C++ 코드를 수행하기 위해 필요하다. 
+또한 네이티브 메소드의 매개변수, 지역변수 등을 바이트 코드로 저장한다.
+```
 
 ## 4. GC(Garbage collection) 설명해주세요
 
