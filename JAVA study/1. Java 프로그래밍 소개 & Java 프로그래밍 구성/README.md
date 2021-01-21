@@ -186,6 +186,12 @@ Native Method Stack : 자바 언어 이외의 언어로 작성된 코드를 저�
 <img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/6.png" width="50%"></img>
 </div>
 
+- 한마디로 정의: JVM에서 힙 영역에서 사용하지 않는 객체를 삭제하는 프로세스를 말한다.
+
+- 어떤 객체에 유효한 참조가 존재한다면 Reachable, 그렇지 않으면 Unreachable이라고한다.
+1. Stack 영역의 데이터들
+2. method 영역의 static 데이터들
+3. JNI에 의해 생성된 객체들
 
 ### java의 가비지 컬렉션 처리 방법
 * java의 가비지 컬렉션(Garbage Collection) 처리 방법
@@ -384,6 +390,64 @@ Native Method Stack : 자바 언어 이외의 언어로 작성된 코드를 저�
 - 우리는 프로그램을 사용할 때 프로그램이 구동되는 그 시점에서만 메시지를 주고 받으므로, 프로그램이 종료되는 시점에서 반환되는 값은 전혀 의미가 없는 값이다.
 
 ## 9.  JAVA의 깊은복사, 얕은 복사
+
+- [참조] (https://shyunku.tistory.com/38) 하였습니다.
+
+
+1. 얕은 복사(Shallow Copy)
+- 정의
+```
+객체를 복사할 때, 해당 객체만 복사하여 새 객체를 생성한다.
+복사된 객체의 인스턴스 변수는 원본 객체의 인스턴스 변수와 같은 메모리 주소를 참조한다.
+따라서, 해당 메모리 주소의 값이 변경되면 원본 객체 및 복사 객체의 인스턴스 변수 값은 같이 변경된다.
+```
+2. 깊은 복사(Deep Copy)
+- 정의
+```
+객체를 복사 할 때, 해당 객체와 인스턴스 변수까지 복사하는 방식.
+전부를 복사하여 새 주소에 담기 때문에 참조를 공유하지 않는다
+```
+- 보통 자바에서 객체를 복사/복제(clone)을 한다고 하면, 다음과 같이 쓴다.
+- 얕은 복사는 다음과 같다.
+
+``` java 
+CustomClass object = new CustomClass();
+CustomClass copied = object;
+//객체 복사도 얕은 복사에 해당한다.
+
+ArrayList<String> classList = new ArrayList<>();
+classList.add("a");
+classList.add("b");
+classList.add("c");
+classList.add("d");
+ 
+ArrayList<CustomClass> copiedList = new ArrayList<>();
+ 
+copiedList = classList;		//복사? 하지만 깊은 복사가 되지않는다.
+```
+
+- 깊은 복사를 사용하는 방식은 다음과 같다.
+
+``` java 
+public class CustomClass implements Cloneable{
+	...
+    @Override
+    public Object clone(){
+    	//CloneNotSupportedException 처리
+    	return super.clone();
+    }
+}
+ 
+CustomClass object = new CustomClass();
+CustomClass copied = (CustomClass) object.clone();
+
+//우선 해당 객체의 클래스에 Cloneable 인터페이스를 implement해주고 
+//unimplemented function인 clone()를 선언해주면 위와 같이 사용할 수 있다.
+
+//리스트 같은경우는
+copiedList.addAll(classList);
+
+```
 
 # JAVA 프로그램밍 소개
 
