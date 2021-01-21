@@ -602,6 +602,10 @@ struct enable_if<true, T>
 
 ##  최신 모던 C++ 알고 있는가?
 
+- N사에서 질문을 받은 것이므로 추가 예정입니다.
+- [마이크로소프트 모던 C++ 시작하기](https://docs.microsoft.com/ko-kr/cpp/cpp/welcome-back-to-cpp-modern-cpp?view=msvc-160)
+- [C++ 나무위키](https://namu.wiki/w/C%2B%2B) 참조
+
 
 ## 퀵소트 설명, 코드 짜보기 O(nlogn), 최악 O(n^2)
 
