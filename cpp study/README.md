@@ -558,8 +558,130 @@ int _tmain(int argc, _TCHAR* argv[])
 
 ## 모던 C++ 람다함수, SFINAE, constexpr
 
+- SFINAE: Substitution Failure Is Not An Error (치환 실패는 에러가 아님)
+
+- 한마디로, 여기에서의 치환은 C++ 컴파일 과정에서의 타입 치환을 뜻한다.
+- 컴파일 과정에서의 타입 치환이 이루어지는 부분은 바로 템플릿이다!
+
+``` C++
+template <bool,typename T =void>
+struct enable_if
+{};
+ 
+template <typename T>
+struct enable_if<true, T>
+{
+  typedef T type;
+};
+
+```
+- 의도적으로 enable_if를 true인 경우에 대해서만 템플릿 특수화를 하고 있다.
+- 즉, 타입 T를 치환 실패하면 컴파일이 진행되지 않도록 하는 장치로서의 역할을 할 수 있는 것이다.
+
+
+- constexpr
+
+1. 변수에서의 사용
+- const와 constexpr의 주요 차이점은 const 변수의 초기화를 런타임까지 지연시킬 수 있는 반면, constexpr 변수는 반드시 컴파일 타임에 초기화가 되어 있어야 한다.
+
+2. 함수에서 사용
+
+- constexpr 함수는 컴파일러에게 가능하다면, 상수시간에 컴파일해 달라고 요청하는 것이지만 상황에 따라 컴파일 타임에 미리 실행될 수도 있고, 그렇지 못하고 런타임에 실행될 수도 있다.
+
+3. 생성자 함수에서 사용
+- 어떤 클래스로부터 상속받지 않아야 한다/
+
+
+- 람다함수 (※Lambda는 기본적으로 캡쳐 블록'[]', 전달인자 '()', return type을 생략할 수 있습니다.)
+
+1. [] 캡쳐 블록 (사용시 외부 변수를 캡쳐해 람다 몸통에서 사용 가능)
+2. () 전달 인자
+3. -> 반환 타입
+4. {} 함수 몸통
+
 
 ##  최신 모던 C++ 알고 있는가?
 
 
-## 퀵소트 설명, 코드 짜보기
+## 퀵소트 설명, 코드 짜보기 O(nlogn), 최악 O(n^2)
+
+- 해당 사이트 [참조](https://blockdmask.tistory.com/177) 하였습니다.
+
+- 퀵 정렬은 기준점(pivot)을 정하고 앞(left)와 뒤(right)를 비교하면서 정렬을 하는 알고리즘입니다.
+
+* 과정
+ * 리스트에서 임의의 원소를 고릅니다. 그것을 pivot이라 합니다. (일반적으로 가운데 원소를 고릅니다.)
+ * pivot의 앞에는 pivot 보다 작은 원소들로, pivot의 뒤에는 pivot 보다 큰 원소들이 오도록 교환해 줍니다. (divided)
+ * divided 된 두 개의 작은 리스트에 대해 Recursive 하게 위의 과정을 반복합니다.
+ * Recursive의 종료조건은 리스트의 크기가 0 입니다.
+
+
+- 장점: 수행속도가 빠른 정렬 알고리즘이다.
+
+- 단점: 중심값이 같을 경우에는 배열의 순서가 파괴 될 수도 있으며 안정성이 없다는 점이다. 
+
+
+``` c++
+
+//퀵소트 
+ 
+#include<iostream>
+using namespace std;
+ 
+void swap(int *arr,int a, int b)
+{
+    int tmp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = tmp;
+}
+ 
+void QuickSort(int *arr, int start, int end)
+{
+    int pivot = arr[start];
+    int left = start+1;
+    int right = end;
+ 
+    while(left <= right)
+    {
+ 
+        while(arr[left] < pivot){ left++; } //pivot보다 작은 경우는 건너뛰고 크거나 같은경우 멈춤
+        while(arr[right] > pivot) { right--; } //pivot보다 큰 경우는 건너뛰고 작거나 같은경우 멈춤
+ 
+        if(left <= right){ swap(arr, left, right); }
+    }
+ 
+ 
+    if(start < end) 
+    {  //1개로 쪼개질때 까지
+        swap(arr, start, right);   //pivot값과 arr[right] 값 swap
+ 
+        QuickSort(arr, start, right-1);  //앞 부분
+        QuickSort(arr, right+1, end);    //뒷 부분
+    }
+ 
+    return;
+}
+ 
+void Printout(int *arr, int len)
+{
+
+    //출력
+    for(int i=0; i<len ; i++)
+    {
+        cout << "[" << arr[i] << "]";
+    }
+    cout << endl;
+}
+ 
+ 
+int main(void){
+    int arr[7] = {5,3,6,7,1,2,4};
+
+    //범위 넣기 0~6
+    QuickSort(arr, 0, 6);
+    Printout(arr, 7);
+ 
+    return 0;
+}
+
+```
