@@ -79,7 +79,7 @@
 - Spark, RDD 유명 논문 정리
 
 1. Spark: Cluster Computing with Working Sets [논문 다운](https://www.usenix.org/legacy/event/hotcloud10/tech/full_papers/Zaharia.pdf)
-2. Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing [논문 다운](https://www.usenix.org/legacy/event/hotcloud10/tech/full_papers/Zaharia.pdf)
+2. Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing [논문 다운](https://www.usenix.org/system/files/conference/nsdi12/nsdi12-final138.pdf)
 
 - 스파크 기초강의 듣기
 - [강의 1](https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=193)
