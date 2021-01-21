@@ -449,12 +449,112 @@ int main() {
 
 
 ```
+##  move ,forward 그리고 R-value vs L-value 차이
 
-## R-value vs L-value 차이
+- rvalue reference vs universal reference(보편 참조)
+```
+ c++에서 참조는 &와 &&으로 표현됩니다. &는 lvalue 참조를 의미합니다.
+
+ &&은 문맥에 따라서 rvalue 참조 또는 universal(보편) 참조를 의미합니다. (마치 한글의 동음이의어와 같습니다.)
+
+ rvalue 참조는 쉽게 이해가 되지만 universal(보편) 참조가 의미하는 내용은 무엇일까요?
+
+ universal(보편) 참조는 rvalue 참조 또는 lvalue 참조 둘 다 될 수 있다는 것을 의미합니다. 
+```
+
+-  일반적으로 rvalue 참조에는 std::move를 사용하고 universal(보편) 참조는 std::forward를 통해서 전달합니다.
+``` C++
+// rvalue 참조
+void f(Person&& obj) 
+
+// rvalue 참조
+Person&& p1 = Person("ahn", 1985); 
+
+// universal 참조
+// var1는 auto로 명시적이지 않습니다.
+auto && var1 = var2		
+
+// rvalue 참조
+// param은 std::vector로 명시적이고 vector 내부 객체가 T만 연역
+template<typename T>
+void tf(std::vector<T>&& param);
+
+// universal 참조
+// param은 T로 명시적이지 않습니다.
+template<typename T>
+void tf2(T&& param)
+```
+
+- std::move
+``` C++
+ std::move는 전달된 파라미터를 강제로 rvalue 참조로 캐스팅하여 리턴하는 함수입니다. 
+
+ 내부를 살펴보면 간단히 구현되어 있습니다. 캐스팅만 수행하고 어떠한 작업도 하지 않습니다. 
+
+예제 코드를 보면 p1이라는 lvalue를 std::move를 통해서 rvalue로 변환 후 이동 생성자를 통해서 p2를 생성합니다. 
+
+ std::move를 보면 모든 값을 rvalue로 캐스팅 할 수 있을 것 같지만 rvalue로 변환될 수 없는 대상도 있습니다. 
+
+ const Person p1("ahn", 1985);
+    
+// const Person인 p1을 std::move를 통해서 캐스팅합니다. 
+// 하지만 const Person&&으로 변환되고 const가 붙어서 이동 생성자가 채택되지 못하고
+// p2는 복사 생성자로 생성됩니다.
+ Person p2= std::move(p1);
+
+p1의 데이터형을 const Person으로 변환해서 std::move를 실행하면 다른 결과를 확인 할 수 있습니다. 
+
+ p1은 std::move를 통해서 const Person &&로 캐스팅 됩니다. Person 내부에서 생성자를 선택할 때 const 때문에
+
+ 이동 생성자가 채택되지 못하고 복사 생성자를 채택되고 p2는 복사생성자를 통해서 생성됩니다.
+
+ 이것은 코드를 작성자의 의도와는 다르게 동작할 가능성이 높습니다.(std::move를 사용한다는건 이동 연산 선호)
+
+ 이동을 수행 할 객체는 const로 선언하지 말아야 합니다.
+
+```
+
+- std::forward
+
+``` C++
+ 이 함수도 std::move처럼 캐스팅만 수행합니다. std::move와는 다르게 조건에 따라서 다른 값을 리턴합니다. 
+
+ 입력 값이  lvalue 참조가 아니라면 rvalue 참조(이동연산지원)를 리턴하고
+
+ lvalue 참조라면 수정하지 않고 그대로 리턴합니다. 
 
 
-##  move ,forward
+ // lvalue를 캐치하는 함수
+void Catch(Person& p, const char* name)
+{
+    cout << name << "lvalue catch" << endl;
+}
 
+// rvalue를 캐치하는 함수
+void Catch(Person&& p, const char * name)
+{
+    cout << name << "rvalue catch" << endl;
+}
+
+// 전달받은 obj를 std::forward를 통해서 catch 함수로 전달합니다.
+template<typename T>
+void ForwardingObj(T&& obj, const char* name)
+{
+    Catch(std::forward<T>(obj), name);
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+    Person p1("ahn", 1985);
+    ForwardingObj(p1, "p1\t\t=\t");
+    ForwardingObj(std::move(p1), "std::move(p1)\t=\t");
+
+    return 0;
+}
+ 
+ ```
+
+ 
 
 ## 모던 C++ 람다함수, SFINAE, constexpr
 
