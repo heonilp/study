@@ -406,14 +406,173 @@ MSS= MTU-(IP header크기) - (TCP header크기)
 
 ## 동기 vs 비동기 방식 설명
 
+- iocp는 비동기적, select는 동기적. 
+
+select는 선택한 이벤트를 처리 가능할 때를 기다리는. iocp는 처리할 작업을 등록하는 방식.
+
+select는 반환이 되더라도 완료가 된 것이 아닌, 처리가 가능할 때를 의미(또는 타임아웃). 
+
+iocp는 작업을 등록하고 완료를 통지받는 것. 때문에 select의 경우 수신을 걸더라도 버퍼를 등록할 필요가 없고, iocp는 데이터를 담을 버퍼가 필요한 것.
+
 
 ## IOCP 설명
 
 - IOCP 개념
 
+- IOCP는 Window 환경에서 작동하는 제일 흔히 쓰이는 논블로킹 프로세스이다.
+
+- 동기화오브젝트 세마포어의 특성과 큐를 가진 커널오브젝트
+
+- Input Output Completion Port로I/O 처리 완료를 담당하는 포트
+
+- OS 커널 단에서 IO 처리
+
+- Work Thread를 Leader/Follow 패턴을 따르는 Thread Pool로 사용하여최소화의 Context Switching 발생
+
+- 유저 모드에서 Send, Receive 요청 -> OS 커널 단에서 IO 처리 -> 완료 후 Queue에 담김
+ -> 작업하고 있지 않은 Work Thread를 깨움 -> 작업 진행
+
+이전 멀티쓰레드형 서버의 문제는 컨텍스트 스위칭 비용이었다. 하지만 CPU개수만큼만 쓰레드를 사용한다면, 컨텍스트 스위칭 문제는 크게 문제가 되지 않는다. 그러니까 우리는 딱 CPU개수만큼만 쓰레드를 쓰는 서버를 만들고 싶다. 이 막연한 희망사항에 긍정적으로 대답해주는 것이 바로 윈도우의 IOCP이다.
+
+
 - IOCP 함수
 
-- IOCP 스레드, 워커스레드 등
+- 디바이스 리스트
+
+I/O 처리를 하려면 우선 I/O 디바이스(소켓, FD) IOCP에 등록을 해야한다. CreateIoCompletionPort 함수를 통해서 디바이스와 CompletionPort(이하 CP)를 바인딩한다. 그런데 CraeteIoCompletionPort 함수의 이름을 다시 한번 생각해보면 디바이스에 바인딩하는 것과는 조금 의미가 다른것 같다. 실제로 이 함수는 두가지 기능을 한다. 첫 번째는 통지모델인 CP를 생성하고 그 핸들을 반환하는 것. 두 번째는 위에서 말한것처럼 디바이스와 CP를 바인딩하는것. 하나의 함수로 서로다른 두 가지 일을 하니, 가능하다면 다른 이름의 함수로 싸서 사용하는게 좋을 듯 하다.
+``` C+++
+HANDLE WINAPI CreateIoCompletionPort(
+  _In_      HANDLE FileHandle,
+  _In_opt_  HANDLE ExistingCompletionPort,
+  _In_      ULONG_PTR CompletionKey,
+  _In_      DWORD NumberOfConcurrentThreads
+);
+```
+
+함수의 signature는 위와 같다. 첫번째 인자에 I/O 디바이스의 핸들을, 두 번째 인자에 CP의 핸들을 넘겨서 사용한다. 세 번째 인자인 Key에는 유저가 원하는 데이터를 넘겨서, I/O 통지때 같이 받을 수 있다. 디바이스(소켓) 정보가 담긴 객체(ex: 세션)를 넘겨서 사용하면 편리하다. 네번째 인자는 동시에 작동할 쓰레드의 최대 수를 정하는데 사용된다. 우리의 목표는 CPU개수만큼 쓰레드를 쓰는 것이므로 여기에 CPU 개수를 집어넣으면 OK다. 물론 MS도 많은 이들이 같은 목표를 공유한다는 사실을 잘 알기 때문에 0만 넣어도 CPU개수로 척척 맞춰준다. 
+
+HANDLE hPort = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 0);
+CP를 처음 만들때는 위와 같이 하면 된다. CP의 핸들이 반환된다. 이 핸들은 앞으로 종종 사용되니 잘 보관한다.
+
+``` c++
+HANDLE port = CreateIoCompletionPort(socket, hPort, (ULONG_PTR)session, 0);
+```
+디바이스와 연결할 떄는 위와 같이 사용한다. Key는 디바이스에 고유한 정보를 넣어주면 편리하게 쓸 수 있다.
+
+
+- I/O Completion Queue
+
+완료된 I/O들의 정보가 저장되는 대기큐. I/O 완료시 말고도 유저가 직접 PostQueuedCompletionStatus 함수(이하 PQCS)를 호출하여 정보를 직접 집어 넣을 수도 있다. 이 함수를 보면 어떤 정보가 전달되는지 잘 알 수 있다. 
+``` c++
+BOOL WINAPI PostQueuedCompletionStatus(
+  _In_      HANDLE CompletionPort,
+  _In_      DWORD dwNumberOfBytesTransferred,
+  _In_      ULONG_PTR dwCompletionKey,
+  _In_opt_  LPOVERLAPPED lpOverlapped
+);
+```
+통지할 CP를 인자를 결정한다. I/O의 경우 이미 I/O 디바이스와 바인딩된 CP에 전달 될 것이다. 그리고 전송된 바이트의 크기와 Key를 넘길 수 있다. I/O의 경우 디바이스 바인딩할 때 미리 넣어둔 그 Key가 전달된다. 마지막으로 버퍼가 담긴 Overlapped 구조체를 넘겨줄 수 있다. 기존 Overlapped I/O 함수에서 전달하는 Overlapped 구조체가 이에 해당한다. 위에서 언급한 정보들을 활용하면 완료된 I/O에 대해서 충분히 잘 처리할 수 있다. 이렇게 전달한 정보들은 I/O가 완료되면 Completion Queue 에 저장되어 쓰레드가 나타나 자신을 처리해주기만을 기다리게 된다.
+
+- Waiting Thread Queue
+
+쓰레드들이라고 노는건 아니다. 다만 바쁘거나 나설 자리가 없을 뿐 (우리가 활성화할 쓰레드 개수를 제한한 것을 잊지말자). 사용자는 쓰레드를 만들어 대기상태로 만들어야 한다. 이때 사용하는 함수가 GetQueuedCompletionStatus (이하 GQCS) 이다. 이름만 보면 바로 I/O 정보를 뽑아올 것 같지만, 우리가 앞에서 말했던것을 곰곰히 생각해보면 왜 그러면 안되는지를 알 수 있을 것이다. 정보를 받아 올 수 있는 상황이 될때까지, 즉 자신이 올라갈 빈 CPU공간이 있고(허용된 활성화 쓰레드 > 현재 활성화된 쓰레드) && 자신을 필요로 하는 완료된 I/O가 있는 경우에 비로소 이 정보를 받아 올 수 있다. 이런 조건이 맞아 떨어지지 않으면, 설정한 timeout까지 이 쓰레드는 대기상태가 된다. 
+
+- Release Thread List
+
+대기상태가 풀리고 쓰레드가 활성화 됬다는 것은 (timeout 제외), 드디어 I/O를 처리할 수 있다는 뜻이다. I/O장치 또는 PQCS로 보낸 정보를 GetQueuedCompletionStatus 함수를 통해서 받아온다.
+
+``` C++
+BOOL WINAPI GetQueuedCompletionStatus(
+  _In_   HANDLE CompletionPort,
+  _Out_  LPDWORD lpNumberOfBytes,
+  _Out_  PULONG_PTR lpCompletionKey,
+  _Out_  LPOVERLAPPED *lpOverlapped,
+  _In_   DWORD dwMilliseconds
+);
+
+```
+생긴것을 보면 딱 Post와 짝이다. 마지막 인자는 미리 언급한 timeout 설정 시간이다. 마음껏 I/O 처리를 하고난 다음 다시 GetQueuedCompletionStatus를 호출하면 다시 대기상태로 들어간다. 이 함수를 다시 호출하지 않으면 다른 쓰레드가 동작할 수 없으니 조심해야한다. 
+
+- Paused Thread List
+
+엄밀히 말하자면 Released Thread Queue의 마지막 문장은 잘못되었다. Released List에 있는 쓰레드, 즉 활성화된 쓰레드 중에서 Blocking 상태에 빠진녀석들을 제대로 처리하지 않는다면 비효율적이다. GQCS를 호출하지 않아도 쓰레드가 Blocking상태에 빠지면, IOCP는 똑똑하게 그것을 감지하여 이 Paused Thread List에 집어넣는다. 그러면 가용 쓰레드 공간이 늘어나서 CPU가 필요한 다른 쓰레드에게 리소스를 양도할 수 있는 것이다. 
+
+
+
+- IOCP 다른 모델 비교, 스레드, 워커스레드 등
+
+1. IOCP
+
+- Input Output Completion Port로I/O 처리 완료를 담당하는 포트
+- OS 커널 단에서 IO 처리
+- Work Thread를 Leader/Follow 패턴을 따르는 Thread Pool로 사용하여최소화의 Context Switching 발생
+- 유저 모드에서 Send, Receive 요청 -> OS 커널 단에서 IO 처리 -> 완료 후 Queue에 담김
+ -> 작업하고 있지 않은 Work Thread를 깨움 -> 작업 진행
+
+2. Select
+
+- Select의 경우는 모든 FD( 파일 디스크립터 )를 순회 하면서 작업( Read/ Write/ Error)이 있는지 확인 하는 모델
+
+select의 정체성
+
+select를 사용해서 I/O의 상황을 알기 위해서는 프로세스가 커널에게 직접 상황 체크를 요청해야한다. 
+프로세스가 커널의 상황을 지속적으로 확인하고 
+그에 맞는 대응을 하는 형태로 구성되기 때문에 프로세스와 커널이 서로 동기화된 상태에서 
+정보를 주고 받는 형태로 볼 수 있다. 따라서 select의 통지형태를 동기형 통지방식이라 부를 수 있다. 
+
+그리고 select 그 자체는 I/O를 담당하지 않지만, 통지하는 함수의 호출방식이 timeout에 따라 
+non-blocking 또는 blocking 형태가 된다. timeout을 설정하지 않으면, 관찰 대상이 변경되지 않는 이상 
+반환되지 않으므로 blocking 함수가 되고, timeout이 설정되면 주어진 시간이 지나면 시간이 
+다되었다는 정보를 반환하므로 non-blocking 함수가 된다. 
+따라서 전체 파일디스크립터를 순회하면서 FD_ISSET을 하는 문제는 더이상 발생하지 않는다.
+
+- epoll의 정체성
+epoll은 select의 단점을 많이 개선한 형태의 통지방식이다. 
+FD_SET을 운영체제가 직접 관리하는 것으로 많은 부분이 개선되었다.
+ 하지만 그 본질적인 동작 구조는 select와 크게 다르지 않다. 
+프로세스가 커널에게 지속적으로 I/O 상황을 체크하여 동기화 하는 개념은 여전히 유효하다.
+ 따라서 epoll의 통지모델 역시 동기형 통지모델이다. 
+그리고 timeout개념이 select와 동일한 방식으로 동작하기 때문에 timeout에 들어온 인자가 어떠냐에 따라
+ blocking이기도 하고 non-blocking이기도 하다. 따라서 epoll의 전체적인 개념모델은 select와 같다고 생각한다.
+
+3.EPoll
+-Event Poll로 FD( 파일 디스크립터 )들을 OS 단에서 관리하며 유저 모드에서 처리 할 내용이 있는지 확인
+
+<div>
+<img src="https://github.com/heonilp/study/blob/master/cpp%20Network/pc/3.PNG" width="60%"></img>
+</div>
+
+1. 비동기 I/O 시작
+동기 함수(Connect Close Accept Send)과 같은 역할을 하는 비동기 함수들(AccpetEX, WSASend, WSARecv...)을 실행해서 윈도우 I/O에 넘긴다. 이 동작을 거친 뒤에는 프로그램의 흐름이 다시 호출한 쓰레드로 바로 돌아온다. (비동기)
+
+2. 비동기 입출력 완료
+비동기 입출력이 윈도우 I/O에서 종료되면 IOCP라는 항구(Port)에 쌓이게 되는데 이 쌓이는 자료구조는 Queue 이다.
+
+3. GetQueuedCompletionStatus
+쓰레드 중에서 작업이 끝난, 그러니까 할 일이 없는 쓰레드에서 GetQueuedCompletionStatus를 호출하면 IOCP에서 완료된 내용을 꺼내서 받을 수 있다.
+
+
+<div>
+<img src="https://github.com/heonilp/study/blob/master/cpp%20Network/pc/4.PNG" width="60%"></img>
+</div>
+
+1. 작업자 쓰레드(Worker Thread)
+[IOCP 흐름]  여러 개의 쓰레드가 존재하는데 IOCP에서는 이 쓰레드를 작업자 쓰레드라고 부른다.
+
+2. Overlapped
+Overlapped는 본래 IOCP가 아닌 Overlapped 모델에서 사용하는 구조체이다.
+이 구조체를 이해하기 위해서는 Overlapped 모델에 대한 설명을 한번 읽어보는 것이 좋다.
+[Overlapped 모델에 대한 설명](https://www.joinc.co.kr/w/Site/win_network_prog/doc/overlapped)
+
+비동기 Recv()를 예로 들자면
+
+1. Overlapped을 초기화(비워줌)해서 넘겨줌.
+2. Window I/O에서 Overlapped의 비동기 입출력 결과(위 그림에서는 완료?)와 버퍼가 채워짐.
+3. Recv()의 결과를 받는 부분에서 채워진 결과를 토대로 처리.
+와 같은 방식으로 사용된다.
+
+
+Overlapped는 사용자가 커스터마이징이 가능해서 Overlapped에  정보를 같이 담아서 보내고, 수신받을 때 결과를 분석하는 데 사용할수 있다.
 
 
 ## C++ Boost Asio 설명
@@ -421,20 +580,82 @@ MSS= MTU-(IP header크기) - (TCP header크기)
 
 - C++ Boost Asio 개념
 
+ Boost.Asio는 주로 네트워킹과 몇몇 다른 저수준의 입력/출력 프로그래밍을 위한 크로스 플랫폼 C++ 라이브러리이다.
+Boost.Asio는 네트워킹 뿐만 아니라 COM 시리얼 포트, 파일 등등을 위해 동작하는 입력과 출력의 개념을 성공적으로 추상화시켰다. 이들 위에서, 여러분은 입력 혹은 출력 프로그래밍을 동기적으로 혹은 비동기적으로 할 수 있다.
+이 라이브러리는 이식 가능하고 대부분의 운영체제에 걸쳐서 동작하며, 수천의 동시 접속을 넘어 잘 확장된다. 네트워킹 부분은 BSD 소켓으로부터 영감을 받았다. 
+이것은 TCP 소켓, UDP 소켓, ICMP 소켓들을 다루는 API를 제공하며, 여러분이 원한다면 여러분 자신만의 프로토콜로 확장시킬 수 있다.
 
 - C++ Boost Asio 함수
+예전에 추천 받았던 CPPCON 영상이며 설명이 잘되있습니다.
+[C++ Boost ASIO CPPCON 강의영상](https://www.youtube.com/watch?v=rwOv_tw2eA4)
+
+## - C++ Boost Asio 스레드 , 워커스레드, strand 설명 
+
+- [strand 설명 영어 사이트](https://www.crazygaze.com/blog/2016/03/17/how-strands-work-and-why-you-should-use-them/)
+- [strand 설명 해석 사이트](https://blog.naver.com/njh0602/220715956896)
+- [많이 참고한 사이트](https://developstudy.tistory.com/63)
+- [boost Asio 참고사이트](https://popcorntree.tistory.com/154)
+
+- Strand는 어떤 작업을 핸들러 단위로 쪼개서 멀티 스레드로 수행하는 것이다.
+예를 들어 일반적인 온라인 게임 서버에서 동기화 단위는 Room일 것이다. Room 밖에서 서로 통신하는 일이 없는 이상, Room 별로 동기화하고, 나머지는 굳이 동기화하지 않아도 되기 때문이다.
+
+그래서 이 Room을 핸들러 단위로 하고, Strand를 사용하면 명시적인 Lock 없이 멀티스레딩 수행이 가능해진다.
+
+그림으로 보면 이해가 더 쉬울테니 그림으로 나타내 보았다.
+<div>
+<img src="https://github.com/heonilp/study/blob/master/cpp%20Network/pc/6.PNG" width="60%"></img>
+</div>
+
+Lock을 사용하면 그림과 같이 같은 핸들러(mutex)를 동기화시키기 위해서 끝날 때까지 대기해야 한다. 이때, Strand를 사용하면 다음과 같이 수행이 가능하다.
+<div>
+<img src="https://github.com/heonilp/study/blob/master/cpp%20Network/pc/7.PNG" width="60%"></img>
+</div>
+
+Strand를 사용하면 같은 핸들러(Room)가 겹치지 않게 Strand가 알아서 함수를 실행시켜 준다. 심지어 Strand 별로 호출 순서도 보장해준다.
+
+지금은 간단히 룸이 2개에 스레드가 2개여서 굳이? 스럽지만, 룸이 몇백몇천개고 스레드가 몇십 개가 됐을 때 Room을 동기화 하기 위해서 여기저기 Lock을 거는 것은 끔찍한 일이 아닐 수 없는데, Strand를 사용하면 명시적인 Lock 없이도 멀티 스레드 프로그래밍이 가능해진다
+
+- Strand 사용법 (개념)
+
+ 프로그램을 실행하게 되었을 때 Socket에 IP주소와 Port 번호를 등록하고 이를 io_service(1.66 버전 이후에서는 io_context)에 이 때 handle_connect, handle_read, handle_write와 같은 handler 또한 함께 등록합니다. 이 때 등록된 handler는 server 혹은 client에서 실행되었을 때 바로 handler를 실행하는 방법으로 어느 한 쪽으로부터 데이터 전달을 기다리지 않고 있다가 요청이 들어왔을 때 실행하는 것
 
 
-- C++ Boost Asio 스레드 , 워커스레드
+먼저 준비해야하는 것이 io_context이다. iocp할 때도 iocp 객체 핸들 하나를 만들었다. 마찬가지로 asio는 io_context라는 객체를 만들어서 얘를 통해 io를 한다. 클래스다.  
+그리고 당연히 asio도 socket api니까 socket이 필요하다. 근데 우리가 소켓 프로그래밍에 쓰던 socket이 아니라 그냥 이름만 socket인 클래스이다. io_context 객체 하나 만들어서 사용해야하고. 여러개 만들어도 되는데 굳이 그럴 필요는 없다. 소켓은 뭐냐면, boost/asio에 있는 boost::asio::ip::tcp::socket socket(io_context); 이 소켓 객체를 이용해야 하고 이 객체를 만들 때 파라미터로 io_context를 넣어줘야한다. iocp할 때 소켓을 iocp에 등록했던 것 처럼, 이렇게 연결을 해준다. 
+
+<div>
+<img src="https://github.com/heonilp/study/blob/master/cpp%20Network/pc/5.PNG" width="60%"></img>
+</div>
+
+- IOCP vs BOOST asio 차이
+
+- PostQueuedCompletionStatus / post (하는 일이 같다)
+
+- post()와 dispatch()의 차이 
+post()는 단순히 핸들러를 io_service 내부에 추가, 
+dispatch()는 호출될 때 호출 스레드 io_service:: run(), poll() 등을 통해 실행되었다면 
+dispatch한 핸들러를 io_service 내부에 추가하지 않고, 즉시 실행. 
+
+- 밑에 로직이 같다.
+
+``` C++
+worker_thread()
+{
+    GQCS( g_iocp , ... );
+    if (is_recv)
+        ProcessBuffer();
+}
+```
+``` C++
+worker_thread()
+{
+    io_context->run();
+}
+
+```
 
 
-## strand 설명
-
-[strand 설명 사이트](https://blog.naver.com/njh0602/220715956896)
-
-
-
-## HTTP 1.0/ 1.1 /2.0 /3.0
+## HTTP 1.1 vs 2.0
 
 - [참조](https://ijbgo.tistory.com/26)
 
