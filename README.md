@@ -19,10 +19,11 @@
 - 인프런 자바 디자인패턴 [강의](https://www.inflearn.com/course/%EC%9E%90%EB%B0%94-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8C%A8%ED%84%B4/dashboard) 들으면서 정리, 깃에 [코드](https://github.com/heonilp/study/tree/master/Java%20Gof%20Design%20Pattern) 올리기
 
 ## 스프링/스프링부트 공부
-- 스프링(Spring) 프레임워크에 대해서 개념정리 하기
-- [초보 웹 개발자를 위한 스프링5 프로그래밍 입문](http://www.yes24.com/Product/Goods/62268795)
+- [부스트코스 스프링 강의 스터디 진행중](https://github.com/heonilp/study/tree/master/Spring%20study)
 
-- [부스트코스 스프링 강의](https://www.boostcourse.org/web326/lecture/60662/) 들으면서 공부/ 과제 프로젝트하기
+- 스프링(Spring) 프레임워크에 대해서 개념정리 하기
+
+- [초보 웹 개발자를 위한 스프링5 프로그래밍 입문](http://www.yes24.com/Product/Goods/62268795)
 
 - 스프링부트 기초 강의, 스프링 입문 - [코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술](https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9E%85%EB%AC%B8-%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8/dashboard)(김영한님, 100% 수강)
 
@@ -31,7 +32,6 @@
 - [GoodGid님 블로그](https://github.com/goodGid/Interview/tree/main/Spring)스프링 정리 개념정리한거 계속 보기
 
 - [코딩의신](https://www.youtube.com/channel/UCdgj6CLA8xpOjJUu_PTPxXw/videos) Spring Boot , Restful API 등 보기
-
 
 - 사이드 프로젝트 1~2개 주제잡고 혼자해보기
 - 1. [게시판 서비스 하나만들어보기](https://github.com/heonilp/springboot/tree/main/myhome)
