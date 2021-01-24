@@ -7,7 +7,7 @@
 - 2021년도는 C++, JAVA 둘다 열심히 공부하기
 - [오브젝트, 김영호님 저](http://www.yes24.com/Product/Goods/74219491?OzSrank=4) 책 추천 받은 것 읽기 
 ### JAVA 
-- 1월 10일부터 쉽게 배우는 [자바1 스터디](https://github.com/heonilp/study/tree/master/JAVA%20study)를 하기로 했습니다.
+- [부스트 코드 자바 스터디 진행중](https://github.com/heonilp/study/tree/master/JAVA%20study)
 
 ### C++
 - [면접 정리 위주 정리](https://github.com/heonilp/study/tree/master/cpp%20study)

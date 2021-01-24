@@ -2,8 +2,8 @@
 
 ## 스터디 진행 방식  
 - 스터디 자료(무료강의)
- [쉽게 배우는 자바1](https://www.boostcourse.org/cs126) 
- [쉽게 배우는 자바2](https://www.boostcourse.org/cs128) 
+ - [쉽게 배우는 자바1](https://www.boostcourse.org/cs126) 
+ - [쉽게 배우는 자바2](https://www.boostcourse.org/cs128) 
 
 
 1. 쉽게 배우는 자바 강의를 듣고 실습을 진행한다. 이 과정에서 어려운 부분은 스터디 카톡방을 이용하여 질문할 수 있다.   
