@@ -127,14 +127,87 @@ public class AccountingApp {
 ```
 
 ### 14-5. 나의 앱 만들기_오리엔테이션2
-
+이번 강의 이후부터는 여러분이 문제를 해결하면서 해결하지 못할 불편함을 예견하고 
+불편함을 해소할 수 있을 만한 도구들을 소개하게 될 것입니다.
 
 ### 14-6. 나의 앱 만들기_조건문
 
+- 핵심 단어
+```
+조건문
+```
+- 조건문
+제어문은 프로그램의 실행 과정을 조건에 따라 바꾸는 것입니다.
+```
+EX: 서울 지하철을 예로 들어 보면 같은 길로 가던 1호선 열차도 방향에 따라 구로역에서 인천 방향과 천안 방향 노선이 분기하고
+2호선처럼 성수역이 나올 때까지 빙글빙글 돌기도 합니다.
+```
+
+``` java
+public class AccountingIFApp {
+    public static void main(String[] args) {
+        double valueOfSupply = Double.parseDouble(args[0]);
+        double vatRate = 0.1;
+        double expenseRate = 0.3;
+        double vat = valueOfSupply * vatRate;
+        double total = valueOfSupply + vat;
+        double expense = valueOfSupply * expenseRate;
+        double income = valueOfSupply - expense;
+         
+        double dividend1;
+        double dividend2;
+        double dividend3;
+         
+        if(income > 10000.0) {
+            dividend1 = income * 0.5;
+            dividend2 = income * 0.3;
+            dividend3 = income * 0.2;
+        } else {
+            dividend1 = income * 1.0;
+            dividend2 = income * 0;
+            dividend3 = income * 0;
+        }
+//우리의 문제상황에 새로운 조건이 하나 생기게 되었다고 해 봅시다.
+//수익(income)이 1만원이 넘을 경우에만 동업자들에게 기존의 배당률대로 수익을 배당하고,
+//수익이 1만원 이하일 경우에는 1번 동업자에게만 모든 수익을 배당하게 되었습니다.
+
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + vat);
+        System.out.println("Total : " + total);
+        System.out.println("Expense : " + expense);
+        System.out.println("Income : " + income);
+        System.out.println("Dividend 1 : " + dividend1);
+        System.out.println("Dividend 2 : " + dividend2);
+        System.out.println("Dividend 3 : " + dividend3);
+    }
+}
+
+```
 ## 생각해보기 
  
 ### 1) 조건문은 어떤 경우에 필요할 것 같은지 댓글로 토론해 보세요
 
+- 변수 값이나 상수 값, 범위 값 등을 if문(else if, else ...)으로 ==(같거나) , !=(같지 않은), >(크거나>=), <(작은<=) 판단을 할 수 있습니다.
+- 추가적으로 switch으로 변수값이 들어가면 해당 케이스로 스위칭 되어 로직이 들어갑니다.
+``` java 
+//다음은 등수에 대한 메달 switch java 문법이다.
+        int rank = scanner.nextInt();
+		char medalColor; 
+				
+		switch(rank) {
+			case 1: medalColor = '금';// char은 '' String은 ""
+				System.out.println("금메달");
+				break; // 중괄호를 빠져나가라. 안쓰면 금은동메달 다나오고 마지막에 A라고나옴..
+			case 2: medalColor = '은';
+				System.out.println("금메달");
+				break;
+			case 3: medalColor = '동';
+				System.out.println("금메달");
+				break;
+			default : medalColor = 'A';  //default 값을 안넣어도 되는데 안낳을거면 초기값을 줘야함- medalcolor : 'A'
+		}
+		
+```
 ### 14-7. 나의 앱 만들기_배열
 
 ## 생각해보기 
