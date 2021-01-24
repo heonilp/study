@@ -267,7 +267,7 @@ JOptionPane
 - 프로그램의 입력과 출력
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/1.png" width="50%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/1.png" width="50%"></img>
 </div>
 
 
@@ -531,7 +531,7 @@ UI(User Interface)
 * 우리가 자바 프로그램을 만들고 사용할 때의 단계는 아래 도식과 같습니다.
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/2.png" width="50%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/2.png" width="50%"></img>
 </div>
 
 ## 생각해보기 
@@ -702,7 +702,7 @@ Animal cat = new Animal();
 - PrintWriter는 Writer를 확장해서 만들어진 클래스이고, Writer는 Object를 확장해서 만들어진 클래스입니다.
  
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/3.PNG" width="50%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/3.PNG" width="50%"></img>
 </div>
 
 - 그래서 PrintWriter 클래스는 Writer의 write 메소드를 사용할 수 있고, Object의 toString 메소드를 사용할 수 있습니다.
@@ -739,7 +739,7 @@ Animal cat = new Animal();
 ## 퀴즈 3
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/4.png" width="50%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/2.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/pc/4.PNG" width="50%"></img>
 </div>
 
 1. 프로그램의 입력값으로 전달되어질 수 있는 Input 값은 일반적으로 뭐라고 표현할 수 있을까요? 답: 매개변수
