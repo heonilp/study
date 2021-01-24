@@ -76,7 +76,7 @@
 ## 2. JAVA의 실행 과정 설명해주세요.
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/javarun.jpg" width="30%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/javarun.jpg" width="30%"></img>
 </div>
 
 - java 파일의 형태로 소스 코드를 작성하면, 컴파일 과정을 거쳐
@@ -107,7 +107,7 @@
 JVM 은 크게 4가지로 구분됩니다.
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/4.png" width="60%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/4.png" width="60%"></img>
 </div>
 
 - Class Loader
@@ -141,7 +141,7 @@ JIT compiler는 이러한 인터프리터의 단점을 고치기 위해서 도�
 
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/5.png" width="70%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/5.png" width="70%"></img>
 </div>
 
 
@@ -183,10 +183,15 @@ Native Method Stack : 자바 언어 이외의 언어로 작성된 코드를 저�
 ## 4. GC(Garbage collection) 설명해주세요
 - [🐥엘리의 GC - 가비지 컬렉션 강의 추천](https://www.youtube.com/watch?v=Fe3TVCEJhzo&t=3s)
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/6.png" width="50%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/6.png" width="50%"></img>
 </div>
 
 - 한마디로 정의: JVM에서 힙 영역에서 사용하지 않는 객체를 삭제하는 프로세스를 말한다.
+
+
+<div>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/7.png" width="50%"></img>
+</div>
 
 - 어떤 객체에 유효한 참조가 존재한다면 Reachable, 그렇지 않으면 Unreachable이라고한다.
 1. Stack 영역의 데이터들
@@ -215,7 +220,7 @@ Native Method Stack : 자바 언어 이외의 언어로 작성된 코드를 저�
 #### 힙의 구조
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/jvm8.png" width="70%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/jvm8.png" width="70%"></img>
 </div>
 
 
@@ -253,7 +258,7 @@ Native Method Stack : 자바 언어 이외의 언어로 작성된 코드를 저�
 - 영역의 참조를 관리할 목적으로 remember set을 만들어 사용(set은 전체 힙의 5% 미만 크기)
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/9.png" width="70%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/9.png" width="70%"></img>
 </div>
 
 - **회색** : 빈 영역 / **연두색** : Eden 영역 / **노란색 S** : Survivor 영역 / **파란색** : Old 영역(파란색 H는 크기가 커서 여러 영역 차지하는 객체)
@@ -528,7 +533,7 @@ public class HelloWorldApp {
 ### 1) 자바의 동작 원리를 설명하시오.
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/javarun.jpg" width="30%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/javarun.jpg" width="30%"></img>
 </div>
 
 - java 파일의 형태로 소스 코드를 작성하면, 컴파일 과정을 거쳐 JVM(Java Virtual Machine, 자바 가상 머신)이 알아들을 수 있는 class 파일로 변환됩니다.
@@ -550,7 +555,7 @@ public class HelloWorldApp {
 
 - 다음과 같이 실습 하였습니다.
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/swing.JPG" width="50%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/swing.JPG" width="50%"></img>
 </div>
 
 #### 5-3. 안드로이드 애플리케이션 만들기
@@ -562,7 +567,7 @@ public class HelloWorldApp {
 #### Quiz 1 10문항
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/quiz1.JPG" width="30%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/quiz1.JPG" width="30%"></img>
 </div>
 
 1. 다음 중 Java 프로그램 개발을 위한 개발 환경을 제공해주는 프로그램은 어떤 것일까요? Eclipse
@@ -989,6 +994,10 @@ public class Program {
 - 툴이 다다르고 강의에서 설명이 되어있으므로 제외하겠습니다.
 
 ### QUiZ 2 정리
+
+<div>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%941/1.%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EC%86%8C%EA%B0%9C%20%26%20Java%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EA%B5%AC%EC%84%B1/pc/quiz2.JPG" width="30%"></img>
+</div>
 
 1. 다음 Java 메서드는 어떤 결과값을 출력할까요? System.out.println("10" + "0") -> 답 : 100
 2. 다음 중 Java 에서 사칙 연산자가 아닌 것은 무엇일까요? 답 : x
