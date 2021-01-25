@@ -23,12 +23,10 @@ public:
             {
                 int m_x=mx;
                 
-                mx = max(1 , mn*a[i]) ;
+                mx = max(1 , mn*a[i]);
                 
-                if(mn <0)
-                    ans=max(mx,ans);
-                else
-                    ans = max(mn*a[i],ans);
+                if(mn <0) ans=max(mx,ans);
+                else ans = max(mn*a[i],ans);
                 
                 
                 mn = m_x*a[i];
@@ -37,6 +35,6 @@ public:
         
             
         }
-        return ans ;
+        return ans;
     }
 };
