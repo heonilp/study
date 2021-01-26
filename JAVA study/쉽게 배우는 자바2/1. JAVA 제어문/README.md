@@ -1,7 +1,7 @@
 # JAVA 제어문
 
 
-## 핵심 단어
+- 핵심 단어
 ```
 제어문
 boolean data type
