@@ -30,6 +30,8 @@ boolean data type
 
 ### 1) 작업을 반복하기 위해서 왜 조건이 필요할까요?
 
+- for문이나 while문으로 해당 조건을 찾아서 데이터나 값을 얻어내기 위해서 조건이 필요합니다.
+
 
 ## 2. Boolean Datatype
 
@@ -38,10 +40,74 @@ boolean data type
 boolean
 ```
 
+- boolean
+```
+boolean 데이터 타입은 참과 거짓을 표현하는 데이터 타입으로, 
+true와 false 키워드를 이용하여 직접 입력할 수도 있고
+메소드의 리턴 값이나 비교 연산으로 도출할 수 있습니다.
+```
 
+``` java
+public class BooleanApp {
+    public static void main(String[] args) {
+         
+        System.out.println("One");
+        System.out.println(1);
+         
+        System.out.println(true);
+        System.out.println(false);
+         
+        String foo = "Hello world";
+        // String true = "Hello world"; reserved word
+        //boolean 데이터 타입은 콘솔에서 출력해보면 true, false로 출력된다는 것을 알 수 있습니다.
+        //그리고 문자열 객체의 contains 메소드와 같이 결과값이 boolean 데이터 타입인 경우,
+        //또는 비교 연산자를 이용해서 계산하는 경우에도 boolean 데이터 타입을 다루게 됩니다.
+        System.out.println(foo.contains("world"));
+        System.out.println(foo.contains("egoing"));
+    }
+}
+```
 ## 생각해보기
 
 ### 1) boolean을 어떻게 활용할 수 있을까요?
+- [참고](https://wikidocs.net/220)
+```
+참 또는 거짓의 값을 갖는 자료형을 부울 자료형이라고 한다. 자료형의 명칭은 boolean(불린 또는 불리언이라고 부른다)이다.
+부울 자료형에 대입되는 값은 참(true) 또는 거짓(false)만 가능하다.
+```
+
+1. 대입연산
+2. 부울연산
+3. 조건문에 사용된다.
+
+다음은 불리언 변수에 값을 대입한 예제이다.
+``` java
+boolean isSuccess = true;
+boolean isTest = false;
+
+
+2 > 1             // 참
+1 == 2            // 거짓
+3 % 2 == 1        // 참 (3을 2로 나눈 나머지는 1이므로 참이다.)
+"3".equals("2")   // 거짓 
+
+
+int base = 180;
+int height = 185;
+boolean isTall = height > base;
+
+if (isTall) {
+    System.out.println("키가 큽니다.");
+}
+
+
+int i = 3;
+boolean isOdd = i % 2 == 1;
+
+i % 2 == 1은 i를 2로 나누었을 때 나머지가 1인지를 묻는 조건문이다. 
+i는 3이므로 3을 2로 나눈 나머지는 1이 되어 참이 된다. 따라서 isOdd 는 true 값을 갖게 될것이다.
+
+```
 
 ## 3. 비교연산자
 
