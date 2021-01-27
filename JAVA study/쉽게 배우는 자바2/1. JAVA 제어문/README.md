@@ -325,6 +325,8 @@ equals 메소드
 
 - 원시 데이터 타입과 클래스
 ``` java
+
+
 자바에서는 기본적으로 다루는 데이터 타입이 존재합니다. 
 
 이러한 데이터 타입을 원시 데이터 타입이라고 부르고, 
@@ -332,17 +334,44 @@ equals 메소드
 boolean, byte, char, short, int, long, float, double 8개가 있습니다.
 
 원시 데이터 타입의 변수는 선언되면 메모리(Stack)에 공간이 할당되며,
-
 그 메모리 공간 안에 실제 값이 들어가게 됩니다.
-
 그래서 원시 데이터의 경우 == 연산자는 변수가 가리키는 값을 토대로 비교하게 됩니다.
 
-
-클래스는 new 키워드를 통한 인스턴스가 만들어지는 시점에
-
+반면 java.lang.Object 클래스를 비롯해 여기에서 파생된 다른 모든 클래스들은 원시 데이터 타입이 아닙니다.
+클래는 new 키워드를 통한 인스턴스가 만들어지는 시점에
 또다른 메모리 구역(Heap)에서 새로운 공간을 할당하여 값을 저장하고 변수는 그 값이 저장된 메모리의 주소를 가리키게 됩니다.
 
 그래서 인스턴스 간 == 연산자를 이용할 경우 그 메모리의 주소를 비교하게 됩니다.
+
+ 
+
+한편 문자열 리터럴과 같은 방식으로 문자열을 생성한 경우는 위와 같은 방식과는 조금 다릅니다.
+문자열 리터럴(아래의 s3, s4의 경우)로 문자열을 생성할 때, 이미 같은 문자열을 생성한 적이 있다면(s4의 경우)
+새로 메모리 공간을 할당하지 않고,
+새로운 변수는 기존의 문자열이 저장된 메모리(String Pool(Heap))의 주소를 가리키게 됩니다.
+그래서 이러한 경우에는 == 연산자를 이용하였을 때
+같은 주소를 가리키고 있기 때문에 true가 나오게 됩니다.
+
+
+int a = 1;
+int b = 1;
+
+String s1 = new String("JAVA");
+String s2 = new String("JAVA");
+
+String s3 = "JAVA";
+String s4 = "JAVA";
+
+
+즉 == 연산자는 변수가 일차적으로 가리키고 있는 메모리 공간의 값을 기준으로 판단합니다.
+s1, s2, s3(s4) 변수는 일차적으로 각각 10번지, 11번지, 12번지라는 주소값을 가리키고 있기 때문에
+서로 == 연산자를 이용하면 false라고 연산하게 됩니다.
+반면 equals 메소드는 구현에 따라 다르지만,
+변수가 최종적으로 가리키고 있는 값을 기준으로 판단하여 
+다른 번지에 저장되어 있는 s1, s2, s3(s4)에 대해서도 서로 같다고 판단하게 됩니다.
+
+* 하지만 C++에서는 == 오버로딩이 되기 때문에 ==을 써서 비교할수 있다. 그치만... 자바에서는 안된다.
+
 ```
 
 ## 생각해보기
@@ -358,6 +387,37 @@ boolean, byte, char, short, int, long, float, double 8개가 있습니다.
 논리 연산자
 ```
 
+-논리 연산자 종합
+
+``` java 
+지난 시간에는 자바에서의 조건 연산자 && 연산자와 || 연산자를 배워 보았습니다. 
+
+여기에 논리 연산자가 하나 더 있는데, ! 연산자입니다.
+
+! 연산자는 NOT 연산을 수행하고 참, 거짓 값을 반전시킵니다.
+
+public class AuthApp2 {
+ 
+    public static void main(String[] args) {
+         
+        String id = "egoing";
+        String inputId = args[0];
+         
+        String pass = "1111";
+        String pass2 = "2222";
+        String inputPass = args[1];
+         
+        System.out.println("Hi.");
+        boolean isRightPass = (inputPass.equals(pass) || inputPass.equals(pass2));
+        if(inputId.equals(id) && isRightPass ) {
+            System.out.println("Master!");
+        } else {
+            System.out.println("Who are you?");
+        }       
+    }
+}
+```
+
 ## 생각해보기
 
 ### 1) 조건식을 간결하게 만들어서 얻게 되는 이점이 무엇이 있을까요?
@@ -370,6 +430,51 @@ boolean, byte, char, short, int, long, float, double 8개가 있습니다.
 while문
 for문
 ```
+
+- 반복문
+``` java 
+조건에 따라 특정한 작업을 반복하게 하는 제어문을 반복문이라고 합니다.
+자바에서는 while문, for문 등으로 반복문을 구현합니다.
+
+public class LoopApp {
+    public static void main(String[] args) {
+        System.out.println(1);
+        System.out.println("=== while ===");
+        int i = 0;
+        //..
+        while(i < 3) {
+            System.out.println(2);
+            System.out.println(3);
+//          i = i + 1;
+            //..
+            i++;
+        }
+        System.out.println("=== for ===");
+        for(int j=0; j < 3; j++) {
+            System.out.println(2);
+            System.out.println(3);
+        }
+        System.out.println(4);
+    }
+}
+
+While 문
+
+while문은 조건식이 참일 동안에 코드블럭의 작업을 반복합니다.
+조건식에 true를 입력할 경우 조건이 항상 참이기 때문에 무한으로 반복하게 됩니다.
+
+
+For 문
+
+for문은 조건식이 3개의 부분으로 나뉘어져 있습니다.
+
+변수의 초기화
+조건식
+1회 반복을 끝내고 수행할 연산
+각각의 부분은 세미콜론(;)으로 구분되어 있습니다.
+```
+
+
 ## 생각해보기
 
 ### 1) 어떤 경우에 반복문을 사용하면 좋을까요?
@@ -381,6 +486,34 @@ for문
 - 핵심 단어
 ```
 배열
+```
+
+- 배열 : 배열은 같은 데이터 타입을 여러 개 묶어놓은 형태의 데이터입니다.
+
+``` java
+public class ArrayApp {
+    public static void main(String[] args) {       
+        // egoing, jinhuck, youbin 
+//      String users = "egoing, jinhuck, youbin";
+        String[] users = new String[3];
+        users[0] = "egoing";
+        users[1] = "jinhuck";
+        users[2] = "youbin";
+         
+        System.out.println(users[1]);
+        System.out.println(users.length);
+         
+        int[] scores = {10, 100, 100}; // 원소, element
+        System.out.println(scores[1]);
+        System.out.println(scores.length);
+    }
+}
+
+배열을 선언할 때는 변수 타입명 뒤에 빈 [ ] 대괄호를 입력하고 변수 이름을 입력합니다.
+초기화를 할 경우에는 new 키워드를 이용하여 [ ] 대괄호 안에 요소의 개수를 입력합니다.
+또는 리터럴로 입력할 수 있는 데이터 타입의 경우, { } 중괄호 안에 요소를 리터럴로 입력할 수 있습니다.
+배열은 인덱스를 통해 접근하고 인덱스는 [ ] 대괄호 안에 입력합니다.
+
 ```
 
 ## 생각해보기
@@ -395,6 +528,33 @@ for문
 배열
 length 필드
 ```
+
+``` java
+public class LoopArray {
+    public static void main(String[] args) {
+        /*
+         *  <li>egoing</li>
+         *  <li>jinhuck</li>
+         *  <li>youbin</li>
+         */
+         
+        String[] users = new String[3];
+        users[0] = "egoing";
+        users[1] = "jinhuck";
+        users[2] = "youbin";
+         
+        for(int i=0; i<users.length; i++) {
+            System.out.println(users[i]+",");
+        }    
+    }
+}
+
+반복문을 이용하면 users 배열에 담겨 있는 각각의 요소 사이에 쉼표를 넣어서 출력할 수도 있고
+앞 뒤에 <li> 문자열을 삽입하여 출력할 수도 있습니다.
+배열도 하나의 객체이기 때문에 여러 필드와 메소드가 담겨 있습니다.
+그 중 length 필드는 배열의 요소 개수를 담고 있는 필드입니다.
+```
+
 ## 생각해보기
 
 ### 1) 배열의 length 값은 언제 결정되는 것일까요?
@@ -407,6 +567,32 @@ length 필드
 반복문
 ```
 
+``` java
+public class AuthApp3 {
+    public static void main(String[] args) {
+        String[] users = {"egoing", "jinhuck", "youbin"};
+        String inputId = args[0];
+         
+        boolean isLogined = false;
+        for(int i=0; i<users.length; i++) {
+            String currentId = users[i];
+            if(currentId.equals(inputId)) {
+                isLogined = true;
+                break;
+            }
+        }
+        System.out.println("Hi,");
+        if(isLogined) {
+            System.out.println("Master!!");
+        } else {
+            System.out.println("Who are you?");
+        }
+    }
+}
+
+```
+
+
 
 ## 생각해보기
 
@@ -418,6 +604,50 @@ length 필드
 - 핵심 단어
 ```
 이차원 배열
+```
+
+``` java
+public class AuthApp3 {
+    public static void main(String[] args) {
+        //String[] users = {"egoing", "jinhuck", "youbin"};
+        String[][] users = {
+                {"egoing", "1111"},
+                {"jinhuck", "2222"},
+                {"youbin", "3333"}
+        };
+        String inputId = args[0];
+        String inputPass = args[1];
+         
+        boolean isLogined = false;
+        for(int i=0; i<users.length; i++) {
+            String[] current = users[i];
+            if(
+                    current[0].equals(inputId) && 
+                    current[1].equals(inputPass)
+            ) {
+                isLogined = true;
+                break;
+            }
+        }
+        System.out.println("Hi,");
+        if(isLogined) {
+            System.out.println("Master!!");
+        } else {
+            System.out.println("Who are you?");
+        }
+    }
+}
+
+인덱스를 이용하여 접근할 경우 행, 열의 순서로 접근합니다.
+따라서 "egoing" 문자열은 users[0][0]이고,
+"3333" 문자열은 users[2][1]로 접근합니다.
+
+
+또한 users[0]은 String 객체가 아닌 String[] 객체, 즉 일차원 배열입니다
+
+지난 과정에서 아이디와 비밀번호를 모두 비교했던 방식과 동일하게 && 연산자로 조건식을 구성하고,
+아이디와 비밀번호가 모두 맞는 경우 isLogined를 true로 대입한 후 더 이상의 반복은 수행하지 않습니다. 
+
 ```
 
 ## 생각해보기
