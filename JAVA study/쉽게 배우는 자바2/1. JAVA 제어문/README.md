@@ -233,10 +233,36 @@ else if 는 여러 개가 들어갈 수 있습니다.
 메소드
 ```
 
+- boolean을 리턴하는 메소드
+
+1. String 클래스의 contains 메소드도
+
+2.  String 클래스의 다른 boolean 리턴 메소드인 equals 메소드
+
+``` java 
+public class AuthApp {
+    public static void main(String[] args) {
+        String id = "egoing";
+        String inputId = args[0];
+         
+        System.out.println("Hi.");
+         //==와 같은 비교 연산자는 기본 데이터 형과는 달리 문자열과 같은 객체에는 의도치 않은 결과를 가져올 수 있습니다.
+         // 문자열이 서로 같은지를 비교하기 위해서 String 객체에서는 equals 메소드를 제공하고 있습니다.
+        //if(inputId == id) {
+        if(inputId.equals(id)) {
+            System.out.println("Master!");
+        } else {
+            System.out.println("Who are you?");
+        }
+    }
+}
+```
+
 ## 생각해보기
 
 ### 1) 여러분이 만들고 싶은 프로그램에서 조건문을 어떻게 활용하면 좋을지 느낌이 오시나요? 조건문을 어떻게 활용하고 싶은지 공유해 봅시다 
 
+- ID, Password 값이 맞는지, id는 소문자 영문만, 패스워드는 길이나 특수문자 포함에서 복잡하게하는걸 조건문으로 할 것같습니다.
 
 ## 4-3. 조건문 응용 2
 
@@ -256,10 +282,38 @@ else if 는 여러 개가 들어갈 수 있습니다.
 사칙연산과 같이 && 연산자는 || 연산자보다 우선순위가 높습니다.
 ```
 
+- 이렇게 boolean 데이터를 연산하기 위해서는 조건 연산자를 사용합니다.
+
+
+``` java
+//조건 연산자는 &&(AND)와 ||(OR, shift + \)가 있습니다.
+//&& 연산자는 전항과 후항이 모두 참일 경우에만 참을 반환하고, 아니면 거짓을 반환합니다.
+//|| 연산자는 전항과 후항 중 하나라도 참일 경우에 참을 반환하고, 모두 거짓일 때에만 거짓을 반환합니다.
+//사칙연산과 같이 && 연산자는 || 연산자보다 우선순위가 높습니다.
+    public static void main(String[] args) {
+         
+        String id = "egoing";
+        String inputId = args[0];
+         
+        String pass = "1111";
+        String inputPass = args[1];
+         
+        System.out.println("Hi.");
+         
+        if(inputId.equals(id) && inputPass.equals(pass)) {
+            System.out.println("Master!");
+        } else {
+            System.out.println("Who are you?");
+        }       
+    }
+}
+```
 
 ## 생각해보기
 
 ### 1) 조건 연산자 없이 조건문을 중첩해서 사용해도 되지 않을까요? 조건 연산자는 왜 필요할까요? 
+
+- 조건이 다른데 같은 로직일 떄 조건문을 중첩해서 사용하게되면 코드량이 늘기 때문에 조건연산자로 중복된 부분을 조건을 걸면 중복 코드량이 줄기 때문에 필요합니다.
 
 ## 5. == vs equals
 
