@@ -10,6 +10,7 @@
 - [부스트코스 자바 스터디 진행중](https://github.com/heonilp/study/tree/master/JAVA%20study)
 
 ### C++
+- [모던 C++ 및 C++ 공부](https://www.youtube.com/channel/UCHcG02L6TSS-StkSbqVy6Fg)
 - [면접 정리 위주 정리](https://github.com/heonilp/study/tree/master/cpp%20study)
 - 현재 C++ 모던 어디까지 나왔는지 한번 정리해보기
 - 이펙티브 C++ 공부하기
