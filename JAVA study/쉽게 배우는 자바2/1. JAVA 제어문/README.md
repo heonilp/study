@@ -654,3 +654,88 @@ public class AuthApp3 {
 
 ### 1) 이차원 배열은 어떤 곳에 더 활용할 수 있을까요?
 
+
+
+## QUIZ 1-1
+
+1. 다음 중 true / false 값만 가질 수 있는 데이터 타입은 무엇일까요? 답 : boolean
+
+2. 다음 중 다음 비교 연산자의 출력값으로 올바른 것은 무엇일까요? 답 : "true"
+``` java
+System.out.println((1+2) <= 3);
+```
+3. 다음 조건문의 출력 결과는 어떻게 될까요? 답 : "Hello"
+``` java
+if (1 < 3) {
+    System.out.println("Hello");
+} else if (true) {
+    System.out.println("World");
+} else {
+    System.out.println("Java!");
+}
+```
+
+4. 다음과 같은 로그인 코드가 있습니다. 다음 코드의 출력을 가장 잘 묘사한 설명을 고르세요.
+- 답 : id 는 일치하지만 pw 가 일치하지 않으므로 로그인에 실패합니다
+``` java 
+String inputA = "TestID";
+String inputB = "pw";
+String id = "TestID";
+String pw = "TestPW";
+
+if (inputA.equals(id) && inputB.equals(pw)) {
+    System.out.println("Login");
+} else {
+    System.out.println("Login fail!");
+}
+```
+
+5. 다음 중 primitive 타입이 아닌 타입은 무엇일까요? 답 : Date
+
+## QUIZ 1-2
+
+1. 어플리케이션은 저장된 id 와 pw 에 대해 사용자로부터 입력받은 inputID 와 inputPW 로 접근하게끔 되어있습니다. 해커인 당신은 저장된 id 와 pw 를 모르지만 접근할 수 있는 방법을 찾아냈습니다. 어떻게 하면 접근할 수 있을까요?
+
+- inputID 를 "Master" 로 입력합니다
+
+``` java
+if ((id.equals(inputID) && pw.equals(inputPW)) || (inputID.equals("Master"))) {
+    System.out.println("로그인 성공!");
+} else {
+    System.out.println("해커 침입 발생!");
+}
+```
+
+2. 다음 코드에서 "Hello" 는 몇 번 출력될까요?
+- 답 : 11번
+ ``` java
+int iter = 0;
+while (iter <= 10) {
+    System.out.println("Hello");
+    iter++;
+}
+```
+
+
+3. 다음 코드의 출력 결과물은 어떻게 될까요? 답 : 1, 2, 3 이 출력됩니다
+``` java 
+for (int i=0; i<3; i++) {
+    System.out.println(i+1);
+}
+```
+
+4. 다음 코드의 출력 결과물은 어떻게 될까요? 답 : 바나나
+``` java 
+String[] fruits = { "사과", "바나나", "딸기", "수박", "파인애플" };
+System.out.println(fruits[1]);
+```
+
+5. 다음 코드의 출력 결과물은 어떻게 될까요? 답 : 11111
+``` java 
+int[] numbers = {1, 10, 100, 1000, 10000};
+int result = 0;
+for (int i=0; i<numbers.length; i++) {
+    result += numbers[i];
+}
+System.out.println(result);
+```
