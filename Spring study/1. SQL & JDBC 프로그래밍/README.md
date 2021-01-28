@@ -80,8 +80,8 @@ Oracle, SQL Server, MySQL, DB2 등의 상용 또는 공개 DBMS가 있다.
 ## 생각해보기
 
 ### 1. Database와 DBMS를 개발자가 아닌 사람에게 설명해보세요.
-
-
+- 엑셀처럼 특정 행과 열이 테이블이 되있는 데이터를 잘 관리하기위한 프로그램
+ 
 ## 2. SQL
 
 ### 1) SQL이란?-1
@@ -141,6 +141,237 @@ insert
 update
 delete
 ```
+
+-  데이터 조작어(Data Manipulation Language, DML)의 종류
+
+데이터 조작어는 모두 동사로 시작합니다.
+
+시작하는 동사에 따라서 다음과 같은 4가지 조작어가 있습니다.
+```
+SELECT – 검색
+INSERT - 등록
+UPDATE - 수정
+DELETE - 삭제
+```
+
+- SELECT 구문 예제(전체 데이터 검색)
+
+전체 데이터 검색
+SELECT 뒤에 * 를 기술함으로써 나타낼 수 있다.
+예제 : departments 테이블의 모든 데이터를 출력하시오.
+```
+SELECT * FROM  DEPARTMENT;
+```
+
+- SELECT 구문 예제(특정 컬럼 검색)
+
+SELECT 뒤에 컬럼을 콤마(,)로 구별해서 나열
+예제 : employee 테이블에서 직원의 사번(empno), 이름(name), 직업(job)을 출력하시오.
+
+어떤 칼럼이 있는지는 desc명령으로 확인
+```
+select empno, name, job from employee;
+```
+
+
+- SELECT 구문 예제(컬럼에 Alias부여하기)
+
+컬럼에 대한 ALIAS(별칭)을 부여해서 나타내는 칼럼의 HEADING을 변경할 수 있다.
+예제 : employee 테이블에서 직원의 사번(empno), 이름(name), 직업(job)을 출력하시오.
+```
+select empno as 사번, name as 이름, job as 직업 from employee;
+```
+
+- SELECT 구문 예제(컬럼의 합성(Concatenation))
+
+문자열 결합함수 concat 사용
+예제 : employee 테이블에서 사번과 부서번호를 하나의 칼럼으로 출력하시오.
+```
+SELECT concat( empno, '-', deptno) AS '사번-부서번호' 
+FROM employee;
+```
+
+
+- SELECT 구문 예제(중복행의 제거)
+
+중복되는 행이 출력되는 경우, DISTINCT 키워드로 중복행을 제거
+예제1 : 사원 테이블의 모든 부서번호 출력하시오. (사원 수 만큼 출력된다.)
+```
+select deptno from employee;
+```
+
+- select 구문 예제(중복행의 제거)
+예제2 : 사원 테이블의 부서번호를 중복되지 않게 출력하시오.
+```
+select distinct deptno from employee;
+```
+
+
+- SELECT 구문 예제(정렬하기)
+
+예제 : employee 테이블에서 직원의 사번(empno), 이름(name), 직업(job)을 출력하시오.
+단, 이름을 기준으로 오름차순 정렬합니다.
+```
+select empno, name, job from employee order by name;
+select empno as 사번, name as 이름, job as 직업 from employee order by 이름;
+```
+
+- SELECT 구문 예제(정렬하기)
+
+예제 : employee 테이블에서 직원의 사번(empno), 이름(name), 직업(job)을 출력하시오.
+단, 이름을 기준으로 내림차순 정렬합니다.
+```
+select empno, name, job from employee order by name desc;
+```
+
+- 산술비교 연산자
+예제 : employee 테이블에서 고용일(hiredate)이 1981년 이전의 사원이름과 고용일을 출력하시오
+```
+select name, hiredate from employee where hiredate < '1981-01-01';
+```
+
+
+- 논리연산자
+예제 : employee 테이블에서 부서번호가 30인 사원이름과 부서번호를 출력하시오.
+```
+select name, deptno from employee where deptno = 30;
+```
+
+- IN 키워드
+예제 : employee 테이블에서 부서번호가 10또는 30인 사원이름과 부서번호를 출력하시오.
+```
+select name, deptno from employee where deptno in (10, 30);
+```
+
+- select 구문 예제(특정 행 검색-where절)-3
+LIKE 키워드
+와일드 카드를 사용하여 특정 문자를 포함한 값에 대한 조건을 처리
+% 는 0에서부터 여러 개의 문자열을 나타냄
+_ 는 단 하나의 문자를 나타내는 와일드 카드
+예제 : employee 테이블에서 이름에 'A'가 포함된 사원의 이름(name)과 직업(job)을 출력하시오
+```
+select name, job from employee where name like '%A%';
+```
+
+
+- SELECT 구문(함수의 사용)
+```
+UCASE, UPPER
+```
+ SELECT UPPER('SEoul'), UCASE('seOUL');
+```
+LCASE, LOWER
+```
+SELECT LOWER('SEoul'), LCASE('seOUL');
+```
+substring
+```
+SELECT SUBSTRING('Happy Day',3,2);
+```
+LPAD, RPAD (? ,* 로 치환)
+```
+SELECT LPAD('hi',5,'?'),LPAD('joe',7,'*');
+```
+TRIM, LTRIM, RTRIM
+ABS(x) : x의 절대값을 구합니다.
+```
+SELECT ABS(2), ABS(-2);
+```
+MOD(n,m) % : n을 m으로 나눈 나머지 값을 출력합니다.
+```
+SELECT MOD(234,10), 253 % 7, MOD(29,9);
+```
+FLOOR(x) : x보다 크지 않은 가장 큰 정수를 반환합니다. BIGINT로 자동 변환합니다.
+CEILING(x) : x보다 작지 않은 가장 작은 정수를 반환합니다.
+ROUND(x) : x에 가장 근접한 정수를 반환합니다.
+POW(x,y) POWER(x,y) : x의 y 제곱 승을 반환합니다.
+GREATEST(x,y,...) : 가장 큰 값을 반환합니다.
+LEAST(x,y,...) : 가장 작은 값을 반환합니다.
+CURDATE(),CURRENT_DATE : 오늘 날짜를 YYYY-MM-DD나 YYYYMMDD 형식으로 반환합니다.
+CURTIME(), CURRENT_TIME : 현재 시각을 HH:MM:SS나 HHMMSS 형식으로 반환합니다.
+NOW(), SYSDATE() , CURRENT_TIMESTAMP : 오늘 현시각을 YYYY-MM-DD HH:MM:SS나 YYYYMMDDHHMMSS 형식으로 반환합니다. 
+DATE_FORMAT(date,format) : 입력된 date를 format 형식으로 반환합니다.
+PERIOD_DIFF(p1,p2) : YYMM이나 YYYYMM으로 표기되는 p1과 p2의 차이 개월을 반환합니다.
+```
+
+
+- SELECT 구문 예제(그룹함수)
+예제 : employee 테이블에서 부서번호가 30인 직원의 급여 평균과 총합계를 출력하시오.
+```
+SELECT AVG(salary) , SUM(salary)
+FROM employee
+WHERE deptno = 30;
+```
+
+- SELECT 구문 예제(그룹함수와 groupby 절)
+예제 : employee 테이블에서 부서별 직원의 부서번호, 급여 평균과 총합계를 출력하시오.
+```
+SELECT deptno, AVG(salary) , SUM(salary)
+FROM employee
+group by deptno;
+```
+
+
+- 데이터 입력 (INSERT문)
+```
+INSERT INTO 테이블명(필드1, 필드2, 필드3, 필드4, … ) 
+        VALUES ( 필드1의 값, 필드2의 값, 필드3의 값, 필드4의 값, … )
+
+INSERT INTO 테이블명
+        VALUES ( 필드1의 값, 필드2의 값, 필드3의 값, 필드4의 값, … )
+```
+
+데이터 입력 실습 (INSERT문)
+
+예제 : ROLE테이블에 role_id는 200, description에는 'CEO'로 한건의 데이터를 저장하시오.
+```
+insert into ROLE (role_id, description) values ( 200, 'CEO');
+```
+
+- 데이터 수정(UPDATE문)
+```
+ UPDATE  테이블명
+        SET  필드1=필드1의값, 필드2=필드2의값, 필드3=필드3의값, …
+   WHERE  조건식
+
+```
+- 데이터 수정 실습(UPDATE문)
+예제 : ROLE테이블에 role_id가 200일 경우 description을 'CTO'로 수정하시오.
+```
+update ROLE
+set description = 'CTO'
+where role_id = 200;
+```
+
+- 데이터 삭제(DELETE문)
+예제 : ROLE테이블에서 role_id는 200인 정보를 삭제하시오.
+```
+delete from ROLE where role_id = 200;
+```
+
+
+## 생각해보기
+
+### 사원의 이름과 그 사원이 속한 부서명을 구하려면 어떻게 해야할까요?
+
+이 경우엔 EMPLOYEE 테이블과 DEPARTMENT 테이블을 조인(Join)해야 합니다. 
+select문과 join에 대해 알아보세요.
+- SQL Join 이란 2개 이상의 테이블로부터 관련있는 컬럼에 기초하여 행을 결합하는데 사용된다.
+- where절을 통해서 테이블끼리 번호가 같다고 놓으면 됩니다.
+
+```
+select name.이름, d.부서명
+from EMPLOYEE e, DEPARTMENT d
+where  e.번호 = d.번호
+```
+
+- INNER JOIN이란 FROM 테이블과 JOIN 테이블에서 ON 조건식이 만족하는 레코드를 선택한다. ON 조건식이 만족하지 않는다면 어느 두 테이블의 필드도 결과로서 나오지 않으므로 레코드의 기존 필드 값이 NULL이 아닌 이상 NULL을 볼 수 없다.
+
+- LEFT JOIN이란 FROM 테이블의 모든 레코드와 JOIN 테이블의 ON 조건식이 만족하는 레코드를 반환한다. 일치하는 항목이 없다면 JOIN 테이블의 필드 값은 NULL이 된다.
+
+- RIGHT JOIN이란 JOIN 테이블의 모든 레코드와 FROM 테이블의 ON 조건식이 만족하는 레코드를 반환한다. 일치하는 항목이 없다면 FROM 테이블 필드 값은 NULL이 된다.
+
+- FULL JOIN이란 FROM과 JOIN테이블의 모든 레코드를 반환한다. ON 조건식을 만족하는 레코드가 없다면 관련 테이블의 필드 값은 NULL이 된다.
 
 ### 3) DDL(create, drop)
 
