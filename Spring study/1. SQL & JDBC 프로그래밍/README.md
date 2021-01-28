@@ -255,32 +255,39 @@ select name, job from employee where name like '%A%';
 
 
 - SELECT 구문(함수의 사용)
-```
+
 UCASE, UPPER
 ```
  SELECT UPPER('SEoul'), UCASE('seOUL');
 ```
+
 LCASE, LOWER
 ```
 SELECT LOWER('SEoul'), LCASE('seOUL');
 ```
+
 substring
 ```
 SELECT SUBSTRING('Happy Day',3,2);
 ```
+
 LPAD, RPAD (? ,* 로 치환)
 ```
 SELECT LPAD('hi',5,'?'),LPAD('joe',7,'*');
 ```
+
 TRIM, LTRIM, RTRIM
+
 ABS(x) : x의 절대값을 구합니다.
 ```
 SELECT ABS(2), ABS(-2);
 ```
+
 MOD(n,m) % : n을 m으로 나눈 나머지 값을 출력합니다.
 ```
 SELECT MOD(234,10), 253 % 7, MOD(29,9);
 ```
+
 FLOOR(x) : x보다 크지 않은 가장 큰 정수를 반환합니다. BIGINT로 자동 변환합니다.
 CEILING(x) : x보다 작지 않은 가장 작은 정수를 반환합니다.
 ROUND(x) : x에 가장 근접한 정수를 반환합니다.
@@ -292,7 +299,7 @@ CURTIME(), CURRENT_TIME : 현재 시각을 HH:MM:SS나 HHMMSS 형식으로 반�
 NOW(), SYSDATE() , CURRENT_TIMESTAMP : 오늘 현시각을 YYYY-MM-DD HH:MM:SS나 YYYYMMDDHHMMSS 형식으로 반환합니다. 
 DATE_FORMAT(date,format) : 입력된 date를 format 형식으로 반환합니다.
 PERIOD_DIFF(p1,p2) : YYMM이나 YYYYMM으로 표기되는 p1과 p2의 차이 개월을 반환합니다.
-```
+
 
 
 - SELECT 구문 예제(그룹함수)
@@ -383,6 +390,112 @@ alter table
 drop table
 ```
 
+```
+create table 테이블명( 
+          필드명1 타입 [NULL | NOT NULL][DEFAULT ][AUTO_INCREMENT], 
+          필드명2 타입 [NULL | NOT NULL][DEFAULT ][AUTO_INCREMENT], 
+          필드명3 타입 [NULL | NOT NULL][DEFAULT ][AUTO_INCREMENT], 
+          ........... 
+          PRIMARY KEY(필드명) 
+          );
+```
+
+- 테이블 생성 실습
+
+EMPLOYEE와 같은 구조를 가진 EMPLOYEE2 테이블을 생성하시오.
+```
+CREATE TABLE EMPLOYEE2(   
+            empno      INTEGER NOT NULL PRIMARY KEY,  
+           name       VARCHAR(10),   
+           job        VARCHAR(9),   
+           boss       INTEGER,   
+           hiredate   VARCHAR(12),   
+           salary     DECIMAL(7, 2),   
+           comm       DECIMAL(7, 2),   
+          deptno     INTEGER);
+```
+
+- 테이블 수정 (컬럼 추가 / 삭제)
+```
+alter table 테이블명
+          add  필드명 타입 [NULL | NOT NULL][DEFAULT ][AUTO_INCREMENT];
+
+alter table 테이블명
+         drop  필드명;
+         
+```
+- 테이블 수정 실습 (컬럼 추가)
+```
+실습 – EMPLOYEE2 테이블에 생일(birthdate)칼럼을 varchar(12)형식으로 추가하시오.
+alter table EMPLOYEE2
+add birthdate varchar(12);
+```
+
+- 테이블 수정 실습 (컬럼 삭제)
+```
+실습 – EMPLOYEE2 테이블의 생일(birthdate)칼럼을 삭제하시오.
+alter table EMPLOYEE2
+drop birthdate;​
+
+```
+
+
+- 테이블 수정 (컬럼 수정)
+```
+alter table  테이블명
+     change  필드명  새필드명 타입 [NULL | NOT NULL][DEFAULT ][AUTO_INCREMENT];
+
+```
+- 테이블 수정 실습 (컬럼 수정)
+```
+실습 – EMPLOYEE2 테이블의 부서번호(deptno)를 dept_no로 수정하시오
+alter table EMPLOYEE2
+change deptno dept_no int(11);
+```
+
+- 테이블 이름 변경
+```
+alter table  테이블명 rename 변경이름
+```
+
+- 테이블 이름 변경 실습
+실습 – EMPLOYEE2 테이블의 이름을 EMPLOYEE3로 변경하시오.
+```
+alter table EMPLOYEE2
+rename EMPLOYEE3;
+```
+
+- 테이블 삭제하기
+```
+drop table 테이블이름;
+```
+
+
+- 테이블 삭제 실습
+
+* 테이블 삭제 후 desc 명령을 수행하면, 존재하지 않는 테이블이라고 표시됩니다.
+실습 – EMPLOYEE2 테이블을 삭제하시오.
+
+```
+drop table EMPLOYEE2;
+```
+
+
+## 생각해보기
+
+### 칼럼의 길이가 10인데, 해당 칼럼에 값이 저장되어 있습니다.  이 때 칼럼의 길이를 5로 바꾼다면 어떤 일이 벌어질까요?
+- 문자열을 저장하는 데이터 타입인 CHAR와 VARCHAR 차이점에 대해 알아보고 어떤 상황에서 CHAR 또는 VARCHAR 를 선택하는 것이 효율적인지 생각해봅시다.
+
+### 문자열 데이터 타입에는 문자셋을 지정할 수 있습니다. 문자셋에 따라 해당 필드가 차지하는 공간 크기를 한번 계산해보자. (예: VARCHAR(10) CHARACTER SET UTF8; 은 몇 Byte 크기를 차지할까요? ASCII 일때는 또 몇 Byte 크기를 가질까요?
+
+1. 데이터가 잘리기 때문에 "ERROR 1265 (01000): Data truncated for column 'name' at row 1"와 같은 에러가 발생하고 해당 명령은 실행되지 않습니다.
+
+
+2. CHAR 데이터 타입은 길이가 고정되기 때문에 저장 및 검색이 빠르지만 저장공간을 낭비할 수 있고, VARCHAR 데이터 타입은 길이가 가변적이기 때문에 저장 및 검색이 느리지만 저장공간을 낭비하지 않습니다.
+CHAR 데이터 타입은 고정된 데이터인 성별, 주민번호 등을 저장 및 연산할 때 쓰이면 좋고, VARCHAR은 가변적인 데이터인 Content, Address 등을 저장 및 연산할 때 쓰이면 좋습니다.
+
+
+3. https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html 를 통해서 MySQL이 지원하는 character sets를 볼 수 있으며 VARCHAR(10) CHARACTER SET UTF8;은 30바이트의 크기를 가지며 ASCII 일 때는 10바이트의 크기를 가집니다.
 
 ## Maven
 
