@@ -125,7 +125,7 @@ RTTI는 객체를 동적으로 변화시킬 수 있는 Polymorphism 능력이라
 ## 스마트 포인터 3가지 종류와 왜 각각 쓰는지 설명
 
 - 스마트 포인터(Smart Pointer)
-1. RALL(Resource Acquisition Is Initialization) 원칙
+1. RAII(Resource Acquisition Is Initialization) 원칙
 ```
 안전하게 자원을 사용하기 위한, C++에서 자주 쓰는 패턴
 객체가 사용되는 스코프(범위)를 벗어나면, 자원을 해제해주는 기법
