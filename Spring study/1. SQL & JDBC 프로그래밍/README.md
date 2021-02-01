@@ -76,6 +76,19 @@ Oracle, SQL Server, MySQL, DB2 등의 상용 또는 공개 DBMS가 있다.
 * 영속성(Durability) - 트랙잭션이 정상 종료되면 그 결과는 시스템에 영구적으로 적용되어야 합니다. 
 * 순차성(Sequentiality) - 데이터를 다시 로드하고 트랜잭션을 재생하여 원래 트랜잭션이 수행된 후의 상태로 데이터를 되돌리는 것을 말합니다.
 
+- 트랜잭션 고립화 레벨
+DB는 무결성을 보장하는 것이 중요하다. Locking은 Transaction이 DB를 다루는 동안 다른 Transaction이 관여하지 못하게 막는다. 이와 관련된 Locking 방법이 Isolation Level이다.
+0 : Read Uncommitted 트랜잭션 처리 중인 데이터를 읽을 수 있음
+1: Read Committed 트랜잭션이 커밋되어 확정된 데이터만 읽을 수 있음
+2: Repeatable Read 선행 트랜잭션이 데이터를 읽는 경우 종료 전까진 갱신/삭제 불가
+3: Serializable 선행 트랜잭션이 데이터를 읽는 경우 종료 전까진 갱신/삭제/삽입 불가
+
+- 부작용(Side Effect)
+Dirty Read 커밋되지 않은 수정 중인 데이터를 다른 트랜잭션에서 읽을 수 있도록 허용할때 발생
+Non-Repeatable Read 두 쿼리의 결과가 상이하게 나타나는 비일관성이 발생하는 것을 말함
+Phantom Read 한 트랜잭션 안에서 일정 범위의 레코드를 두번 이상 읽을 때, 첫번째 쿼리에서 없던 레코드가 두번째 쿼리에서 나타나는 현상
+
+
 
 ## 생각해보기
 
