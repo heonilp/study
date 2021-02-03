@@ -194,3 +194,277 @@ public class WhyMethod {
 
 #### 1) 공통된 작업을 추출해서 하나의 메소드로 만들게 되면 어떤 장단점이 있을까요?
 #### 2) 그 장점과 단점은 어떠한 경우에도 항상 성립하나요?
+
+
+## 6. 메소드의 활용
+
+- 핵심 단어
+```
+메소드
+```
+
+``` java
+public class AccountingApp {
+	public static void main(String[] args) {
+		double valueOfSupply = 10000.0;
+		double vatRate = 0.1;
+		double vat = valueOfSupply * vatRate;
+		double total = valueOfSupply + vat;
+		
+		System.out.println("Value of supply : " + valueOfSupply);
+		System.out.println("VAT : " + vat);
+		System.out.println("Total : " + total);
+	}
+}
+
+// 메소드
+public class AccountingApp {
+    //공급가와 부가가치세율은 모든 메소드에서 바로 접근할 수 있게
+    //클래스의 static 필드로 빼내었습니다.
+    // 이부분은 나중에 따로 빼서 상속으로 받는게 좋을듯!
+    // 공급가액
+    public static double valueOfSupply = 10000.0;
+    // 부가가치세율
+    public static double vatRate = 0.1;
+ 
+    public static double getVAT() {
+        return valueOfSupply * vatRate;
+    }
+     
+    public static double getTotal() {
+        return valueOfSupply + getVAT();
+    }
+ 
+    public static void main(String[] args) {
+ 
+        System.out.println("Value of supply : " + valueOfSupply);
+        System.out.println("VAT : " + getVAT());
+        System.out.println("Total : " + getTotal());
+    }
+
+    //메소드 안에서 메소드를 호출할 수 있습니다.
+    //main 메소드에서 여러 메소드를 호출할 수 있었던 것처럼
+    //우리가 만든 메소드도 다른 메소드를 호출할 수도 있습니다.
+
+    //이렇게 메소드를 이용해서 만든 코드는 지금의 예시에서는 큰 차이가 존재하지는 않지만 재사용성이 훨씬 높아집니다.
+}
+```
+
+### 생각해보기
+
+#### 1) 이 프로그램을 좀 더 확장성 있게 리팩토링할 수 있는 방법이 더 있을까요?
+
+
+## 7. 수업을 마치며
+
+-핵심 단어
+```
+클래스
+OOP
+```
+
+``` java
+클래스는 비슷한 연관된 일을 하는 메소드와 변수들을 묶어 그룹으로 만든 것입니다.
+
+이러한 클래스를 틀로 하여 실제로 프로그램에서 동작하는 객체들을 인스턴스라고 합니다.
+
+이러한 객체를 뼈대로 해서 프로그램을 만들어 가는 방식을
+
+객체 지향 프로그래밍(OOP, Object Oriented Programming)이라고 합니다.
+```
+
+
+## 8. 부록 (access level modifiers)
+
+- 핵심 단어
+``` java
+접근 제어
+private, public, protected, default
+```
+
+``` java
+public class AccessLevelModifiersMethod {
+
+	private static void hi() {
+		System.out.println("Hi");
+	}
+	public static void main(String[] args) {
+		hi();
+	}
+}
+
+class Greeting {
+	private static void hi() {
+		System.out.println("Hi");
+	}
+}
+
+public class AccessLevelModifiersMethod {
+	public static void main(String[] args) {
+		Greeting.hi();
+	}
+}
+
+public 과 private 과 같은 접근 제어도 비슷한 맥락으로 이해할 수 있습니다.
+
+public 은 선풍기의 버튼들과 같이 사용자가 외부에서 선풍기의 동작을 제어하기 위해서
+
+바깥으로 드러나서 호출할 수 있는 것들을 위해 지정합니다.
+
+private 은 선풍기의 부품들과 전선들과 같이 동작을 위해 꼭 필요하지만, 
+
+외부에서 굳이 알 필요도 없거나 알아서는 안되는 것들을 위해서 지정합니다.
+```
+
+### 생각해보기
+
+#### 1) 외부에서 접근해서는 안되는 데이터나 메소드는 어떤 것들이 있을까요?
+
+
+## 9. 부록 (static)
+
+- 핵심 단어
+```
+static 메소드
+```
+
+그래서 static 메소드는 클래스의 메소드로, 
+프로그램에서 한번만 정의됩니다. 즉 여러 개 가질 수 없는 유일무이한 메소드입니다.
+
+반면 static이 아닌 메소드는 인스턴스의 메소드로, 
+프로그램 안에서 여러 개 있을 수 있고, 그 인스턴스를 통해서 접근하는 메소드입니다.
+
+``` java
+class Print{
+    public String delimiter;
+    public void a() {
+        System.out.println(this.delimiter);
+        System.out.println("a");
+        System.out.println("a");
+    }
+    public void b() {
+        System.out.println(this.delimiter);
+        System.out.println("b");
+        System.out.println("b");
+         
+    }
+    public static void c(String delimiter) {
+        System.out.println(delimiter);
+        System.out.println("b");
+        System.out.println("b");
+    }
+}
+
+public class staticMethod {
+    public static void main(String[] args) {
+//      Print.a("-");
+//      Print.b("-");
+        // instance
+        Print t1 = new Print();
+        t1.delimiter = "-";
+        t1.a();
+        t1.b();
+        Print.c("$");    
+//      Print.a("*");
+//      Print.b("*");
+        Print t2 = new Print();
+        t2.delimiter = "*";
+        t2.a();
+        t2.b();
+    }
+}
+static 메소드인 c는 Print클래스를 통해서 접근할 수 있습니다.
+
+Math클래스의 floor 메소드는 클래스를 통해서 접근하는 static 메소드입니다.
+
+하지만 static 메소드가 아닌 a와 b는 인스턴스 t1, t2를 생성해서
+
+인스턴스를 통해 접근할 수 있는 메소드입니다. 
+
+String의 equals 메소드는 인스턴스를 통해 접근할 수 있는 인스턴스 메소드입니다.
+
+static 키워드는 필드에도 적용됩니다.
+
+```
+
+### 생각해보기
+
+#### 1) 왜 static 메소드가 필요할까요?
+
+
+
+## quiz2
+
+- 1. 다음 중 메서드의 설명이 아닌 것은 무엇일까요? 답 : 메서드라는 개념은 존재하지 않습니다.
+
+- 2. 다음 중 메소드가 아닌 코드는 무엇일까요? 답 : int a = 0; (변수 초기화)
+
+- 3. 우리는 다음 메서드를 정의해보았습니다. print 메서드의 호출 결과는 무엇일까요? 답 : "Hello"
+``` java
+public static void print() {
+    System.out.print("Hello");
+}
+```
+
+- 4. 다음과 같은 메서드가 있습니다. 다음 myfunc 메서드의 출력 결과는 무엇일까요? 답 : a, b 를 입력받아 a+b 를 반환합니다
+``` java
+public static int myfunc(int a, int b) {
+    return a + b;
+}
+```
+
+5. 다음과 같은 코드가 있습니다. 코드는 어떤 값을 출력할까요? 답 : "Hello:Hello"
+``` java
+public static String twoTimes(String value) {
+    return value + ":" + value;
+}
+
+public static void main(String[] args) {
+    System.out.println(twoTimes("Hello"));
+}
+```
+
+6. 다음 메서드의 출력 결과는 무엇일까요? 답 : "Plus!"
+``` java
+public class Main
+{
+    public static void Foo(int val) {
+        if (val >= 0) {
+            System.out.println("Plus!");
+        } else {
+            System.out.println("Minus!");
+        }
+    }
+        public static void main(String[] args) {
+            Foo(0);
+        }
+}
+```
+
+7. 다음 메서드 출력결과는 무엇일까요?  답 : 1000
+``` java
+public class Main
+{
+    public static void Foo(int idx) {
+        int[] numbers = { 10, 100, 1000, 10000 };
+        System.out.println(numbers[idx]);
+    }
+        public static void main(String[] args) {
+            Foo(2);
+        }
+}
+```
+
+8. 다음 중 메서드가 제공해줄 수 있는 이점이 아닌 것은 무엇일까요? 답: 코드가 자동으로 생성됩니다.
+
+- 코드의 재사용이 가능해집니다.
+- 코드의 수정이 용이해집니다.
+- 코드의 관리가 쉬워지며, 안정성이 증가합니다.
+- 코드가 자동으로 생성됩니다.
+
+
+
+
+
+
+
