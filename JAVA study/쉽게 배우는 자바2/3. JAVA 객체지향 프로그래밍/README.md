@@ -173,8 +173,9 @@ Print 객체의 A메소드이기 때문에 A를 출력한다는 의미를 쉽게
 
 - 클래스의 형식
 
+
 <div>
-<img src="https://github.com/heonilp/study/tree/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%942/3.%20JAVA%20%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/pc/1.PNG" width="50%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%942/3.%20JAVA%20%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/pc/1.PNG" width="50%"></img>
 </div>
 
 클래스는 한 파일에 여러 개를 넣을 수 있지만, 
@@ -186,7 +187,7 @@ Print 객체의 A메소드이기 때문에 A를 출력한다는 의미를 쉽게
 아래와 같이 따로따로 하나씩 class 파일로 만들어집니다.
 
 <div>
-<img src="https://github.com/heonilp/study/tree/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%942/3.%20JAVA%20%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/pc/2.PNG" width="50%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%942/3.%20JAVA%20%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/pc/2.PNG" width="50%"></img>
 </div>
 
 
