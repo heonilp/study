@@ -376,9 +376,9 @@ public class AccountingApp {
 
 ## Quiz 3
 
-- 1. 다음 중 서로 연관된 메서드와 변수들을 합쳐서 그루핑을 하기 위해 만들어진 개념은 무엇일까요? 답 : 클래스
+1. 다음 중 서로 연관된 메서드와 변수들을 합쳐서 그루핑을 하기 위해 만들어진 개념은 무엇일까요? 답 : 클래스
 
-- 2. 다음 코드가 있습니다. Class 가 아닌 항목은 무엇일까요? 답 : main
+2. 다음 코드가 있습니다. Class 가 아닌 항목은 무엇일까요? 답 : main
  
 ``` java 
 public static void main(String[] args) throws IOException {
