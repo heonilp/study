@@ -187,7 +187,7 @@ Print 객체의 A메소드이기 때문에 A를 출력한다는 의미를 쉽게
 아래와 같이 따로따로 하나씩 class 파일로 만들어집니다.
 
 <div>
-<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%942/3.%20JAVA%20%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/pc/2.PNG" width="50%"></img>
+<img src="https://github.com/heonilp/study/blob/master/JAVA%20study/%EC%89%BD%EA%B2%8C%20%EB%B0%B0%EC%9A%B0%EB%8A%94%20%EC%9E%90%EB%B0%942/3.%20JAVA%20%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/pc/2.PNG" width="30%"></img>
 </div>
 
 
@@ -201,3 +201,250 @@ Print 객체의 A메소드이기 때문에 A를 출력한다는 의미를 쉽게
 ### 생각해보기
 
 #### 1) 여러 개의 클래스를 하나의 파일에 쓰는 것과, 각각 하나의 파일에 쓰는 것은 어떤 장단점이 있을까요
+
+
+## 6. static
+
+핵심 단어
+``` java
+static
+```
+- static 변수와 메소드
+
+static 변수와 메소드는 클래스에서 생성된 모든 인스턴스가 공유하는 자원입니다.
+그리고 인스턴스를 만들지 않고도 클래스에서 직접 호출할 수 있습니다.
+
+``` java 
+인스턴스를 생성하지 않고 클래스에서 바로 인스턴스의 변수와 메소드에 접근할 수 없습니다.
+즉 static이 아닌 변수와 메소드는 인스턴스를 생성해야 비로소 접근할 수 있게 됩니다.
+ 
+static 변수와 메소드는 해당 클래스로 생성된 모든 인스턴스가 공유하는 자원이기 때문에
+인스턴스 모두는 같은 static 변수와 메소드를 사용할 수 있습니다.
+반면 static이 아닌 변수와 메소드는 인스턴스마다 고유의 값을 가지기 때문에 
+인스턴스에서 변경한다고 해도 다른 인스턴스에 어떠한 영향도 끼치지 않습니다.
+class Foo{
+    public static String classVar = "I class var";
+    public String instanceVar = "I instance var";
+    public static void classMethod() {
+        System.out.println(classVar); // Ok
+//      System.out.println(instanceVar); // Error
+    }
+    public void instanceMethod() {
+        System.out.println(classVar); // Ok
+        System.out.println(instanceVar); // Ok
+    }
+}
+public class StaticApp {
+ 
+    public static void main(String[] args) {
+        System.out.println(Foo.classVar); // OK
+//      System.out.println(Foo.instanceVar); // Error
+        Foo.classMethod();
+//      Foo.instanceMethod();
+         
+        Foo f1 = new Foo();
+        Foo f2 = new Foo();
+//      
+        System.out.println(f1.classVar); // I class var
+        System.out.println(f1.instanceVar); // I instance var
+//      
+        f1.classVar = "changed by f1";
+        System.out.println(Foo.classVar); // changed by f1
+        System.out.println(f2.classVar);  // changed by f1
+//      
+        f1.instanceVar = "changed by f1";
+        System.out.println(f1.instanceVar); // changed by f1
+        System.out.println(f2.instanceVar); // I instance var
+    }
+}
+```
+
+ ### 생각해보기
+
+#### 1) 구체적으로 어떤 경우에 static 변수와 메소드를 사용하고 어떤 경우에 static이 아닌 변수와 메소드를 이용해야 할까요?
+
+
+## 7. 생성자와 this
+
+- 핵심 단어
+```
+생성자
+this
+```
+- 생성자
+
+지난 시간에 Print 객체를 생성할 때(인스턴스화) new Print()를 사용했었습니다.
+우리는 구분자를 따로 두기 위해서 구분자마다 Print 인스턴스를 사용했던 것인데
+구분자를 지정하기 위해서는 Print 인스턴스의 delimiter 필드를 직접 수정해야 했습니다.
+
+클래스는 인스턴스를 생성할 때 클래스의 이름과 같은 이름인 생성자로 인스턴스를 만듭니다.
+클래스는 따로 만들어 주지 않아도 기본 생성자를 포함하고 있습니다.
+Print()와 같이 아무것도 지정하지 않는 생성자를 기본 생성자라고 합니다.
+기본적으로 public 권한으로 설정되어 있어서 따로 명시하지 않아도 클래스를 만들게 되면
+새로운 인스턴스를 생성할 수 있도록 만듭니다.
+
+ 
+만약 처음에 인스턴스를 생성할 때부터 필드를 초기화하고 싶다면,
+필드를 초기화할 수 있게 만드는 생성자를 구성할 수 있습니다.
+생성자는 접근 권한을 설정할 수 있고, 리턴 타입은 명시하지 않으며,
+초기화할 필드에 따라 파라미터를 설정합니다.
+
+- this 키워드
+
+생성자도 클래스 내부의 메소드이고, 보통 초기화할 필드를 파라미터로 넣기 때문에
+생성자 내부에서 필드에 접근할 때 파라미터의 이름과 같게 되어 접근하기 어렵게 됩니다.
+이 때 사용하는 예약어가 this인데, this는 인스턴스를 가리키는 예약어입니다.
+this를 통해 필드를 손쉽게 사용할 수 있습니다.
+
+
+### 생각해보기
+
+
+#### 1) this는 무엇일까요? 인스턴스와 같은 것이라면 역시 또다른 인스턴스라는 것일까요?
+
+#### 2) 생성자를 만드는 방법 말고 다른 방식으로 인스턴스의 초기화를 할 수 있을까요?
+
+
+## 8-1. 활용 (클래스화), 8-2. 활용 (인스턴스화)
+
+- 핵심 단어
+```
+클래스
+인스턴스
+```
+
+``` java
+class Accounting{
+    public double valueOfSupply;
+    public static double vatRate = 0.1;
+    public Accounting(double valueOfSupply) {
+        this.valueOfSupply = valueOfSupply;
+    }
+    public double getVAT() {
+        return valueOfSupply * vatRate;
+    }
+    public double getTotal() {
+        return valueOfSupply + getVAT();
+    }
+}
+public class AccountingApp {
+    public static void main(String[] args) {
+        Accounting a1 = new Accounting(10000.0);      
+        Accounting a2 = new Accounting(20000.0);
+         
+        System.out.println("Value of supply : " + a1.valueOfSupply);
+        System.out.println("Value of supply : " + a2.valueOfSupply);
+         
+        System.out.println("VAT : " + a1.getVAT());
+        System.out.println("VAT : " + a2.getVAT());
+         
+        System.out.println("Total : " + a1.getTotal());
+        System.out.println("Total : " + a2.getTotal());
+    }
+}
+```
+
+## 9. 수업을 마치며
+
+- 핵심 단어
+```
+상속
+인터페이스
+```
+
+상속과 인터페이스
+
+
+만약 여러분이 어떤 클래스와 비슷한 다른 것을 만들고 싶다면 어떻게 해야 할까요?
+
+이 때 가능한 방법은 두 가지입니다.
+우선 그 어떤 클래스의 변수와 메소드들을 모두 복사해서 만드는 방법,
+그리고 상속이라는 개념을 이용하는 방법입니다.
+어떤 클래스를 상속해서 새로운 클래스를 만들게 되면, 
+어떤 클래스의 모든 변수와 메소드들이 기본적으로 새로운 클래스에 포함되게 되고,
+만약 부족하다면 기존의 변수와 메소드를 덮어쓰거나(overiding),
+아예 새로운 변수와 메소드를 추가할 수도 있습니다.
+
+ 
+
+그리고 인터페이스는 일종의 규격과도 같은 것입니다.
+우리 나라에서 사용하는 모든 전자 제품들이 220V를 이용하는 것과 마찬가지로
+어떤 전자 제품들을 새로 만들지는 구체적으로 전혀 모르지만 220V를 사용한다는 규격을 정할 수 있습니다.
+인터페이스도 마찬가지로, 앞으로 어떤 클래스를 만들지는 전혀 모르지만, 
+그 클래스에 대한 규격을 선언하는 것입니다.
+
+
+## Quiz 3
+
+- 1. 다음 중 서로 연관된 메서드와 변수들을 합쳐서 그루핑을 하기 위해 만들어진 개념은 무엇일까요? 답 : 클래스
+
+- 2. 다음 코드가 있습니다. Class 가 아닌 항목은 무엇일까요? 답 : main
+ 
+``` java 
+public static void main(String[] args) throws IOException {
+    System.out.println(Math.PI);
+    FileWriter f1 = new FileWriter("test.txt");
+    f1.write("File");
+    f1.close();
+}
+```
+
+3. 다음 중 Class 에 변수 delimiter 를 선언하기 위한 올바른 방법은 무엇일까요? 답 : 클래스 내에 변수를 포함시켜 멤버 변수를 만듭니다
+
+```java
+class Print {
+    public static void A() {
+        System.out.println(delimiter);
+    }
+}
+```
+
+4. 여러분은 코드를 받았고, 팀원이 여러분이 필요한 코드를 MyOOP 클래스에 정의해두었다는 걸 알았습니다! 다음 중 해당 Class 를 찾을 때, 어떤 파일에 있다고 생각할 수 있을까요? 답 : MyOOP.java
+
+5. 다음 중 Class를 원형으로, 여러 상태의 클래스가 동시에 필요할 때 만들 수 있는 일종의 복제본을 무엇이라고 할까요? 답 : 인스턴스
+
+6. 다음 중 Print Class 의 인스턴스를 p 라는 이름으로 선언하는 올바른 방법은 무엇일까요?
+- 답 : Print p = new Print();
+``` java
+class Print {
+}
+```
+7. 다음 코드의 결과 값은 무엇이 나올까요? 답 : 10
+
+``` java 
+class Test {
+    public static int no = 0;
+}
+
+public class Main
+{
+    public static void main(String[] args) {
+        Test a = new Test();
+        Test b = new Test();
+        a.no = 10;
+        System.out.println(b.no);
+    }
+}
+```
+
+8. 인스턴스를 생성할 때, 초기화 작업을 정의할 수 있는 방법은 다음 중 무엇일까요? 답 : 생성자
+
+9. 다음 코드 출력 결과는 어떻게 될까요? 답: 0
+``` java
+class Test {
+    public int no = 0;
+
+    public void print(int no) {
+        System.out.println(this.no);  // this.no 가 우선 이므로 0
+    }
+}
+
+public class Main
+{
+    public static void main(String[] args) {
+
+        Test a = new Test();
+        a.print(10);
+    }
+}
+```
