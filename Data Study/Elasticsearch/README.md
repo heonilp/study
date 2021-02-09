@@ -49,3 +49,12 @@ http://localhost:9200/nklee/phone/1 POST 요청과 함께 아래 JSON데이터�
 }
 
 ```
+
+## 엘라스틱 서치
+- Get = select
+
+- Put = update
+
+- Post = insert
+
+- Delete = delete
