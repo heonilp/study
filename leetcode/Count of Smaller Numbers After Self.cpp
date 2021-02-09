@@ -7,7 +7,7 @@ public:
         {
             t[i]+=d;
         }
-    }
+    } 
 
     int get(vector<int> &t, int n, int i)
     {
