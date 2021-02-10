@@ -58,3 +58,65 @@ http://localhost:9200/nklee/phone/1 POST 요청과 함께 아래 JSON데이터�
 - Post = insert
 
 - Delete = delete
+
+
+## 실습
+
+## BUIK POST / CLASSES.JSON (BULK FILE)
+
+- curl -XPOST http~~~~~/ bulk?pretty -data-binary @classes.json
+
+## MAPPONG (SCHEMA)
+
+- curl -XPUT 'http~~~~~/ classes/class/_mapping' -d @classesRating_mapping.json
+
+- curl -XPOST http~~~~~/ bulk?pretty -data-binary @classes.json
+
+- 확인 curl -XGET 'http~~~~~/ classes/class/1?pretty
+
+
+## SEARCH
+
+- curl -XPOST 'http~~~~~/_bulk' -data-binary @simple_basketball.json
+
+- curl -XGET 'http~~~~~/basketball/record/_search?pretty'
+
+- curl -XGET 'http~~~~~/basketball/record/_search?q=points:30&pretty'
+
+- curl -XGET 'http~~~~~/basketball/record/_search? -d
+{
+  "query" : {
+    "term" : { "point" : 30 }
+  }
+}
+
+## Mectric AGGREGATION // 최대, 최소 평균값 등
+
+- curl -XPOST 'http~~~~~/_bulk' -data-binary @simple_basketball.json
+
+- vi avg_points_aggs.json //평균 구하는 json
+
+- curl -XGET http~~~~~/_search?pretty -data-binary @avg_points_aggs.json
+
+- curl -XGET http~~~~~/_search?pretty -data-binary @max_points_aggs.json
+
+- curl -XGET http~~~~~/_search?pretty -data-binary @stats_points_aggs.json //계산하는 것 , 모두 출력하는것
+
+## Bucket AGGREGATION // 그룹화 group by
+
+- vi basketball_mapping.json
+
+- curl -XPUT 'http~~~~~/besketball/record_mapping' -d basketball_mapping.json
+
+- vi twoteam_basketball.json
+
+- curl -XPOST 'http~~~~~/_bulk' -data-binary @twoteam_basketball.json
+
+- vi terms_aggs.json
+
+- curl -XGET http~~~~~/_search?pretty -data-binary @terms_aggs.json
+
+- vi stats_by_team.json
+
+- curl -XGET http~~~~~/_search?pretty -data-binary @stats_by_team.json
+
