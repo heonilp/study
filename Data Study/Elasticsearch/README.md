@@ -22,7 +22,7 @@ Java로 작성되어졌으며 아파치 Lucene 기반으로 검색 기능 및 RE
 그냥 brew install elasticsearch 명령어 한 줄로 간단하게 엘라스틱서치를 설치할 수 있습니다.
 
 
-## ElasticSearch 저장 구조에는 Index, Type, Document, Field, Mapping 용어들이 존재한다.
+## ElasticSearch 저장 구조에는 Index, Type, Document, Field, Mapping 용어들이 존재한다. 실습을 해볼 예정
 
 ```
 Index란?
