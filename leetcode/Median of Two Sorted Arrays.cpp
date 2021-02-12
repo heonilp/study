@@ -29,7 +29,8 @@ public:
         {
             return go(nums1, nums2, 0, 0, size/2+1); 
         }  
-
+//double 리턴 늘 타입에 조심해라.
+// 지난번에도 long long 실수 해고 long double 타입도 있는걸 잊지말자
         return (go(nums1, nums2, 0, 0, size/2+1) 
                 + go(nums1, nums2, 0, 0, size/2))/2.0;
     }
