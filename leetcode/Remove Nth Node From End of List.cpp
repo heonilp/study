@@ -1,5 +1,36 @@
+//Follow up: Could you do this in one pass?
+//상도쿤의 one pass 채찍...? 다시 풀었어요.
+class Solution {
+public:
+  ListNode* removeNthFromEnd(ListNode* head, int n) {
+      
+      ListNode* dummyNode = new ListNode();
+      dummyNode->next = head;
+      
+      int len = 0;
+      ListNode * node = head;
+      
+      while(node != nullptr)
+      {
+          ++len;
+          node = node->next;
+      }
+      
+      len = len - n;
+      node = dummyNode;
+      
+      while(len--)
+      {
+          node = node->next;
+      }
+      
+      node->next = node->next->next;
+      
+      return dummyNode->next;
+  }
+};
 
-
+//2pass방식이라네요.
 class Solution {
 public:
   ListNode* removeNthFromEnd(ListNode* head, int n) {
@@ -15,7 +46,7 @@ public:
         while(f!=nullptr)
         {
             p=s;
-            s=s->next;
+            s=s->next; 
             f=f->next;
         }
         
