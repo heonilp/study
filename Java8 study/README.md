@@ -283,3 +283,113 @@ Integer two)
     }
 }
 ```
+
+
+## 5. 메소드 레퍼런스
+
+- 람다가 하는 일이 기존 메소드 또는 생성자를 호출하는 거라면, 메소드 레퍼런스를 사용해서 매우 간결하게 표현할 수 있다.
+
+- 메소드 참조하는 방법
+```
+● 메소드 또는 생성자의 매개변수로 람다의 입력값을 받는다.
+● 리턴값 또는 생성한 객체는 람다의 리턴값이다.
+```
+
+```
+스태틱 메소드 참조 / 타입::스태틱 메소드
+특정 객체의 인스턴스 메소드 참조 / 객체 레퍼런스::인스턴스 메소드
+임의 객체의 인스턴스 메소드 참조 / 타입::인스턴스 메소드
+생성자 참조  /타입::new
+```
+
+
+``` java
+//1. 기존 방법
+public class App {
+    public static void main(String[] args){
+        UnaryOperator <String> hi = {s} -> "hi" + s;
+       
+    }
+}
+
+//2. 스태틱 메소드 참조를 사용하는 방법
+public class App {
+    public static void main(String[] args){
+        UnaryOperator <String> hi = {s} -> Greeting::hi; // 메소드 참조
+       
+    }
+}
+
+//3. 인스턴스를 참조하는 방식
+public class App {
+    public static void main(String[] args){
+       Greeting greeting = new Greeting();
+       UnaryOperator <String> hello = {s} -> Greeting::hello;     //hello를 가지고 apply를해야 만들어짐  
+    }
+}
+
+public class App {
+    public static void main(String[] args){
+        Supplier <Greting> newGreeting = Greting::new;  //만들어지지않음 Get을 해야 만들어짐
+        newGreeting.get();
+    }
+}
+
+
+public class App {
+    public static void main(String[] args){ //메소드만봐서 어떤 생성자를 쓰는지 모름
+        Function <String, Greting> hiGreeting = Greting::new;  //만들어지지않음 Get을 해야 만들어짐
+        
+        Greting hi = hiGreeting.apply("hi");
+        System.out.println(hi.getName());
+
+        Supplier <Greting> newGreeting = Greting::new;  
+    }
+}
+
+// 기본 sort
+public class App {
+    public static void main(String[] args){ 
+        String [] names = {"a1" , "b2" , "c3"};
+        Arrays.sort(names, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2){
+                return 0;
+            }
+        });
+    }
+}
+
+// 람다형
+public class App {
+    public static void main(String[] args){ 
+        String [] names = {"a1" , "b2" , "c3"};
+        Arrays.sort(names, String::compareToIgnoreCase); //메소드 레퍼런스/ 임의의 레퍼런스를 사용
+        System.out.println(Arrays.toString(names));
+    }
+}
+
+public class Greeting {
+    private String name;
+
+    public Greeting() { //생성자 입력값이 없음, 객체의 타입
+    }
+
+    public String getName() { //게터
+         return name;
+    }
+
+    public Greeting(String name) { //생성자 입력값
+        this.name = name;
+    }
+
+    public String hello(String name) {
+        return "hello" + name;
+    }
+
+    public String hi(String name) {
+        return "hi" + name;
+    }
+}
+
+```
