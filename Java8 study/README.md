@@ -492,4 +492,67 @@ public interface Bar extends Foo {
 
 ```
 
+## 7. 자바 8 API의 기본 메소드와 스태틱 메소드
+
+- 자바 8에서 추가한 기본 메소드로 인한 API 변화
+
+``` java
+
+- Iterable의 기본 메소드
+
+● forEach()
+//순회
+
+    List<String> name = new ArrayList<>();
+    name.forEach(s -> {
+        System.out.println(s);
+    });
+
+    name.forEach(System.out::println);
+
+    for(Stirng n: name) {
+         System.out.println(n);
+    }
+
+
+● spliterator()
+//순회 , 스플릿 기능이 있음
+    Spliterator<String> spliterator = name.spliterator();
+    Spliterator<String> spliterator1 =  spliterator.trySplit(); //절반으로 줄음
+    while(spliterator.tryAdvance(System.out::println)); //3, 4
+    System.out.println("================");
+    while(spliterator1.tryAdvance(System.out::println));//1, 2
+
+
+- Collection의 기본 메소드
+
+● stream() / parallelStream()
+● removeIf(Predicate)
+● spliterator()
+
+    stream : spliterator를 사용함을 알 수 있음
+    name.stream().map(String::toUpperCase).filter(s-> s.startsWith("K")).collect(Collectors.toSet());
+
+    name.removeIf(s-> s.startsWith("k")); //k가 들어간걸 지움
+    name.forEach(System.out::println);
+    
+
+
+
+- Comparator의 기본 메소드 및 스태틱 메소드
+
+● reversed()
+● thenComparing()
+● static reverseOrder() / naturalOrder()
+● static nullsFirst() / nullsLast()
+● static comparing()
+
+
+    Comparator<String> compareToIgnoreCase = String::compareToIgnoreCase;
+    name.sort(String::compareToIgnoreCase); //문자순으로 정렬
+    name.sort(String::compareToIgnoreCase.reversed(); //역순으로 정렬
+
+```
+
+
 
