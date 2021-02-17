@@ -398,7 +398,8 @@ public class Greeting {
 
 ## 6. 인터페이스 기본 메소드와 스태틱 메소드
 
-- 기본 메소드 (Default Methods)
+
+- 기본 메소드 (Default Methods), 강력한 기능이기 때문에 주의해서 사용하자!!
 
 ```
 ● 인터페이스에 메소드 선언이 아니라 구현체를 제공하는 방법
@@ -406,14 +407,89 @@ public class Greeting {
 ● 기본 메소드는 구현체가 모르게 추가된 기능으로 그만큼 리스크가 있다.
     ○ 컴파일 에러는 아니지만 구현체에 따라 런타임 에러가 발생할 수 있다.
     ○ 반드시 문서화 할 것. (@implSpec 자바독 태그 사용)
+
 ● Object가 제공하는 기능 (equals, hasCode)는 기본 메소드로 제공할 수 없다.
     ○ 구현체가 재정의해야 한다.
+
 ● 본인이 수정할 수 있는 인터페이스에만 기본 메소드를 제공할 수 있다.
 ● 인터페이스를 상속받는 인터페이스에서 다시 추상 메소드로 변경할 수 있다.
 ● 인터페이스 구현체가 재정의 할 수도 있다.
 
 - 스태틱 메소드
 ● 해당 타입 관련 헬퍼 또는 유틸리티 메소드를 제공할 때 인터페이스에 스태틱 메소드를
-제공할 수 있다3부 인터페이스의 변화
+제공할 수 있다.
 
 ```
+
+``` java
+public interface Foo {
+
+    void printName();
+
+   // void printNameUpperclass();//구현체에서 구현을 안하면 오류가남
+
+
+// 다음과 같은 것을 주석으로 써놓은다.
+// @implSpec 이 구현체는 getName()으로 가져온 문자열을 대문자로 바꿔 출력한다.
+
+   //하지만 앞에 default 키워드를 넣으면 오류가안남
+   //동작이 100% 구현하는 게 보장되지 않음, null 오면 런타임 익섹션이 발생함
+    default void printNameUpperCase(){
+        System.out.println(getName().toUpperCase());
+    }
+
+    static void printAnything(){
+        System.out.println("Foo");
+    }
+
+    String getName();
+}
+
+
+public class DefalutFoo implements Foo { // Foo, Bar 두개 쓰면 안됨 충돌하는 경우 오버라이딩해야함
+
+    String name;
+
+    public DefalutFoo(String name) {
+        this.name = name;
+    }
+
+    //오버라이딩으로 재정의 할수 있다.
+    default void printNameUpperCase(){
+        System.out.println(getName().toUpperCase());
+    }
+
+    @Override
+    public void printName() {
+        System.out.println(this.name);
+    }
+
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+}
+
+
+public class App {
+    public static void main(String[] args){ 
+       Foo foo = new DefalutFoo("hi");
+       foo.printName();
+       foo.printNameUpperCase();
+       Foo.printAnything(); // 스태틱 메소드
+       //해당 타입 관련 헬퍼 또는 유틸리티 메소드를 제공할 때 인터페이스에 스태틱 메소드를제공할 수 있다.
+    }
+}
+
+```
+
+``` java
+public interface Bar extends Foo {
+
+    void printNameUpperCase(); // 추상메소드 , 하지만 , Bar 받는 것이 재정의해야합니다.
+}
+
+```
+
+
