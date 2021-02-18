@@ -8,6 +8,7 @@
 - [오브젝트, 김영호님 저](http://www.yes24.com/Product/Goods/74219491?OzSrank=4) 책 추천 받은 것 읽기 
 ### JAVA 
 - [부스트코스 자바 스터디 진행중](https://github.com/heonilp/study/tree/master/JAVA%20study)
+- [JAVA 8 강의듣기(백기선님)](https://github.com/heonilp/study/tree/master/Java8%20study)
 
 ### C++
 - [모던 C++ 및 C++ 공부](https://www.youtube.com/channel/UCHcG02L6TSS-StkSbqVy6Fg)
