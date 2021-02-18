@@ -128,3 +128,169 @@ public class InterfaceApp {
 - 자바에서 다중 상속이 되지 않는 것이 있는 데 여러개의 인터페이스 설계를 적용할 수 있다. 하지만 객체지향 단일책임원칙에 위배될수도 있다.
 
 
+## 3. 다형성
+
+- 핵심 단어
+```
+다형성(polymorphism)
+```
+
+- 다형성
+
+클래스의 인스턴스를 변수로 선언할 때, 해당 클래스의 데이터 타입으로 선언하지 않고
+부모 클래스나 인터페이스를 데이터 타입으로 선언할 수도 있습니다.
+이렇게 객체의 타입이 부모 클래스, 인터페이스, 자식 클래스 등 여러 형태인데도
+인스턴스로 만든 객체(자식 클래스의 인스턴스)와 같이 행동하는 것을 다형성(polymorphism)이라고 합니다.
+
+
+``` java
+
+interface Calculable {
+	double PI = 3.14;
+	int sum(int v1, int v2);
+}
+interface Printable {
+	void print();
+}
+class RealCal implements Calculable, Printable {
+
+	public int sum(int v1, int v2) {
+		return v1 + v2;
+	}
+
+	public void print() {
+		System.out.println("this is RealCal!!!");
+	}		
+}
+
+public class InterfaceApp {
+	public static void main(String[] args) {
+		Calculable c = new RealCal(); //호환성을 보장할 수 있다.
+		System.out.println(c.sum(2, 1));
+		c.print(); // Compile Error
+		System.out.println(c.PI);
+	}
+}
+```
+
+## 생각해보기
+
+### 1) 인터페이스로 변수를 선언했으면 메소드는 내용이 없는 껍데기에 불과할텐데 어떻게 작업을 수행할 수 있는 것일까요?
+
+- 인터페이스의 구현체 클래스가 다형성으로 메소드를 구현해서 불러서 작업을 수행됩니다.
+
+
+## 4. 사용설명서 속의 인터페이스
+
+- 핵심 단어
+```
+인터페이스
+Java API
+```
+
+- 다른 Java API속의 클래스들이 인터페이스를 어떻게 활용하고 있는지 알아봅니다.
+
+
+##  생각해보기
+
+### 1) Closeable과 AutoCloseable 인터페이스 사이의 관계는 무엇인가요?
+
+``` java
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+
+public class FileWriterApp {
+	public static void main(String[] args) throws IOException {
+		Writer fileWriter = new FileWriter("filewriter.txt");
+		fileWriter.write("data 1");
+		fileWriter.write("data 2");
+		fileWriter.write("data 3");
+
+		fileWriter.close();
+	}
+}
+
+FileWriter 인스턴스는 초기화를 할 때 파일에 접근해서 현재 파일을 점유하고 있다는 표시를 합니다. 
+다 끝낸 후에는 close 메소드를 이용해서 현재 파일에 대한 점유를 끝낸다는 표시를 합니다.
+이 close 메소드는 AutoCloseable 인터페이스에 선언되어 있는 메소드입니다.
+https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html
+AutoCloseable에는 close 메소드 하나만 선언되어 있는데, 
+FileWriter와 같이 작업에 있어서 복수의 접근을 막을 필요가 있는 경우에 해당 인터페이스를 적용합니다.
+```
+
+
+##  5. 수업을 마치며
+
+- 핵심 단어
+```
+인터페이스
+```
+
+여러분의 클래스의 기능이 너무 많고 구획화를 할 필요가 있다면 
+그 때 인터페이스를 이용해서 프로그램을 만들면 됩니다.
+그리고 다른 사람과 협업을 할 때, 서로 공통적으로 적용해야 할 규격이 있을 때도 
+인터페이스를 이용한다면 좋을 것입니다.
+
+## Quiz 5
+
+### 1. 규격을 엄격하게 준수할 수 있도록 해주는 Java 의 기능은 무엇일까요? 답: 인터페이스
+
+### 2. 다음 코드에서 발생하는 에러를 해결하는 올바른 방법은 무엇일까요?
+
+- 답 : CalcA 와 CalcB 클래스에 public int sum(int a, int b) 형식의 메서드를 구현합니다
+ ``` java
+ interface Calc {
+    int sum(int a, int b);
+}
+class CalcA implements Calc {
+    public void foo() {
+        System.out.println("Foo");
+    }
+}
+class CalcB implements Calc {
+
+}
+public class Main
+{
+    public static void main(String[] args) {
+        CalcA calcA = new CalcA();
+        calcA.foo();
+    }
+}
+```
+### 3. 다음 중 인터페이스와 상속에 대해 틀린 것은 무엇일까요? 답 : 클래스는 여러 클래스로부터 상속받을 수 있습니다
+
+### 4. 다음 인터페이스에서 잘못된 점은 무엇일까요?
+
+- 답 : 인터페이스의 메서드는 구현을 가질 수 없습니다
+``` java
+interface Calculable {
+    double PI = 3.14;
+    public int sum(int v1, int v2) {
+        return v1 + v2;
+    }
+}
+```
+
+### 5. 다음 중 클래스가 데이터 타입에 따라 다양한 형태로 보여질 수 있는 성질을 뭐라고 정의할까요? 답 : 다형성
+
+### 6. 여러분은 동료가 작업해줄 클래스를 기다리고 있습니다. 친구는 아직 작업을 마치지 못했지만, 클래스가 다음 인터페이스를 구현한다는 것을 알게 되었습니다. 여러분은 클래스의 어떤 기능들이 있다고 생각할 수 있을까요?
+
+- 답 : isEatable 및 Eat 메서드가 있습니다
+
+``` java
+interface Food {
+    boolean isEatable();
+    void Eat();
+}
+```
+
+### 6. 다음 중 인터페이스를 사용하기 적합한 케이스는 무엇일까요? 답 : 위의 모든 항목에서 적합합니다
+
+```
+클래스의 기능이 너무 많아져서, 선택적으로 사용자에게 제공하고 싶어질 때
+다른 사람과 협업할 때, 기능을 명확히 하고 싶을 때
+여러 목적의 클래스들을 공통적으로 기능적으로 묶고자 할 때
+```
