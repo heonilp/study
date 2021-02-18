@@ -661,7 +661,7 @@ public interface Bar extends Foo {
 ● 예) 모든 데이터를 하나의 List 또는 Set에 옮겨 담기
 
 public class OnlineClass {
-    
+
     private Integer id;
     private String title;
     private boolean closed;
@@ -721,7 +721,7 @@ public static void main(String[] args) {
         keesunEvents.add(javaClasses);
 
         System.out.println("두 수업 목록에 들어있는 모든 수업 아이디 출력");
-        // TODO
+        // TODO , 출력하는 오퍼레이터를 넣어야함
         keesunEvents.stream()
                 .flatMap(Collection::stream)
                 .forEach(oc -> System.out.println(oc.getId()));
@@ -741,8 +741,8 @@ public static void main(String[] args) {
      
         System.out.println("스프링 수업 중에 제목에 spring이 들어간 제목만 모아서 List로 만들기");
         List<String> spring = springClasses.stream()
-                .map(OnlineClass::getTitle)
-                .filter(t -> t.contains("spring"))
+                .map(OnlineClass::getTitle) // 순서가 달라지면 타입이 달라집니다.
+                .filter(t -> t.contains("spring")) //문자열 // 순서 주의하자
                 .collect(Collectors.toList());
         spring.forEach(System.out::println);
     }
