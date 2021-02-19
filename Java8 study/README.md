@@ -750,3 +750,108 @@ public static void main(String[] args) {
 
 ```
 
+# 5부 Optional
+
+## 10. Optional 소개
+
+``` java
+
+// map은 key값이 null 아니다가 특성임
+
+- 자바 프로그래밍에서 NullPointerException을 종종 보게 되는 이유
+● null을 리턴하니까! && null 체크를 깜빡했으니까!
+
+- 메소드에서 작업 중 특별한 상황에서 값을 제대로 리턴할 수 없는 경우 선택할 수 있는 방법
+
+● 예외를 던진다. (비싸다, 스택트레이스를 찍어두니까.)
+● null을 리턴한다. (비용 문제가 없지만 그 코드를 사용하는 클리어인트 코드가 주의해야
+한다.)
+● (자바 8부터) Optional을 리턴한다. (클라이언트에 코드에게 명시적으로 빈 값일 수도
+있다는 걸 알려주고, 빈 값인 경우에 대한 처리를 강제한다.)
+
+- Optional
+
+● 오직 값 한 개가 들어있을 수도 없을 수도 있는 컨네이너.
+
+
+- 주의할 것
+
+● 리턴값으로만 쓰기를 권장한다. (메소드 매개변수 타입, 맵의 키 타입, 인스턴스 필드
+타입으로 쓰지 말자.)
+● Optional을 리턴하는 메소드에서 null을 리턴하지 말자.
+● 프리미티브 타입용 Optional을 따로 있다. OptionalInt, OptionalLong,...
+● Collection, Map, Stream Array, Optional은 Opiontal로 감싸지 말 것.
+
+
+public class App {
+    public static void main(String[] args) {
+        List<OnlineClass> springClasses = new ArrayList<>();
+        springClasses.add(new OnlineClass(1, "spring boot", true));
+        springClasses.add(new OnlineClass(5, "rest api development", false));
+
+         Optional<OnlineClass> optional = springClasses.stream()
+                .filter(oc -> oc.getTitle().startsWith("spring"))
+                                .findFirst();
+    }
+
+        private static OnlineClass createNewClasss() {
+        System.out.println("creating new online class");
+        return new OnlineClass(10, "New class", false);
+    }
+}
+
+
+public class OnlineClass {
+
+    private Integer id;
+    private String title;
+
+    private boolean closed;
+
+    public Progress progress;
+
+    public OnlineClass(Integer id, String title, boolean closed) {
+        this.id = id;
+        this.title = title;
+        this.closed = closed;
+    }
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public boolean isClosed() {
+        return closed;
+    }
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+    }
+
+    public Optional<Progress> getProgress() {
+        return Optional.empty();
+    }
+}
+
+public class Progress {
+
+    private Duration studyDuration;
+
+    private boolean finished;
+
+    public Duration getStudyDuration() {
+        return studyDuration;
+    }
+
+    public void setStudyDuration(Duration studyDuration) {
+        this.studyDuration = studyDuration;
+    }
+}
+
+```
