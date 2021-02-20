@@ -842,6 +842,7 @@ public class Progress {
 ## 11. Optional API
 
 ``` java
+
 - Optional 만들기
 
 ● Optional.of()
@@ -889,8 +890,20 @@ public class App {
          Optional<OnlineClass> optional = springClasses.stream()
                 .filter(oc -> oc.getTitle().startsWith("spring"))
                                 .findFirst();
-    }
 
+
+        //OnlineClass onlineClass= optional.get();
+        //System.out.println(onlineClass.getTitle());
+        OnlineClass onlineClass= optional.orFlse(craeteNewClasss());
+        System.out.println(onlineClass.getTitle());
+
+        //OnlineClass onlineClass= optional
+        //          .filter(oc -> !oc.isClosed());
+
+         OnlineClass onlineClass= optional.flatMap(OnlineClass::getProgress);
+                  
+
+    }
         private static OnlineClass createNewClasss() {
         System.out.println("creating new online class");
         return new OnlineClass(10, "New class", false);
