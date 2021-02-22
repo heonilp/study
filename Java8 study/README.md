@@ -1043,7 +1043,7 @@ Date legacyInstant = Date.from(newInstant);
 
 ``` java
 
-- Concurrent 소프트웨어
+- Concurrent 소프트웨어 // 멀티스레드 
 
 ● 동시에 여러 작업을 할 수 있는 소프트웨어
 ● 예) 웹 브라우저로 유튜브를 보면서 키보드로 문서에 타이핑을 할 수 있다.
@@ -1074,18 +1074,24 @@ Date legacyInstant = Date.from(newInstant);
 
 - Runnable 구현 또는 람다
 
-Thread thread = new Thread(() -> System.out.println("world : " + Thread.currentThread().getName()));
-thread.start();
-System.out.println("hello : " + Thread.currentThread().getName());
+    Thread thread = new Thread(() -> System.out.println("world : " + Thread.currentThread().getName()));
+    thread.start();
+    System.out.println("hello : " + Thread.currentThread().getName());
+
+    try {
+        Thread.sleep(3000L);
+    } catch (InterruptedExeption e) {
+        throw new IllegalStateExcption(e);
+    }
 
 
 - 쓰레드 주요 기능
 
 ● 현재 쓰레드 멈춰두기 (sleep): 다른 쓰레드가 처리할 수 있도록 기회를 주지만 그렇다고
 락을 놔주진 않는다. (잘못하면 데드락 걸릴 수 있겠죠.)
-● 다른 쓰레드 깨우기 (interupt): 다른 쓰레드를 깨워서 interruptedExeption을 발생 시킨다.
+● 다른 쓰레드 깨우기 (interupt): 다른 쓰레드를 깨워서 interruptedExeption을 발생 시킨다. // 종료시키는거아님, 깨우는거임
 그 에러가 발생했을 때 할 일은 코딩하기 나름. 종료 시킬 수도 있고 계속 하던 일 할 수도
 있고.
-● 다른 쓰레드 기다리기 (join): 다른 쓰레드가 끝날 때까지 기다린다.
+● 다른 쓰레드 기다리기 (join): 다른 쓰레드가 끝날 때까지 기다린다. // 3초기다렸다가 대기해서 끝낸다
 
 ```
