@@ -1140,7 +1140,7 @@ Date legacyInstant = Date.from(newInstant);
 
 
 
-16. Callable과 Future
+## 16. Callable과 Future
 
 ``` java
 - Callable
@@ -1209,7 +1209,7 @@ Date legacyInstant = Date.from(newInstant);
 
         List<Future<String>>futures = executorService.invokeAll(Arrays.asList(hello, java, hi));
         for(Future<String> f : futures){ //invokeAll : 다기다림, hi가 끝날때까지 기달렸다가 가져옴
-            System.out.printlen(f.get());
+            System.out.printlen(f.get()); // 예시 모든주가를 가져올때 사용?
         }
 
         String s = executorService.invokeAny(Arrays.asList(hello, java, hi));
