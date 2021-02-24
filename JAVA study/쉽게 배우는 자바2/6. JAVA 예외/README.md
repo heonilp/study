@@ -214,3 +214,60 @@ public class CheckedExceptionApp {
 ### 생각해보기
 
 #### 1) 왜 unchecked Exception들을 컴파일 시에 체크하지 않는 것일까요?
+
+
+## 7. Finally와 Resource 다루기
+
+- 핵심 단어
+```
+자원(Resource)
+finally
+```
+
+- finally 문
+
+try 문에서 오류가 발생하면 이후에 작업이 있더라도 catch 문으로 넘어갑니다.
+
+그래서 자원을 놓아주는 작업을 try 문에 넣게 되면,
+
+예외가 발생했을 때 자원을 놓아주는 작업을 하지 못하게 됩니다.
+
+그래서 예외가 발생했든, 발생하지 않았든 자원을 일단 잡았으면 놓아주는 작업을 실행하도록 해야 합니다.
+
+이런 경우에 사용하는 형식이 finally 문입니다.
+
+finally 문은 try 문에서 예외가 발생했거나 발생하지 않았거나 무조건 실행됩니다.
+
+
+
+``` java
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class CheckedExceptionApp {
+
+	public static void main(String[] args) {
+		FileWriter f = null;
+		try {
+			f = new FileWriter("data.txt");
+			f.write("Hello");
+			// close를 하기 전에 예외가 발생한다면 close가 실행되지 않음
+			// f.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (f != null) {
+				try {
+					f.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}			
+		}
+	}
+}
+```
+
+### 생각해보기
+
+#### 1) 자원을 붙잡는 작업과 놓아주는 작업을 하지 않는다면 어떤 일이 발생할까요?
