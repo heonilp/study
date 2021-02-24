@@ -271,3 +271,60 @@ public class CheckedExceptionApp {
 ### 생각해보기
 
 #### 1) 자원을 붙잡는 작업과 놓아주는 작업을 하지 않는다면 어떤 일이 발생할까요?
+
+
+## 8. Try with Resource
+
+- 핵심 단어
+
+```
+try-with-resource 문
+```
+Java SE 7부터 try-with-resource 문이 등장하여 자원 관리를 훨씬 단순하게 할 수 있게 되었습니다.
+
+클래스가 AutoCloseable 인터페이스를 상속한다면 try-with-resource 문에 사용할 수 있습니다.
+
+try-with-resource 문은 try 문에 괄호를 추가하여 그 안에 사용할 자원을 정의합니다.
+
+객체를 여러 개 선언할 수도 있고, 세미콜론(;)으로 구별합니다.
+
+객체의 정의 가장 마지막에는 세미콜론(;)을 넣지 않습니다.
+
+전체 try 문(try, catch, finally 등)이 종료되면 생성된 인스턴스는 자동으로 종료되기 때문에
+
+명시적으로 close를 이용해서 자원을 놓아주지 않습니다.
+
+
+
+``` java
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class TryWithResource {
+
+	public static void main(String[] args) {
+		try (FileWriter f = new FileWriter("data.txt")) {
+			f.write("Hello");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+```
+
+### 생각해보기
+
+
+#### 1) try-with-resource 문을 사용할 때 주의할 점은 무엇인가요?
+
+
+## 9. 수업을 마치며
+
+- 핵심 단어
+```
+throw 구문
+throws 구문
+```
+
