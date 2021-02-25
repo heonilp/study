@@ -1268,6 +1268,26 @@ public class App {
     }
 
 }
+```
+
+
+## 18. CompletableFuture 2
+
+``` java
+
+
+- 조합하기
+
+● thenCompose(): 두 작업이 서로 이어서 실행하도록 조합
+● thenCombine(): 두 작업을 독립적으로 실행하고 둘 다 종료 했을 때 콜백 실행
+● allOf(): 여러 작업을 모두 실행하고 모든 작업 결과에 콜백 실행
+● anyOf(): 여러 작업 중에 가장 빨리 끝난 하나의 결과에 콜백 실행
+
+
+- 예외처리
+
+● exeptionally(Function)
+● handle(BiFunction)
 
 public class App {
 
@@ -1291,7 +1311,74 @@ public class App {
 
         System.out.println(hello.get());
     }
-
 }
 
+
+    private static  CompletableFuture<String> getWorld(String message)
+    {
+        return CompletableFuture.supplyAsync(() -> {
+            System.out.println("World" + Thread.currentThread().getName());
+            return message + "World";
+        });
+    }
+
+    //블로킹이 되지않음
+    List<CompletableFuture<String>> futures = Arrays.asList(hello ,world);
+    CompletableFuture[] futuresArray = futures.toArray(new ComletableFutrue[futures.size()]);
+
+    CompletableFuture<List<String>> results = CompletableFuture.allOf(futuresArray)
+            .thenApply(v -> futures.stream()
+                .map(CompletableFuture::join)
+                .collect(collectors,toList()));
+
+    results.get().forEach(System.out::println); 
+
+```
+
+# 8부 그밖에...
+## 19. 애노테이션의 변화
+
+``` java
+- 애노테이션 관련 두가지 큰 변화
+
+● 자바 8부터 애노테이션을 타입 선언부에도 사용할 수 있게 됨.
+● 자바 8부터 애노테이션을 중복해서 사용할 수 있게 됨.
+
+- 타입 선언 부
+● 제네릭 타입
+● 변수 타입
+● 매개변수 타입
+● 예외 타입
+● ...
+
+- 타입에 사용할 수 있으려면
+● TYPE_PARAMETER: 타입 변수에만 사용할 수 있다.
+● TYPE_USE: 타입 변수를 포함해서 모든 타입 선언부에 사용할 수 있다.
+
+- 중복 사용할 수 있는 애노테이션을 만들기
+● 중복 사용할 애노테이션 만들기
+● 중복 애노테이션 컨테이너 만들기
+    ○ 컨테이너 애노테이션은 중복 애노테이션과 @Retention 및 @Target이 같거나 더넓어야 한다.
+
+- Chicken.java (중복 사용할 애노테이션)
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE_USE)
+    public @interface ChickenContainer {
+    Chicken[] value();
+    }
+
+
+- 컨테이너 애노테이션으로 중복 애노테이션 참조하기
+
+@Chicken("양념")
+@Chicken("마늘간장")
+public class App {
+    public static void main(String[] args) {
+            ChickenContainer chickenContainer = App.class.getAnnotation(ChickenContainer.class);
+            Arrays.stream(chickenContainer.value()).forEach(c -> {
+            System.out.println(c.value());
+        });
+    }
+}
 ```
