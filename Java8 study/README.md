@@ -1275,7 +1275,6 @@ public class App {
 
 ``` java
 
-
 - 조합하기
 
 ● thenCompose(): 두 작업이 서로 이어서 실행하도록 조합
@@ -1362,11 +1361,23 @@ public class App {
 
 - Chicken.java (중복 사용할 애노테이션)
 
+//제네릭 Retention java5기능이기 때문에 공부해야한다.
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE_USE)
     public @interface ChickenContainer {
-    Chicken[] value();
+        Chicken[] value();
     }
+
+package me.whiteship.java8to11;
+
+import java.lang.annotation.*;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE_USE)
+@Repeatable(ChickenContainer.class) // 여러개 어노테이션(@Chicken)을 쓰려면 Repeatable을 써야한다.
+    public @interface Chicken {
+        String value();
+}
 
 
 - 컨테이너 애노테이션으로 중복 애노테이션 참조하기
