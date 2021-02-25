@@ -1251,6 +1251,24 @@ Date legacyInstant = Date.from(newInstant);
 ● thenRun(Runnable): 리턴값 받지 다른 작업을 처리하는 콜백
 ● 콜백 자체를 또 다른 쓰레드에서 실행할 수 있다.
 
+
+public class App {
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        boolean throwError = true;
+        ExcutorService  executorService = Executors.newFixedThreadPoll(4);
+        CompletableFuture<String> hello = CompletableFuture.supplyAsync(() -> {
+            
+            System.out.println("Hello " + Thread.currentThread().getName());
+            return "Hello";
+        }, executorService).thenRun(() -> {  //pool의 이름이 달라짐, 풀에있는걸 사용  //thenRunAsync
+            System.out.println(Thread.currentThread().getName());
+        });
+
+    }
+
+}
+
 public class App {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
@@ -1260,7 +1278,7 @@ public class App {
             if (throwError) {
                 throw new IllegalArgumentException();
             }
-            
+
             System.out.println("Hello " + Thread.currentThread().getName());
             return "Hello";
         }).handle((result, ex) -> {
@@ -1275,4 +1293,5 @@ public class App {
     }
 
 }
+
 ```
