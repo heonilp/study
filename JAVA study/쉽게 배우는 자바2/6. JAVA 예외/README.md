@@ -328,3 +328,69 @@ throw 구문
 throws 구문
 ```
 
+- throw Exception
+``` java
+public class MyException {
+
+	public static void main(String[] args) {
+		throw new RuntimeException("무언가 문제가 있습니다.");
+	}
+}
+
+이렇게 문제 상황이 발생했을 때, throw 구문을 통해서 예외를 발생시킬 수도 있습니다.
+이 경우에는 RuntimeException 객체를 이용하였지만, Exception 객체도 여러분이 직접 생성할 수도 있습니다.
+```
+
+
+- 메소드 단위로 예외 발생
+
+``` java
+우리가 직접 예외를 처리한다기보다는 앞으로 우리의 메소드를 사용할 누군가가 예외를 처리해 주기를 바라는 것과 같습니다.
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class ThrowException {
+	public static void main(String[] args) throws IOException {
+		FileWriter f = new FileWriter("./data.txt");
+		f.write("Hello");
+		f.close();
+	}
+}
+```
+
+## Quiz 6
+
+1. 다음 중 예상치 못한 상황으로 프로그램 동작에 의도치않은 결과가 초래되는 현상을 뭐라고 표현할까요? 답 :예외
+
+
+2. 다음 코드의 출력 결과는 어떻게 될까요? 답 : 1은 출력되지만 그 이후 예외가 발생합니다
+
+``` java
+System.out.println(1);
+System.out.println(2/0);
+System.out.println(3);
+```
+
+3. 예외 발생이 예상되는 상황에서 이를 대응하려면 어떤 구문을 이용해볼 수 있을까요? 답 : try catch 구문을 활용하여 예외 상황 시 동작을 정의합니다
+
+
+4. 다음 코드의 출력 결과는 어떻게 될까요?(틀렸음) 답 : 1, 3, 4 가 출력됩니다
+
+``` java
+public static void main(String[] args) {
+    try {
+        System.out.println(1);
+        System.out.println(0/0);
+    } catch (ArrayIndexOutOfBoundsException e) {
+        System.out.println(2);
+    } catch (Exception e) {
+        System.out.println(3);
+    }
+    System.out.println(4);
+}
+```
+
+5. 다음 중 예외에 상관없이 실행되어야하는 코드는 어떤 구문을 통해 정의하는게 좋을까요? 답 : finally
+
+6. 어플리케이션에서 직접 예외를 발생시킬 수 있도록 하는 키워드는 무엇일까요? 답 : throw
+
