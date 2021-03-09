@@ -1,5 +1,5 @@
 # CS 공부, 면접 대비
-- 자주 나오는 개념위주로 정리
+- 자주 나오는 개념위주로 정리, 면접에서 나왔던 기출문제이므로 꼭 봐야합니다.
 
 ## 1. 네트워크
 
@@ -365,6 +365,8 @@ HTTPS / SSL 특징
 
 ### HTTP 200, 300, 400, 500 응답 코드 (추가 예정)
 
+- [나무위키 참조](https://namu.wiki/w/HTTP/%EC%9D%91%EB%8B%B5%20%EC%BD%94%EB%93%9C)
+
 - 100 번대  Informational (정보), 리퀘스트를 받고, 처리 중에 있음.
 
 - 200 번대 응답(Response) : 성공(Success)
@@ -614,7 +616,7 @@ Connection: close
   렌더링이 완료된 후 브라우저는 Javascript 실행을 통해 DOM과 CSSOM이 변경 될 수 있는데 레이아웃이 수정 되는 경우 페이지 렌더링 및 페인팅을 다시 수행한다.
 
 
-### GET 메서드와 POST 메서드, 멱등성
+### GET 메서드와 POST 메서드, 멱등성(꼭알기 PUT도?)
 
 - [참조](https://hongsii.github.io/2017/08/02/what-is-the-difference-get-and-post/) 하였습니다.
 
