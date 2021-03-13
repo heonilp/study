@@ -19,11 +19,11 @@ void dfs(int dth)
     }
     for (int i = 0; i < n; i++)
     {    
-        if (ck[i] == 0)
+        if (ck[i] == 0 && a[i] >= ans[dth -1])
         {
             ck[i] = 1;
             ans[dth] = a[i];
-            dfs(dth + 1);
+            dfs( dth + 1);
             ck[i] = 0;
         }
         
@@ -37,8 +37,7 @@ int main() {
         cin >> a[i];
     }
     sort(a, a + n);
-    dfs(0);
+    dfs (0);
 
     return 0;
 }
-
