@@ -67,11 +67,11 @@ char int_to_char(int num)
 	do
 	{
 		result = int_to_char(temp % 10) + result;
-		temp /= 10ULL;
+		temp /= 10;
 
 	} while (temp != 0);
 
-	if (input < 0LL)
+	if (input < 0)
 	{
 		result = "-" + result;
 	}
