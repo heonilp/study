@@ -151,8 +151,9 @@ ex. 함수 내의 지역변수(stack에 할당된 메모리)는 그 함수가 �
 
 2.  shared_ptr
 - 참조 카운팅 방식 스마트 포인터(Reference Counting Smart Pointer)
--  소유권이 아닌 공유 방식 사용
+- 소유권이 아닌 공유 방식 사용
 - 참조 카운트가 0이 될 때만, 해당 객체가 자동으로 삭제됨
+- class 클래스명: public std::enable_shared_from_this<클래스명> 선언
 
 3. weak_ptr ( 왜 쓰는 가 ?? )
 - shared_ptr와 함께 사용할 수 있는 스마트 포인터
@@ -162,6 +163,7 @@ ex. 함수 내의 지역변수(stack에 할당된 메모리)는 그 함수가 �
 
 4. weak_ptr 나온 이유 - 순환참조 방지!
 ``` C++
+- 캐싱, 관찰자 목록, std::shared_ptr 순환 고리 방지.
  shared_ptr 를 구현하면서 참조 카운트에 영향을 받지 않는 스마트 포인터가 필요했는데
  weak_ptr 을 사용하면 shared_ptr 가 관리하는 자원(메모리)을 참조카운트에 영향을 미치지 않으면서 참조 타입으로
  가질 수 있습니다.
