@@ -21,6 +21,7 @@
 철학이나 생각하는 방식도 추가
 - Ch6 쿠버네티스 Tips
 
+## 1.1 쿠버네티스 란?
 
 ## 쿠버네티스 가 하는일
 - 컨테이너(도커)가 문제가 생기는 것을 관리
@@ -30,12 +31,14 @@
 
 - 클러스터 전체를 관리하는 컨트롤러로서 마스터가 존재하고, 컨테이너가 배포되는 물리적인 머신을 노드라고 하게 됩니다.
 
--쿠버네티스에 의해서 배포 및 관리되는 가장 기본적인 오브젝트는 컨테이너화되어 배포되는 애플리케이션의 워크로드를 기술하는 오브젝트로 Pod,Service,Volume,Namespace 4가지가 있다
+-쿠버네티스에 의해서 배포 및 관리되는 가장 기본적인 오브젝트는 컨테이너화되어 배포되는 애플리케이션의 워크로드를 
+기술하는 오브젝트로 Pod, Service, Volume, Namespace 4가지가 있다
 
 ## 도커가 뭔가요?
 
 - 가상화 환경 : 하이퍼바이저 -> 가상머신(운영체제 커널) -> 어플리케이션 
-하이퍼바이저(영어: hypervisor)는 호스트 컴퓨터에서 다수의 운영 체제(operating system)를 동시에 실행하기 위한 논리적 플랫폼(platform)을 말한다.
+
+- 하이퍼바이저(영어: hypervisor)는 호스트 컴퓨터에서 다수의 운영 체제(operating system)를 동시에 실행하기 위한 논리적 플랫폼(platform)을 말한다.
 
 - 컨테이너 환경(도커 환경): 운영체제 커널 - 컨테이너(어플리케이션)
 
@@ -56,7 +59,77 @@
 - 설치형 쿠버네티스 : PANCHER , RED HAT OPENSHIFT
 - 구성형 쿠버네티스 : Kops, Kubueadm, Kubesparay, KRIB
 
+## 1.2 코드로 구성하는 쿠버네티스 랩 환경
+
+- 웹에서 사용가능 :  플레이 쿠버네티스(노드4, 4시간 동안사용) 
+- 웹에서 사용가능 :  쿠버네티스 플레이그라운드
+
+- 우리가 쓸 환경, 메모리를 최적화해서 쓸 예정
+- VAGRANT -> 버추얼 박스 (CentOS마스터노드, 워커노드 #1 , 워커노드 #2, 워커노드 3)
 
 
+- 환경 셋팅된 환경 cmd에서 vagrant up을 친다.
+- kubeadm : 실제 k8s를 배포하는 과정
+- 클러스터 4개의 환경으로 구성됨
+- 쿠버네티스 노드 확인 : kubectl get nodes
+
+- 환경이 달라 생기는 문제가 많다
+
+ 1. 기존 구성과 충돌
+
+ 2. 베이그런트 호스트와 게스트 통신 실패
+
+ 3. 베이그런트 실행 권한 문제
 
 
+ ## 2.1 배포를 통해 확인하는 파드(Pod)
+
+ - 노드들에 배포
+
+ - Pod :  컨테이너들의 집합, 하나의 도커가 하나의 파드
+
+ - kubectl run nginx --iamge=niginx
+
+ - kubectl get pod
+
+ - kubectl get pod -o wide
+
+ - curi <ip>
+
+ ## 2.2 파트를 외부에서도 접속하게 하는 서비스(Service)
+
+ - 쿠버네티스 클러스터의 문을 통과해야함
+
+ - SVC ??
+
+ - kubectl expose pod nginx --type=NodePort --port=80
+
+ - kubectl get service
+
+ - kubectl get nodes -o wide
+
+## 2.3 파드와 디폴로이먼트(Deployment) 차이
+
+- kubectl run (사용 X, Pod 한개밖에...)
+
+- kubectl create
+
+- kubectl apply (파일)
+
+- 배포하기
+
+ - kubectl create deployment deploy-niginx --image=niginx
+
+ - kubectl get pod
+
+ - kubectl get pod -o wide
+
+ - curi <ip>
+
+- 여러개 배포하기 ReplicaSet replicas : 3
+
+  - kubectl scale  deployment deploy-niginx --replicas=3
+
+  - kubectl get service
+
+  - kubectl get nodes -o wide
