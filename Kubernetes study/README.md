@@ -136,13 +136,13 @@
 
 ## 2.4 외부로 노출하는 더 좋은 방법인 로드 밸런서(LoadBlancer)
 
-- 1. 노드 포트로 노출
+1. 노드 포트로 노출
 
 - kubectl expose deployment deploy-nginx --type=NodePort --port=80-
 
 - kubectl get services  , IP 를 치면 nginx 가씀
 
-- 2. 디플로이먼트를 노출하는 가장 좋은 방법 - 로드 밸런서 타입(MetalLB)
+2. 디플로이먼트를 노출하는 가장 좋은 방법 - 로드 밸런서 타입(MetalLB)
 
 - 노드포트보다 로드밸런서가 좋은점
 
@@ -161,3 +161,40 @@
 - kubectl expose deployment chk-hn --type=LoadBlancer --port=80- // EXTERNAL-IP를 알려줌
 
 - kubectl get pods -o wide
+
+## 2.5 배포한 것들을 삭제하기
+
+- 배포 된것을 정리
+
+- 컨테이너를 모아놓은 것? Pod, chk-hn
+
+- 파드를 모아 놓은 것? deploy - ReplicaSet : 배포되는 걸 조절
+
+- 쿠버네티스에서 서비스란 ? 문같은 존재, 1. NodePort, 2. LoadBlancer
+- 서비스 추가 설명 : 현관문에서 다른 곳을 거쳐가는 거실 같은 곳??
+
+- 배포 한것들 모두 삭제
+
+1. 서비스 삭제
+
+- kubectl delete service chk-hn
+
+- kubectl get service
+
+- kubectl delete service deploy-nginx
+
+- kubectl get service
+
+2.  deployment, pod 삭제
+
+- kubectl delete deployment chk-hn
+
+- kubectl delete deployment deploy-nginx
+
+- kubectl delete pod nginx
+
+- kubectl get pods
+
+3.  파일 삭제
+
+- kubectl delete f ~/_Lecture_k8s.starterkit/ch2/2.4/metalib.yml
