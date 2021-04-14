@@ -88,7 +88,7 @@
 
  - Pod :  컨테이너들의 집합, 하나의 도커가 하나의 파드
 
- - kubectl run nginx --iamge=niginx
+ - kubectl run nginx --iamge=nginx
 
  - kubectl get pod
 
@@ -118,7 +118,7 @@
 
 - 배포하기
 
- - kubectl create deployment deploy-niginx --image=niginx
+ - kubectl create deployment deploy-nginx --image=nginx
 
  - kubectl get pod
 
@@ -128,8 +128,36 @@
 
 - 여러개 배포하기 ReplicaSet replicas : 3
 
-  - kubectl scale  deployment deploy-niginx --replicas=3
+  - kubectl scale  deployment deploy-nginx --replicas=3
 
   - kubectl get service
 
   - kubectl get nodes -o wide
+
+## 2.4 외부로 노출하는 더 좋은 방법인 로드 밸런서(LoadBlancer)
+
+- 1. 노드 포트로 노출
+
+- kubectl expose deployment deploy-nginx --type=NodePort --port=80-
+
+- kubectl get services  , IP 를 치면 nginx 가씀
+
+- 2. 디플로이먼트를 노출하는 가장 좋은 방법 - 로드 밸런서 타입(MetalLB)
+
+- 노드포트보다 로드밸런서가 좋은점
+
+- 노드포트는 ip를 알려줘야함, 하지만 로드밸런서 ip만 알려주면됨
+
+- 로드밸런서를 사용하면 가야되는 경로를 최적화 해줄수 있음
+
+- kubectl apply -f ~/_Lecture_k8s.starterkit/ch2/2.4/metalib.yml
+
+- kubectl create deployment chk -hn --image=sysnet4adimin/chk-hn
+
+- kubectl scale deployment chk-hn --replicas=3
+
+- kubectl get pods
+
+- kubectl expose deployment chk-hn --type=LoadBlancer --port=80- // EXTERNAL-IP를 알려줌
+
+- kubectl get pods -o wide
