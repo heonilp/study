@@ -1,6 +1,6 @@
 # 쉽게 시작하는 쿠버네티스(Kubernetes) 인프런 강의
 
-## 4월 10일 ~ 12일 강의 수강, 정리 예정
+## 4월 10일 ~ 18일 강의 수강, 정리 예정
 -실습과 전반적인 흐름을 이해할 예정
 
 ## 관련 Git 주소
@@ -358,3 +358,80 @@
 - kubectl get pods -n kube-system (모두 레디상태로 다시 통신)
 
 - 결론 : 컨테이너 런타임(도커)가 중요 하기 때문에 현업에서는 멀티 마스터노드를 놓고 합니다.
+
+## 쿠버네티스 오브젝트
+
+## 5.1. 쿠버네티스에서 오브젝트란?
+
+- api, etcd, c-d, sched, CoreDNS, k-proxy, CNI, kubelet
+
+- 상태를 가지고 있는 것이 오브젝트
+
+- api, etcd, c-d, sched, CoreDNS, k-proxy, CNI
+
+- 추구하는 상태  -(X)- 현재 상태 -> 추구하는상태 -(O)- 현재상태
+
+- 추구하는 상태와 현재 상태를 맞추려고함  ( 차이발견, 상태변경, 감시 )
+
+- ex ) replicas 9
+
+
+- 추구하는 상태(Spec)와 현재 상태(Status) 확인
+
+- kubectl get pods (배포된 파드가 9개)
+
+- kubectl edit deployment del-deploy (설정 파일을 볼 수 있음, 9를 3으로 고침)
+
+- kubectl get pods (실행하는게 9 -> 3, 선언한 상태와 현재 상태 맞춤)
+
+- kubectl get pods (pods 가 3개로 변함)
+
+## 5.2. 쿠버네티스 기본오브젝트
+
+- 쿠버네티스 기본 오브젝트 ?
+
+- 파드 (api, etcd, c-d, sched, CoreDNS, k-proxy, CNI, kubelet)
+
+- 서비스 (NodePort, 로드밸런서, SVC)
+
+- 네임스페이스 (default- pod, SVC, deploy..., kube-system)
+
+- 볼륨 (vol, 영속적인 데이터를 보존하기 위해서 쓰임)
+
+-  vs 파드는 가축같은 존재이므로 언제든지 삭제할 수있음
+
+- 실습
+
+1. kubectl get pods
+
+2. ~/_Lecture_k8s.starterkit/ch5/5.2/nfs-exporter.sh log
+
+3. cat /etc/exports (마스터 서버, 들어올수있도록 nts-shared)
+
+4. ls /nts-shared
+
+5. cat ~/_Lecture_k8s.starterkit/ch5/5.2/dpy-chk.log.yaml
+
+6. kubectl apply -f ~/_Lecture_k8s.starterkit/ch5/5.2/dpy-chk.log.yaml
+
+7. kubectl get pods (생성이 됨)
+
+8. kubectl get pods -o wide (curl로 접속을 시도함)
+
+9. kubectl exec dpy-chk-log-~~~~~xcc -it -- /bin/bash
+
+10. ls(생성)
+
+11. cat audit/audit/dpy-chk-log-~~~~~xcc.log
+
+12. kubectl delete -f ~/_Lecture_k8s.starterkit/ch5/5.2/dpy-chk.log.yaml
+
+13. kubectl get pods -w( 삭제 )
+
+14. kubectl apply -f ~/_Lecture_k8s.starterkit/ch5/5.2/dpy-chk.log.yaml
+
+15. kubectl get pods -w(새로 생김)
+
+16. kubectl exec dpy-chk-log-~~~~~xcc -it -- /bin/bash
+
+- 결론(중요) : 파드는 계속 지워질수 있으나 볼륨은 영속성이 있다!!
