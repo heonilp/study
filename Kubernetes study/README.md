@@ -128,7 +128,7 @@
 
 - 여러개 배포하기 ReplicaSet replicas : 3
 
-  - kubectl scale  deployment deploy-nginx --replicas=3
+  - kubectl scale deployment deploy-nginx --replicas=3
 
   - kubectl get service
 
@@ -245,9 +245,9 @@
 
 - API 서버의 모든 곳의 중심!!(알파 오메가?)
 
-## 문제를 통해 배우는 쿠버네티스
+## 4. 문제를 통해 배우는 쿠버네티스
 
-## 4.1 쿠버네티스 파드에 문제가 생긴다면
+## 4.1 쿠버네티스 파드에 문제가 생긴다면?
 
 - 파드를 실수로 지웠다면?
 
@@ -279,4 +279,82 @@
 
 8. kubectl get pods
 
+## 4.2. 쿠버네티스 워커 노드의 구성요소 문제가 생겼다면?
 
+1. kubelet 중단 실습
+
+- systemctl stop kubelet
+
+- systemctl status kubelet
+
+- kubectl get pods -o wide
+
+- kubectl get pods -o wide -w (w옵션은 상태가 변하는 걸알려줌)
+
+2. 컨테이너 런타임(도커) 중단 실습
+
+- systemctl stop docker  (배포하지않음, 스케줄링하지않음)
+
+- systemctl status docker 
+
+- kubectl get pods
+
+- kubectl scale deployment del-deploy --replicas-6 (6개 배포)
+
+- kubectl get pods -o wide
+
+
+3. 추가배포를 통해 스케줄러 역할 확인
+
+- kubectl scale deployment del-deploy --replicas-9
+
+- kubectl get pods -o wide (스케줄러가 균형있게 배포한다.)
+
+
+## 4.3. 쿠버네티스 마스터 노드의 구성 요소에 문제가 생겼다면?
+
+1. 스케줄러가 삭제된다면??
+
+- kubectl get pods -n kube-system
+
+- kubectl get pods -n kube-system -o wide
+
+- kubectl get pods -n kube-system
+
+- kubectl delete pod kub-scheduler-n-k8s -n kubu-system(네임스페이스를 줘야함)
+
+- kubectl get pods -n kube-system (중요한요소이기 때문에 문제가 생기면 다시만듬)
+
+2. kubelet이 중단이 된다면? (kubelet에 전달되지 않기 때문에 이상이없음)
+
+- systemctl stop kubelet
+
+- kubectl delete pod kub-scheduler-n-k8s -n kubu-system (1분정도를 줌, 멈춤)
+
+- terninating이 나옴 (멈춤)
+
+- kubectl create deployment deploy-nginx --image=nginx (생성됨)
+
+- kubectl get pods (생성이 됨)
+
+- kubectl scale deployment deploy-nginx --replicas=3(스케일을 통해 3개를 늘림 , 이상없음 )
+
+- systemctl start kubelet (스케줄러 다시시작)
+
+- kubectl get pods -n kube-system -w
+
+- 결론 : kubelet이 중단되면 문제가 있는것 처럼보이나 워커노드에 영향을 미치지않음
+
+3. 컨테이너 런타임(도커) 중단이 된다면(전체 시스템이 마비될수 있음, API 서버를 핸들링)
+
+- systemctl stop docker (도커 중단)
+
+- kubectl get pods  (컨테이너 런타임이 되지않으면 통신이 되지않음)
+
+- systemctl status docker
+
+- systemctl start docker (다시 시작)
+
+- kubectl get pods -n kube-system (모두 레디상태로 다시 통신)
+
+- 결론 : 컨테이너 런타임(도커)가 중요 하기 때문에 현업에서는 멀티 마스터노드를 놓고 합니다.
