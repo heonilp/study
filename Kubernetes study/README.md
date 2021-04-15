@@ -198,3 +198,85 @@
 3.  파일 삭제
 
 - kubectl delete f ~/_Lecture_k8s.starterkit/ch2/2.4/metalib.yml
+
+
+## 3.1 쿠버네티스 구성 요소 확인
+
+- 쿠버네티스는 어떻게 구성되어있나요?
+
+- api, etcd, c-d, sched, CoreDNS, k-proxy, CNI, kubelet
+
+- 구역을 나누는 네임스페이스(Namespace) -default, kub-system, metallb-system
+
+- 네이티브 쿠버네티스 구성요소 확인
+
+- kubectl get pods -n kube-systeam
+
+- aws eks-node , aks(애저) , gke(GCP) 배포, aws cloudshell 등
+
+## 3.2 쿠버네티스의 기본 철학
+
+- 파드 배포시에 쿠버네티스 구성요소들이 하는일
+
+- 마이크로서비스 아키텍쳐(MSA) vs 모놀리식 아키텍처
+
+- 각자의 일을 열심히한다.
+
+- 파드에 배포되면? (PDF 그림보기)
+
+- 마스터모드 (API 서버 & etcd-  컨트롤러 - 스케줄러) - 워커노드 ( kubelet - 파드)
+
+- 선언적인 시스템
+
+- 추구하는 상태  -(X)- 현재 상태 -> 추구하는상태 -(O)- 현재상태
+
+- 추구하는 상태와 현재 상태를 맞추려고함  ( 차이발견, 상태변경, 감시 )
+
+- API서버와 ETCD와 다름
+
+1. 값에 대해서 API서버가 휘발 될 수가 있으므로 DB처럼 etcd에 업데이트된 정보기록
+
+2. API 정보에 대해서 업데이트 됬음을 API 서버에 알림
+
+
+## 3.3 현재 실제 쿠버네티스의 파드 배포 흐름
+
+- PDF 그림보고 이해
+
+- API 서버의 모든 곳의 중심!!(알파 오메가?)
+
+## 문제를 통해 배우는 쿠버네티스
+
+## 4.1 쿠버네티스 파드에 문제가 생긴다면
+
+- 파드를 실수로 지웠다면?
+
+1. 파드만 배포된 경우 - 난감
+
+2. 디폴로이먼트 형태로 배포된 파드
+
+- 파드와 디폴로이먼트 비교
+
+- 디폴로이먼트 -> pod를 감싸고있는 객체라고 생각하면됨
+
+- 쿠버네티스가 파드를 대하는 자세는 애완동물과 가축(죽어도돼.)
+
+- 실습
+
+1. kubectl apply f ~/_Lecture_k8s.starterkit/ch4/4.1/dei
+
+2. kubectl apply f ~/_Lecture_k8s.starterkit/ch4/4.1
+
+3. kubectl get pods (보기)
+
+4. kubectl delete pod dei-pod (삭제)
+
+5. kubectl delete pod del-deploy-5/~~~
+
+6. kubectl get pods
+
+7. kubectl delete deployment dei deploy
+
+8. kubectl get pods
+
+
