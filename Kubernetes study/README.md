@@ -435,3 +435,33 @@
 16. kubectl exec dpy-chk-log-~~~~~xcc -it -- /bin/bash
 
 - 결론(중요) : 파드는 계속 지워질수 있으나 볼륨은 영속성이 있다!!
+
+
+## 쿠버네티스 TIPS
+
+## 6.1 kubectl 쉽게 쓰는방법
+
+- BASH -> Vagrant -> ~/.bashrc , /etc/bsh_compeletion.d/kubectl
+
+- kubectl -> k로 쓰임
+
+1. kubectl 자동완성 실습
+
+- cat ~/_Lecture_k8s.starterkit/ch1/1.2/k8s-min-5G1B/ (참고해서 하기)
+
+- k로 명령어를 칠수 있음
+
+- k 텝텝을 하면 명령어를 볼수 있음
+
+2. 배시 셸에 별명(Alias) 지어주기 (쉽게 쓸수 있음)
+
+- alias k = kubectl
+
+- alias ka = kubectl apply -f
+
+- alias keq = kubectl exec
+
+3. kubectl의 별명 실습
+
+- ~/_Lecture_k8s.starterkit/ch6/6.1/k8s_rc.sh (내용 보기)
+
