@@ -465,3 +465,100 @@
 
 - ~/_Lecture_k8s.starterkit/ch6/6.1/k8s_rc.sh (내용 보기)
 
+## 6.2 쿠버네티스 버전 업그레이드
+
+1. 업그레이드 계획 수립
+
+2. Kubeadm 업그레이드
+
+3. Kubelet 업그레이드
+
+4. 업그레이드 완료 확인
+
+- 쿠버네티스 버전 업그레이드 실습
+
+- k get nodes
+
+- Kubeadm upgrade plan
+
+- yum list kubedam --showuplicates (어디까지 올렸는지 알 수 있음)
+
+- Kubeadm upgrade apply 1.20.4 (실패함)
+
+- yum upgrade -y kubedam-1.20.4 (버전에 맞춰서 업그레이드 됨)
+
+- Kubeadm upgrade apply 1.20.4 (업그레이드 됨, 성공)
+
+- k get nodes (업그레이드가 되지않음)
+
+- Kubeadm version
+
+- kubectl version
+
+- kublet --version
+
+- yum upgrade kubelet-1.20.4 -y
+
+- k get nodes
+
+- yum upgrade kubelet-1.20.4 -y (다 kubelet를 업그레이드하고 재시작하면 버전이 올라감)
+
+
+## 6.3. 오브젝트 예약 단축어
+
+- 오브젝트에는 예약 단축어가 있다??
+
+- 파드의 예약 단축어 - pod, pods -> po
+
+- 디폴로이먼트 예약 단축어 - deployment, deployments ,deploy
+
+
+- 정리하자면?!!!
+
+- 자주 사용되는 명령어 
+
+- 이름  축약어  오브젝트 이름
+
+- nodes - no - Node
+
+- namespaces - ns - Namespace
+
+- deployments - deploy - Deployment
+
+- pods - po - Pod
+
+- services svs Service
+
+- k get po
+
+- k get deploy
+
+- k get no
+
+## 7. 강의를 마차며
+
+- 쿠버네티스에서 느낌이 오는지? 공식 홈페이지 도큐먼트 보면서 실습하면 도움이 많이 됩니다.
+
+- 현재 기술이 총망라 되있어서 어렵긴함, 쉬운 강의, 처음시작하는 강의임
+
+- DNS(Domain Name System) 정보 조회
+
+- Kubernetes DNS query [검색](https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution/)
+
+- kubectl apply -f https://k8s.io/examples/admin/dns/dnsutils.yaml
+
+- kubectl get pods dnsutils
+
+- kubectl exec -i -t dnsutils -- nslookup kubernetes.default
+
+- k get service -n kube-system
+
+- kubectl get pods --namespace=kube-system -l k8s-app=kube-dns
+
+- kubectl logs --namespace=kube-system -l k8s-app=kube-dns
+
+
+## 보강 강의
+
+## 8.1. 도커가 중단되었는데 파드가 그대로에요.
+
