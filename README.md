@@ -44,8 +44,12 @@
 ## JPA 공부
 - [자바 ORM 표준 JPA 프로그래밍 - 기본편](https://www.inflearn.com/course/ORM-JPA-Basic/dashboard) 강의 들으면서 정리(김영한님, 현재 수강중)
 
-## CS(컴퓨터공학) 전공 정리하기
+## CS(컴퓨터공학) 전공과목 정리하기
 - 자료구조, 알고리즘, 네트워크, 운영체제, 데이터베이스 등
+
+- CS 공부 면접 준비 정리 하였습니다. [정리한곳](https://github.com/heonilp/study/tree/master/CS%20study)
+
+- 참고
 - https://github.com/JaeYeopHan/Interview_Question_for_Beginner
 - https://github.com/WeareSoft/tech-interview
 - https://github.com/gyoogle/tech-interview-for-developer
@@ -67,11 +71,14 @@
 - 스케일 업 vs 스케일 아웃
 - MSA 관련 서비스 생각해보기 (GATEWAY API)
 
-## CI/CD, MSA 실습/공부
-- 젠킨스 ,도커, 쿠버네티스 공부
-- 젠킨스 CI CD [강의](https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=190)
+## 도커, 쿠버네티스 CI/CD, MSA 실습/공부
+- 젠킨스 ,도커, 쿠버네티스 실습/공부
 
-- Spring Cloud를 활용한 MSA 기초 [강의](https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=150)
+- 쉽게 시작하는 쿠버네티스(Kubernetes) 인프런 강의 [정리](https://github.com/heonilp/study/tree/master/Kubernetes%20study)
+
+- 따라하며 배우는 도커와 CI환경 인프런 강의 [정리](https://github.com/heonilp/study/tree/master/Docker%20study)
+
+- 젠킨스 CI CD [강의](https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=190)
 
 ## 카프카, 레빗MQ 공부
 - 카프카 강의로 기초 공부하기 [강의](https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=183)
