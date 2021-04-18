@@ -907,9 +907,31 @@ int main()
 
 ## const
 
+- 상수화, 멤버함수 내 멤버변수 변경x
+
 ## r-value 레퍼런스, 퍼펙트포워딩
 
 
 ## 맵과 언오더 맵, 벡터 데이터 사용
 
-## BST, 레드블랙트리에 대한 설명과 시간복잡도 
+## BST, 레드블랙트리에 대한 설명과 시간복잡도
+
+
+[참고](https://zeddios.tistory.com/237)
+
+- 레드블랙트리의 높이는 logn에 바운드 된다 => 레드블랙트리에서 search연산은 O(logn)의 시간복잡도를 가지게 된다. 
+
+- Restructuring, Recoloring 연산
+
+1. Root Property : 루트노드의 색깔은 검정(Black)이다.
+
+2. External Property : 모든 external node들은 검정(Black)이다.
+
+3. Internal Property : 빨강(Red)노드의 자식은 검정(Black)이다. 
+
+== No Double Red(빨간색 노드가 연속으로 나올 수 없다.) 
+
+4. Depth Property : 모든 리프노드에서 Black Depth는 같다. 
+
+== 리프노드에서 루트노드까지 가는 경로에서 만나는 블랙노드의 개수는 같다.
+
