@@ -836,9 +836,74 @@ int b: 4bytes
 
 ## 가상함수 
 
--생성자, 소멸자에서 가상함수 문제
--가상함수
--순수가상함수 
+-생성자, 소멸자에서 가상함수 문제 (중요)
+[참고](https://lunchballer.com/archives/831)
+``` C++
+//정리하면, 생성자와 소멸자에서 가상 함수를 호출할 수는 있지만, 
+//가상 함수의 역할은 하지 않게 되고, 멤버 함수로서의 기능으로만 작동된다. 
+class Base
+{
+public:
+	Base()
+	{
+		cout << "Base 생성자 호출" << "\n";
+		//call(); //객체 소멸 , 객체생성 중에는 절대로 가상함수 호출하지말자, 할당 소멸중에 먼저 실행되면 안됨 
+       // 실행을 해보면, 아래와 같이 Base::casll()가 호출되었다는 것을 알 수 있다.  즉, 생성자에서 가상 함수를 호출할 수는 있지만, 하위 클래스의 가상 함수가 호출되지는 않는다.  생성자에서는 virtual의 의미가 없어지는 것이고 이는 Item 오브젝트가 아직 생성되지 않았기 때문이다. 
+	}
+
+	virtual ~Base()
+	{
+        //virtual를 써주지않으면 자식클래스의 소멸자가 호출되지않음
+        //Base* d = new Item("t");
+		cout << "Base 소멸자 호출" <<"\n";
+        //call(); 소멸된후에 실행
+	}
+    //virtual void call() { }
+
+	//virtual void call() = 0; // 순수 가상함수로 실행하면 링크오류가 발생
+};
+
+
+class Item : public Base
+{
+private:
+	const char* m;
+public:
+	Item(const char *_m):m(_m)
+	{
+		cout << "Item 생성자 호출 " << "\n";
+	}
+
+	~Item() 
+	{
+		cout << "Item 소멸자호출" << "\n";
+	}
+	/*
+	void call()
+	{
+		cout << "call" << "\n";
+	}
+	*/
+
+};
+
+int main() 
+{
+	Item* d = new Item("t");
+	//Base* b = d;
+
+	delete d;
+
+	return 0;
+}
+
+```
+## 가상함수, 순수가상함수 
+
+- 순수 가상 함수는 인터페이스(Interface)를 자식 클래스에게 전달하기 위해 사용하는 함수입니다.
+
+- 일반(단순) 가상 함수는 인터페이스(Interface) + 함수의 선언(내부 구현) 까지 자식 클래스에게 전달하기 위해 사용하는 함수입니다
+
 
 ## const
 
