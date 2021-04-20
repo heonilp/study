@@ -182,3 +182,27 @@ Plan 명령어는 어떠한 형상에도 변화를 주지 않습니다. (100% �
 - curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
 - vim ~/.zshrc (테마를 바꿈, ys로 바꿈, 편하게 업무를 볼수 있음)
+
+
+## 5-1 AWS CLI 및 테라폼 설치
+
+# Linux x86 (64-bit)
+- curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+- unzip awscliv2.zip
+
+- sudo ./aws/install
+
+- 테라폼 설치 Terraform v0.12.24으로 설치
+
+- $ curl -sO https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
+
+- (Mac 유저는 darwin_amd64.zip 가 붙은 파일을 다운로드 하시면 됩니다.)
+
+- $ unzip terraform_0.12.24_linux_amd64.zip
+
+- $ sudo mv terraform /usr/local/bin
+
+- $ terraform --version
+
+- Terraform v0.12.24 (성공)
