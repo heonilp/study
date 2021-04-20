@@ -161,3 +161,24 @@ Plan 명령어는 어떠한 형상에도 변화를 주지 않습니다. (100% �
 - ls -al ->.ssh ->authorized_keys ( 공개키 암호화 방식 )
 
 - 키가 쌍으로 존재, Private 키 ,퍼블릭키가 존재, 서로가 적합한지 확인
+
+
+## 4-2 강 ZSH 및 Oh-my-zsh 설치
+
+- 강사님은 리눅스환경... 저는 현재 윈도우 환경이니.. putty 사용하고, puttygen 사용해서 pem파일을 바꿈.
+
+- sudo yum install zsh
+
+- sudo yum install util-linux-user.x86_64
+
+- sudo passwd ec2-user 암호 설정해줘야함
+
+- chsh -s /bin/zsh 
+
+- 암호침
+
+- sudo yum install git
+
+- curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+- vim ~/.zshrc (테마를 바꿈, ys로 바꿈, 편하게 업무를 볼수 있음)
