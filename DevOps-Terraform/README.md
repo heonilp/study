@@ -317,4 +317,103 @@ resource "aws_s3_bucket" "test" {
 20. terraform apply (완료)
 
 
+## 7장 VPC 소개
 
+- AWS 시작과 기본이 되는 VPC에 대해서 알자
+
+- 구성요소를 알아보고 AWS Console을 통해 실습
+
+- Virtual Private Cloud(VPC) — 사용자의 AWS 계정 전용 가상 네트워크입니다.
+
+- 서브넷 — VPC의 IP 주소 범위입니다.
+- 프라이빗서브넷(NAT게이트웨이연결), 퍼블릭서브넷(인터넷게이트웨이연결)
+
+- 라우팅 테이블 — 네트워크 트래픽을 전달할 위치를 결정하는 데 사용되는 라우팅이라는 규칙 집합입니다.
+
+- 인터넷 게이트웨이 — VPC의 리소스와 인터넷 간의 통신을 활성화하기 위해 VPC에 연결하는 게이트웨이입니다.
+
+- NAT 게이트웨이 — 네트워크 주소 변환을 통해 **프라이빗 서브넷**에서 인터넷 또는 기타 AWS 서비스에 연결하는 게이트웨이입니다.
+
+- 씨큐리티 그룹 — 보안 그룹은 인스턴스에 대한 인바운드 및 아웃바운드 트래픽을 제어하는 가상 방화벽 역할을 하는 규칙 집합입니다.
+
+- VPC 엔드포인트 — 인터넷 게이트웨이, NAT 디바이스, VPN 연결 또는 AWS Direct Connect 연결을 필요로 하지 않고 PrivateLink 구동 지원 AWS 서비스 및 VPC 엔드포인트 서비스에 VPC를 비공개로 연결할 수 있습니다. VPC의 인스턴스는 서비스의 리소스와 통신하는 데 퍼블릭 IP 주소를 필요로 하지 않습니다. VPC와 기타 서비스 간의 트래픽은 Amazon 네트워크를 벗어나지 않습니다.
+
+## 8강 VPC와 subnet 생성하기
+
+-왜 코드로 만드나요? - 사실 마법사로 만들거나 콘솔로 만들면 히스토리를 추척하기 힘들다. IaC를 사용하는이유는 히스토리를 추척하기 편리.
+
+- VPC에 대해서 한번 복습하고 테라폼을 이용하여서 AWS VPC와 서브넷 생성
+
+- VPC를 삭제하면 관련된 것을 삭제, 의존성이 있어서 하위를 먼저 삭제해야함.
+
+- VPC 생성
+
+- vim provider.tf
+
+```
+provider "aws" {
+  region  = "ap-northeast-2"
+}
+```
+
+- vim vpc.tf
+
+```
+resource "aws_vpc" "main" {
+  cidr_block       = "10.0.0.0/16"
+
+  tags = {
+    Name = "terraform-101"
+  }
+}
+```
+
+- terraform init
+
+- terraform plan
+
+- terraform apply (yes, vpc 생성)
+
+- 서브넷 구성 (서브넷은 가용영역에 속한 의존성을 가지고 있음)
+
+- vim vpc.tf (수정)
+
+```
+
+resource "aws_vpc" "main" {
+  cidr_block       = "10.0.0.0/16"
+
+  tags = {
+    Name = "terraform-101"
+  }
+}
+
+##  추가 함
+
+resource "aws_subnet" "public_subnet" {
+  vpc_id     = aws_vpc.main.id
+  cidr_block = "10.0.0.0/24"
+
+  availability_zone = "ap-northeast-2a" // 지정을 안하면 apply 이후에 안다.
+
+  tags = {
+    Name = "terraform-101-public_subnet"
+  }
+}
+
+
+resource "aws_subnet" "private_subnet" {
+  vpc_id     = aws_vpc.main.id
+  cidr_block = "10.0.10.0/24"
+
+  availability_zone = "ap-northeast-2b"
+
+  tags = {
+    Name = "terraform-101-priavte_subnet"
+  }
+}
+```
+
+- terraform plan
+
+- terraform apply (yes, 서브넷 두개 생성)
