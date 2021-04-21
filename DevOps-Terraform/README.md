@@ -223,3 +223,98 @@ Plan 명령어는 어떠한 형상에도 변화를 주지 않습니다. (100% �
 5. aws s3 ls 하면 s3의 저장소가 나옵니다.
 
 6. IAM 설정해서 계정만들어서 하기 (실습 , 완료)
+
+## 6강 테라폼 작동원리와 CLI 실습
+
+- 다음은 테라폼 활용에 필요한 개념입니다.
+
+```
+- resource : 실제로 생성할 인프라 자원을 의미합니다.
+ex) aws_security_group, aws_lb, aws_instance
+
+- provider : Terraform으로 정의할 Infrastructure Provider를 의미합니다.
+https://www.terraform.io/docs/providers/index.html
+
+- output : 인프라를 프로비저닝 한 후에 생성된 자원을 output 부분으로 뽑을 수 있습니다. Output으로 추출한 부분은 이후에 remote state에서 활용할 수 있습니다.
+
+- backend : terraform의 상태를 저장할 공간을 지정하는 부분입니다. backend를 사용하면 현재 배포된 최신 상태를 외부에 저장하기 때문에 다른 사람과의 협업이 가능합니다. 가장 대표적으로는 AWS S3가 있습니다.
+
+- module : 공통적으로 활용할 수 있는 인프라 코드를 한 곳으로 모아서 정의하는 부분입니다. Module을 사용하면 변수만 바꿔서 동일한 리소스를 손쉽게 생성할 수 있다는 장점이 있습니다.
+
+- remote state : remote state를 사용하면 VPC, IAM 등과 같은 공용 서비스를 다른 서비스에서 참조할 수 있습니다. tfstate파일(최신 테라폼 상태정보)이 저장되어 있는 backend 정보를 명시하면, terraform이 해당 backend에서 output 정보들을 가져옵니다.
+```
+
+- Terraform 작동 원리
+
+- 가장 중요한 것은 AWS 실제 인프라와 Backend에 저장된 상태가 100% 일치하도록 만드는 것입니다. 
+
+1. Local 코드 : 현재 개발자가 작성/수정하고 있는 코드
+
+2. AWS 실제 인프라 : 실제로 AWS에 배포되어 있는 인프라
+
+3. Backend에 저장된 상태 : 가장 최근에 배포한 테라폼 코드 형상
+
+4. vim provider.tf
+```
+provider "aws" {
+    region = "ap-northeast-2"
+}
+```
+5. terraform init
+
+6. vim s3.tf
+```
+resource "aws_s3_bucket" "test" {
+   bucket = "terraform101-inflearn"
+}
+```
+
+7. terraform plan
+
+8. terraform apply(배포)
+
+9. 에러가 나옴 ,terraform101-inflearn 말고 다른 이름으로 생성
+```
+Error: Error creating S3 bucket: BucketAlreadyExists: The requested bucket name is not available. The bucket namespace is shared by all users of the system.
+
+bucket 의 이름은 by all users of the system.
+
+즉 모든 유저들이 공유하기 때문에, 그 이름이 유일해야합니다.
+
+bucket                      = "terraform101-inflearn"
+
+이 이름이 bucket 의 이름이 되고, 그 이름이 유일하지 않기 때문에,
+
+제가 강의해서 만들었기 때문에 아마 만들어지지 않습니다.
+
+이름을 유일할만한걸로 바꿔보시고 생성 - hi0223로 생성 완료
+```
+
+10.  terraform.tfstate 생성됨을 보임
+
+11. rm -f s3.tf
+
+12. terraform plan (삭제되었다고나옴, 코드삭제됨)
+
+13. rm -f terraform.tfstate
+
+14. rm -rf .terraform
+
+15. terraform init
+
+16. terraform plan (코드분실, 테라폼 입장에서 아무것도 안만듬)
+
+17. terraform import aws_s3_bucket.test hi0223(실제코드가 없음- 에러)
+
+18. vim s3.tf
+```
+resource "aws_s3_bucket" "test" {
+   bucket = "hi0223"
+}
+```
+19. terraform plan (force_destroy가 false 이기 때문에 apply해야함)
+
+20. terraform apply (완료)
+
+
+
