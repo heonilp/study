@@ -78,6 +78,8 @@
 
 - 따라하며 배우는 도커와 CI환경 인프런 강의 [정리](https://github.com/heonilp/study/tree/master/Docker%20study)
 
+- DevOps-Terraform 기초 강의 연습[정리](https://github.com/heonilp/study/tree/master/DevOps-Terraform)
+
 - 젠킨스 CI CD [강의](https://tacademy.skplanet.com/live/player/onlineLectureDetail.action?seq=190)
 
 ## 카프카, 레빗MQ 공부
