@@ -798,3 +798,66 @@ Terraform “Backend” 는 Terraform의 state file을 어디에 저장을 하�
 - Locking: 보통 Terraform 코드를 혼자 작성하지 않습니다. 인프라를 변경한다는 것은 굉장히 민감한 작업이 될 수 있습니다. 원격 저장소를 사용함으로써 동시에 같은 state를 접근하는 것을 막아 의도치 않은 변경을 방지할 수 있습니다.
 
 - Backup: 로컬 스토리지에 저장한다는건 유실할 수 있다는 가능성을 내포합니다. S3와 같은 원격저장소를 사용함으로써 state 파일의 유실을 방지합니다.
+
+[실습 참고 코드](https://terraform101.inflearn.devopsart.dev/advanced/backend/)
+- Terraform Backend 실습
+
+S3 bucket as backend
+테라폼의 상태를 저장하기 위해 S3 버킷을 생성합니다. AWS S3는 쉽게 구축할 수 있으며 versioning 을 지원하는 안전한 저장소입니다.
+
+- DynamoDB Table for Lock
+
+동시에 같은 파일을 수정하지 못하도록 하기 위해 DynamoDB에 작업에 대한 Lock을 생성합니다.
+
+- state 가져오기
+
+- terraform state list
+
+- terraform state pull
+
+## 17강 Variables 활용하기
+
+- Terraform variables 사용하기
+
+- Terraform 은 HCL Syntax를 가진 언어입니다. 언어적 특성을 가지고 있기 때문에 당연히 변수를 정의하고 주입해서 사용할 수 있습니다.
+
+```
+- Variable Types
+    string
+    number
+    bool
+    Complex variable types
+    list()
+    set()
+    map()
+    object({ = , … })
+    tuple([, …])
+
+```
+
+## 18강 Functions 활용하기
+
+
+- Terraform fuction 사용하기
+
+Terraform 을 프로그래밍 언어라 볼 수 는 없지만, 그래도 언어적 특성과 장점을 가지고 있습니다. 그렇기 때문에 프로그래밍처럼 기본 내장된 다양한 fuction 사용할 수 있습니다.
+
+[코드 참고](https://terraform101.inflearn.devopsart.dev/advanced/function/)
+```
+- Functions
+    Numeric functions
+    String functions
+    Collection functions
+    Encoding functions
+    Filesystem functions
+    Date and Time functions
+    Hash and Crypto functions
+    IP Network functions
+    Type Conversion Functions
+```
+
+## 19강 Github 협업하기
+
+- Terraform with Github
+
+- IaC는 Infrastructure as Code 코드로써의 인프라를 이야기합니다. Terraform 은 IaC 도구이며, 즉 테라폼은 코드를 수행합니다. 그렇기 때문에 반드시 코드로써의 관리가 필요하며, 팀원간의 코드리뷰가 필요합니다. 코드리뷰란 팀원들끼리 서로의 코드를 점검하고, 서로의 코드를 배우는 것입니다.
