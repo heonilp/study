@@ -417,3 +417,149 @@ resource "aws_subnet" "private_subnet" {
 - terraform plan
 
 - terraform apply (yes, 서브넷 두개 생성)
+
+## 9강 AWS 인터넷게이트웨이 & NAT 게이트웨이 생성
+
+- 인터넷게이트웨이 & NAT 게이트웨이 연결에 따라서 public subnet, private subnet이 결정됨, 인터넷게이트웨이 & NAT 게이트웨이를 직접 생성할것
+
+- NAT 게이트웨이는 시간 단위로 과금이 되는 서비스이기 때문에, 오래 켜놓으시면 큰 비용이 발생합니다.
+
+- Free Tier(프리티어) 계정을 사용한다고 하더라도, 여차하면 비용이 발생할 수도 있으므로, 반드시 삭제를 해주시기 바랍니다.
+
+- [실습 사이트](https://terraform101.inflearn.devopsart.dev/cont/vpc-practice/vpc-practice-with-nat/)
+
+- 인터넷게이트웨이 생성
+
+- vim vpc.tf (수정)
+
+```
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "main"
+  }
+}
+```
+
+- terraform plan
+
+- terraform apply (yes, 인터넷게이트웨이 생성)
+
+- NAT 게이트웨이 생성
+
+```
+# eip 생성
+resource "aws_eip" "nat_1" {
+  vpc   = true
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_nat_gateway" "nat_gateway_1" {
+  allocation_id = aws_eip.nat_1.id
+
+  # Private subnet이 아니라 public subnet을 연결하셔야 합니다.
+  subnet_id = aws_subnet.public_subnet.id
+
+  tags = {
+    Name = "terraform-NAT-GW-1"
+  }
+}
+
+
+```
+
+- terraform plan
+
+- terraform apply (생성, nat게이트웨이 생성)
+
+## 10강 AWS RouteTable
+
+- 테라폼을 이용해서 라우터 테이블 구성
+
+- 어디로 보낼지 룰들을 선택하는 것
+
+- Route Table은 트래픽을 규칙에 맞게 전달해주기 위해 필요한 일종의 테이블입니다. Route table은 여러 서브넷에서 동시에 사용할 수 있으며, 이렇게 연결하는 작업은 Association 이라고 합니다.
+
+
+```
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "terraform-101-rt-public"
+  }
+}
+
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "terraform-101-rt-priavte"
+  }
+}
+
+```
+
+- terraform plan
+
+- terraform apply (생성, 라우터테이블 생성)
+
+
+```
+# 연결 관계 생각해서 짜기
+
+resource "aws_route_table_association" "route_table_association_public" {
+  subnet_id      = aws_subnet.public_subnet.id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route_table_association" "route_table_association_private" {
+  subnet_id      = aws_subnet.private_subnet.id
+  route_table_id = aws_route_table.private.id
+}
+
+```
+
+- terraform plan
+
+- terraform apply (연결)
+
+
+- Nat Gateway 생성
+```
+
+resource "aws_route" "private_nat" {
+  route_table_id              = aws_route_table.private.id
+  destination_cidr_block      = "0.0.0.0/0"
+  nat_gateway_id              = aws_nat_gateway.nat_gateway_1.id
+}
+
+```
+
+- terraform plan
+
+- terraform apply 
+
+- 연결되는 구간이 되게 많은 데 바깥쪽으로 코드를 뺴는 것이 더 보기 좋은 코드이다.
+
+- VPC endpoint : 인터넷게이트웨이나 nat게이트가 아닌 ,다이렉트로 바로 만들어줌
+
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id = aws_vpc.main.id
+  service_name ="com.amazonaws-ap-northeast-2.s3"
+}
+
+
+## 11강 Amazon S3 소개
+
+- 웹하드 서비스들이 실제로 S3를 통해 구현된 서비스들이 정말 많음
+
+- Amazon Simple Storage Service는 인터넷용 스토리지 서비스입니다. 이 서비스는 개발자가 더 쉽게 웹 규모 컴퓨팅 작업을 수행할 수 있도록 설계되었습니다.
+
+- 버킷
+
+버킷은 Amazon S3에 저장된 객체에 대한 컨테이너입니다. 모든 객체는 어떤 버킷에 포함됩니다. 예를 들어 photos/puppy.jpg로 명명된 객체는 미국 서부(오레곤) 리전의 awsexamplebucket1 버킷에 저장되며 URL https://awsexamplebucket1.s3.us-west-2.amazonaws.com/photos/puppy.jpg를 사용하여 주소를 지정할 수 있습니다
