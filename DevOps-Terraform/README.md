@@ -563,3 +563,238 @@ resource "aws_vpc_endpoint" "s3" {
 - 버킷
 
 버킷은 Amazon S3에 저장된 객체에 대한 컨테이너입니다. 모든 객체는 어떤 버킷에 포함됩니다. 예를 들어 photos/puppy.jpg로 명명된 객체는 미국 서부(오레곤) 리전의 awsexamplebucket1 버킷에 저장되며 URL https://awsexamplebucket1.s3.us-west-2.amazonaws.com/photos/puppy.jpg를 사용하여 주소를 지정할 수 있습니다
+
+## 12강 Amazon S3 실습
+
+- 테라폼을 이용해 S3를 생성하고, 간단한 S3 설정을 실습합니다. 파일을 생성하고 aws cli를 통해 파일을 s3로 업로드합니다.
+
+```
+provider "aws" {
+  region  = "ap-northeast-2"
+}
+
+resource "aws_s3_bucket" "main" {
+  bucket = "devopxxxx-terraform-101-hi"
+
+  tags = {
+    Name        = "devopxxxx-terraform-101-hi"
+  }
+}
+
+
+```
+
+- terraform init
+
+- terraform plan
+
+- terraform apply
+
+- vim index.html
+
+- 업로드
+- aws s3 cp index.html s3://devopxxxx-terraform-101-hi/hi
+
+- 다운로드
+- aws s3 cp s3://devopxxxx-terraform-101-hi/path/testfile. (현재위치)
+
+## 13강. AWS IAM 소개
+
+- 보안은 3가지라고 생각할 수 있다. 
+
+- Blocking : 특정 자원에 대한 접근 혹은 사용을 제어 : IAM영역
+
+- Encryping : 공개되는 정보에 대해서 식별 불가능한 정보로 암호화하는것
+
+- Hiding : 정보에 대한 접근 특정 경로 혹인 명령어로 접근
+
+- AWS Identity and Access Management(IAM)는 AWS 리소스에 대한 액세스를 안전하게 제어할 수 있는 웹 서비스입니다. IAM을 사용하여 AWS기본 접근 및 리소스를 사용하도록 권한 부여를 할 수 있습니다.
+
+- AWS IAM User — AWS IAM User는 AWS 내에서 생성하는 사용자로 AWS와 상호작용하는 사용자 혹은 어플리케이션을 의미합니다.
+
+- AWS IAM Group — AWS IAM Group은 IAM User의 집합이고, Group을 사용함으로써 다수 사용자에 대하여 동일한 권한을 보다 쉽게 관리할 수 있습니다.
+
+- AWS IAM Role — AWS IAM Role은 특정 권한을 가진 IAM 자격증명입니다. 이 Role을 사용함으로써 특정 사용자 혹은 어플리케이션에 혹은 AWS 서비스에 접근 권한을 위임할 수 있습니다.
+
+- AWS IAM Policy — AWS의 접근하는 해당 권한을 정의하는 개체로 AWS IAM 리소스들과 연결하여 사용할 수 있습니다.
+
+## 14강 AWS IAM 실습 1
+
+# IAM는 리전이 달라도 똑같음
+
+
+- IAM user 기본 생성
+
+provider "aws" {
+  region  = "ap-northeast-2"
+}
+
+
+resource "aws_iam_user" "gildong_hong" {
+  name = "gildong.hong"
+}
+
+
+- terraform init
+
+- terraform plan
+
+- terraform apply
+
+- IAM group 기본 생성
+
+- vim devops_group.tf
+
+resource "aws_iam_group" "devops_group" {
+  name = "devops"
+}
+
+- terraform paln
+
+- terraform apply -parallelism=30
+
+
+- 생성한 IAM user 를 IAM group 에 등록
+IAM user를 IAM group 에 등록하는 것도 Terraform 으로 진행할 수 있습니다. 실제로 AWS IAM user 를 개발자, 데브옵스, 검증 등 조직의 실제 그룹으로 나누고 등록하고 관리해야 합니다.
+
+Terraform을 통해서 IAM group membership을 생성해보도록 하겠습니다. IAM User를 생성할 때는 aws_iam_group_membership 리소스를 사용하면됩니다.
+
+```
+resource "aws_iam_group_membership" "devops" {
+  name = aws_iam_group.devops_group.name
+
+  users = [
+    aws_iam_user.gildong_hong.name
+  ]
+
+  group = aws_iam_group.devops_group.name
+}
+
+
+```
+- terraform paln
+
+- terraform apply -parallelism=30 (연결 완료)
+
+- full 이라도 deny가 하나있으면 deny된것이 우선순위임
+
+## 15강 AWS IAM 실습 2
+
+- IAM ROLE 기본 실습
+
+- EC2를 위한 IAM role 기본 생성
+
+- Terraform을 통해서 IAM role을 생성해보도록 하겠습니다. IAM role을 생성할 때는 aws_iam_role 리소스를 사용하면되고, 필수적으로 필요한 설정은 name 입니다. 여기에 aws_iam_role_policy 도 만들어 생성한 aws_iam_role 와 연결하는 작업도 진행해보겠습니다.
+
+- vim iam_role_hello.rf
+
+```
+resource "aws_iam_role" "hello" {
+  name               = "hello-iam-role"
+  path               = "/"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+EOF
+
+}
+```
+- terraform paln -parallelism=30
+
+- terraform apply -parallelism=30
+
+```
+resource "aws_iam_role_policy" "hello_s3" {
+  name   = "hello-s3-download"
+  role   = aws_iam_role.hello.id
+  policy = <<EOF
+{
+  "Statement": [
+    {
+      "Sid": "AllowAppArtifactsReadAccess",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": [
+        "*"
+      ],
+      "Effect": "Allow"
+    }
+  ]
+}
+EOF
+
+}
+
+resource "aws_iam_instance_profile" "hello" {
+  name = "hello-profile"
+  role = aws_iam_role.hello.name
+}
+```
+- terraform paln -parallelism=30
+
+- terraform apply -parallelism=30
+
+
+- AWS IAM Policy 의 종류
+
+- AWS의 접근하는 해당 권한을 정의하는 개체로 AWS IAM 리소스들과 연결하여 사용할 수 있습니다. 즉 AWS IAM policy 는 user 에 할당 할 수 도, group 에 할당 할 수 있습니다. IAM policy 는 여러 타입으로 나누어져있습니다.
+
+- AWS Managed policy: AWS에서 먼저 생성해놓은 Policy set 입니다. 사용자가 권한(Permission)을 변경할 수 없습니다.
+
+- Customer Managed policy: User 가 직접 생성하는 Policy 로 권한을 직접 상세하게 만들어 관리할 수 있습니다.
+
+```
+resource "aws_iam_user" "gildong_hong" {
+  name = "gildong.hong"
+}
+
+resource "aws_iam_user_policy" "art_devops_black" {
+  name  = "super-admin"
+  user  = aws_iam_user.gildong_hong.name
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+    ]
+}
+EOF
+}
+```
+- terraform paln -parallelism=30
+
+- terraform apply -parallelism=30
+
+- resource:aws_iam_group_policy 도 할수 있음 해보기!
+
+## Terraform 고도화 작업
+
+## 16강 Terraform Backend
+
+- Terraform Backend 란?
+Terraform “Backend” 는 Terraform의 state file을 어디에 저장을 하고, 가져올지에 대한 설정입니다. 기본적으로는는 로컬 스토리지에 저장을 하지만, 설정에 따라서 s3, consul, etcd 등 다양한 “Backend type“을 사용할 수 있습니다.
+
+- Locking: 보통 Terraform 코드를 혼자 작성하지 않습니다. 인프라를 변경한다는 것은 굉장히 민감한 작업이 될 수 있습니다. 원격 저장소를 사용함으로써 동시에 같은 state를 접근하는 것을 막아 의도치 않은 변경을 방지할 수 있습니다.
+
+- Backup: 로컬 스토리지에 저장한다는건 유실할 수 있다는 가능성을 내포합니다. S3와 같은 원격저장소를 사용함으로써 state 파일의 유실을 방지합니다.
