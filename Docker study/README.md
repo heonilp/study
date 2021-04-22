@@ -818,3 +818,65 @@ CMD ["npm", "run", "build"]
 
 5. 테스트 코드 실행후 테스트가 성공하면 AWS같은 호스팅 사이트로 보내서 배포를 합니다.
 
+- Travis CI와 github id로 가입해서 프로젝트를 동기화
+
+- 설정을 위해서 -> Travis CI-> .travis.yml작성을 함
+
+
+## 7.3 .travis.yml 파일 작성하기 (테스트까지)
+
+ ``` yml
+
+ sudo: required
+
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - echo "start creating an image with dockerfile"
+  - docker build -t smileajw1004/docker-react-app -f Dockerfile.dev .
+
+script: #스크립트에서 테스트
+  - docker run -e CI=true smileajw1004/docker-react-app npm run test -- --coverage
+  ```
+
+## 7.4 AWS알아보기
+
+- EC2(서버), EB (Benatalk)
+
+- EB : 도커와 함께 응용 프로그램 및 서비스를 배포하고 확장하기 쉬운 서비스
+- 역할 : EC2인스턴스 데이터베이스, 시큐리티 그룹, 오토스케일링 그룹, 로드밸런서
+
+## 7.5 Elastic Beanstalk 환경 구성하기
+## 7.6 .travis.yml 파일 작성하기 (배포 부분)
+
+- EB를 만들면 S3를 만든다. 배포 버킷장소
+
+``` yml
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: ap-northeast-2
+  app: docker-react-app
+  env: DockerReactApp-env
+  bucket_name: elasticbeanstalk-ap-northeast-2-801492874160
+  bucket_path: docker-react-app
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+
+```
+
+## 7.7 Travis CI의 AWS접근을 위한 API 생성
+- API key (AWS_SECRET_ACCESS_KEY,AWS_ACCESS_KEY 필요 )
+
+## 8. 복잡한 어플을 실제로 배포해보기(테스트 & 배포 부분)
+
+- Dockerrun.aws.json : 백엔드 프론트앤드 등등 도커파일 배포
+
+- EB 안에 ECS(TASK, 컨테이너)가 들어있음 
+
+- 실습 
