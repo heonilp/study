@@ -258,7 +258,7 @@
 
 - 이번강좌는 hello라는 문구
 
-```
+``` dockerfile
 # 베이스 이미지를 명시, 태그를 붙이지 않으면 최근버전으로 받음
 FROM baseIamge
 
@@ -271,7 +271,7 @@ CMD [ "exccutable" ]
 ```
 
 
-```
+```  dockerfile
 # 베이스 이미지를 명시, 태그를 붙이지 않으면 최근버전으로 받음
 FROM alpine
 
@@ -290,6 +290,8 @@ CMD [ "echo", "hello" ]
 
 - docker bulid ./ 또는 docker build .
 
+- docker run -it <도커id>
+
 ## 3.4 내가 만든 이미지 기억하기 쉬운 이름 주기
 
 - 이름 쉽게 짓기
@@ -297,3 +299,88 @@ CMD [ "echo", "hello" ]
 - docker build -t smile/hello:latest ./
 
 - -t 나의도커아이디 / 저장소 프로젝트 이름 : 버전
+
+
+## 4. 도커를 이용한 간단한 Node.js 어플 만들기
+
+## 4.1 섹션 설명
+
+- Node.js가 중요하지않고 도커환경에 어떻게 띄우는 지 확인
+
+## 4.2 Node.js 앱만들기
+
+- package.json 만들기
+
+``` json
+{
+  "name": "nodejs-docker-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express":"4.17.1",
+    "nodemon":"2.0.4"
+  },
+  "author": "",
+  "license": "ISC"
+}
+
+
+```
+
+- 간단한 node.js 만들기
+
+``` js
+const express = require('express');
+
+const PORT = 8080;
+
+//APP 
+const app = express();
+app.get('/', (req,res) => {
+    res.send("반가워요!!!!!!!")
+});
+
+app.listen(PORT);
+console.log("Server is running")
+```
+
+
+## 4.3 Dockerfile 작성하기
+
+``` dockerfile
+FROM node:10
+
+RUN npm install
+
+CMD ["nodemon", "server.js"]
+```
+
+- 에러 발생
+
+1. npm가 실행이안되서 안됨 -> RUN 부분 추가
+
+2. npm install에서 에러 -> COPY 부분 추가
+
+
+## 4.4 Package.json 파일이 없다고 나오는 이유
+
+- Node 베이스 이미지 ->생성 -> 임시 컨테이너
+
+``` dockerfile
+FROM node:10
+
+WORKDIR /usr/src/app
+
+COPY package.json ./
+
+RUN npm install
+
+COPY ./ ./
+
+CMD ["nodemon", "server.js"]
+```
+
