@@ -105,3 +105,86 @@
 - 좀비 프로세스 : 부모 없는 프로세스
 
 - 기아 프로세스 : wait를 실행하지 않음, 부모가 죽지는않았는데 신경을 안씀 
+
+## 04. 프로세스의 생성: Chapter 3. Processes (Part 2) 
+
+- 실습
+
+## 05. 프로세스간 통신: Chapter 3. Processes (Part 3)
+
+- 프로세스 간의 통신 (RPC)
+
+- Processes executing concurrently may be : 독립적, 협력적
+
+- IPC (Inter -Process Communication)
+
+- 데이터를 주고 받는 과정, send data, receive data
+
+- 두가지 모델이 있음
+
+1. 공유 메모리
+
+2. Message Passing (메세지 큐)
+
+- 생산자 소비자 문제
+
+1.  ex) 컴파일러-> 어셈블러 코드-> 어셈블러 
+
+2.  ex) web server ->  HTML file -> brower 
+
+- shared-memory 이용할때 솔루션 - 버퍼를 공유 메모리로 만들면 됩니다.
+
+- To allow producer and comsumer to run concurrently
+
+- Let a buffer of items be available,
+
+ 1. a producer and fill the buffer and
+
+ 2. a consumer can empty the buffer
+
+ - A shared memory is a region of memory : that is shared by the producer and comsumer processes.
+
+ ``` C++
+ #define BUFFER_SIZE 10
+
+    typedef struct {
+        
+    }item
+
+    item buffer[BUFFER_SIZE];
+    int in =0;
+    int out =0;
+
+ ```
+
+- OS에서 책임안지고 개발자보고 짜라고하면 그 OS를 안쓰겠죠?
+
+- Message-Passing :OS가 cooperating processes를 제공, 공유메모리 제공해줘!
+
+-Communication Links
+
+- 두개의 프로세스 P와 Q가 통신을 원할때, send와 recevice메시지를 주고 받을수 있다.
+
+- direct(상대방을 아는 것), indirect 통신
+
+1. direct : exactly trwo processes , exactly one link
+
+2. indirect : 메세지는 port로 전송하고 수신할수 있다., port를 공유해야지 pair가 맺어진다. 두개 이상의 프로세스도 상관없다!
+
+- port와 4가지만 os에서 제공해주면됨 : create , send, recv, delete
+
+- synchronous and asynchronous communication.
+
+- blocking or non-blocking :  synchronous and asynchronous.
+
+- blocking send : the sender is blocked until the message is received.
+
+- non-blocking end : the sender is sends the message and conninue.
+
+- blocking receive : the receiver blocks until a message is available.
+
+- Non-blocking receive : the receiver receives either a valid message or a null message.
+
+- automatic(자동) or explicit buffering(명시적으로 버퍼링)
+
+- 결론 : IPC : 프로세스간 통신을 어떻게하는지 / 1. 공유메모리 2.메시지 passing P->Q
