@@ -188,3 +188,70 @@
 - automatic(자동) or explicit buffering(명시적으로 버퍼링)
 
 - 결론 : IPC : 프로세스간 통신을 어떻게하는지 / 1. 공유메모리 2.메시지 passing P->Q
+
+
+## 06. 프로세스간 통신의 실제: Chapter 3. Processes (Part 4)
+
+- IPC 시스템의 예
+
+1. Shared Memory : POSIX Shared Memory
+
+- POSIX: Portable Operating System Interface (for unix) / OS 표준화? X
+
+2. Message Passing : Pipes
+
+- One of the earliest IPC mechanisms on UNIX systems
+
+- POSIX Shared Memory - memory-mapped files, which associate the region of shared memory with a file.
+
+1. create a shared-momory object
+
+- fd = shm_open(name ,O_CREAT | ORDWR, 0666);
+
+2. Configure the size of the object in bytes:
+
+- ftruncate(fd, 4096);
+
+3. Finally, establish a memory-mapped file
+
+- mmap(0, SIZE, PORT_READ | PORT_WRITE, MAP_SHARED, fd 0);
+
+- Pipes were
+
+- one of the first IPC mechanisms in early UNIX systems.
+
+- A pipe acts as a conduit allowing two processes 
+
+- Four issues of pipe implementation :
+
+- Does the pope allow unidirectional or bidirectional communication?
+
+- In the case of two-way comm.,is it half-duplex or full-duplex?
+
+- Two common types of pipes 
+
+1. Ordinary pipes 
+- cannot be accessed from outside the process the created it.
+
+- Typically, a parent process creates a pipe and uses 
+
+2. Named pipes
+
+- can be accessed without a parent-child relationship.
+
+- Ordinary Pipes
+
+- allow two processes to communicate in prodeucer-consumer fashion.
+
+- the producer writes to one end of the pipe (write end)
+
+- the consumer reads from the other end (read end)
+
+- ex) pipe (int fd[])
+
+1. fd[0] : the read end of the pipe
+
+2. fd[1] : the write end
+
+- sockets : are defined as endpoints for communication.
+
