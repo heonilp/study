@@ -192,6 +192,8 @@
 
 ## 06. 프로세스간 통신의 실제: Chapter 3. Processes (Part 4)
 
+- 종합요약: IPC, RPC에 대한 것을 알기
+
 - IPC 시스템의 예
 
 1. Shared Memory : POSIX Shared Memory
@@ -255,3 +257,10 @@
 
 - sockets : are defined as endpoints for communication.
 
+- RPCs(Remote Procedure Calls) : abstracts procedure calls between processes on networked systems. (추상화 프로시저), one of the most forms of remote serivce.
+
+- The PRC system : hides the details that allow communication to take place -by providing a stub on the client side. (Little엔디안인지 Bigd엔디안인지 문제생김, 객체직렬화)
+
+- 마샬링은 객체의 메모리 표현을 저장공간 또는 전송에 적합한 데이터 포맷으로 변환하는 과정이다
+
+- The stub of client -side locates the server and - marchals (마샬링) the prameter.
