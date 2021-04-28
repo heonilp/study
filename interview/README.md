@@ -332,3 +332,66 @@ docker version (내부적으로 리눅스)
 ## 메시지큐를 어떨떄 써야 효율적일까?
 
 ## 카나리배포, 블루,그린배포
+
+
+## JAVA For-each문은 For문 속도 성능 비교
+
+- 사이즈가 100인 List를 순차적으로 탐색해보았습니다. 
+
+(탐색한 정수값을 1증가시키는 무의미한 코드입니다. 탐색과정을 100번 반복했으며, 이 과정을 100,000번 수행하여서 평균을 내었습니다.)
+
+- TEST 코드 [참고](https://siyoon210.tistory.com/99)
+
+``` java
+public class ForeachVsFor {
+    public static void main(String[] args) {
+        List<integer> list = new LinkedList<>();
+        for (int i = 0; i < 100; i++) {
+            list.add(i);
+        }
+
+        final int TestCaseNum = 100000;
+        final int IteratorNumber = 100;
+
+        final double foreach = PerformanceTester.calcPerformance(() -> {
+            for (Integer integer : list) {
+                integer++;
+            }
+        }, TestCaseNum, IteratorNumber);
+
+        final double traditionalFor = PerformanceTester.calcPerformance(() -> {
+            for (int i = 0, size = list.size(); i < size; i++) {
+                Integer integer = list.get(i); //O(N);
+                integer++;
+            }
+        }, TestCaseNum, IteratorNumber);
+    }
+}
+```
+
+1. LinkedList
+
+for-each문 = 19,774.56 ns
+일반 for문 = 151,597.54 ns
+
+LinkedList에 경우는 For-each문이 압도적으로 빠른 속도가 나왔습니다. 약 7.7배 정도 빠르게 나왔습니다. (list의 사이즈가 커질 수록 더 많은 격차가 예상됩니다.)
+(for-each문이 더 빠른이유는 내부적으로 iterator를 사용하기 때문입니다.)
+
+
+2. ArrayList
+
+for-each문 = 15,405.32 ns
+일반 for문 = 14,318.87 ns
+
+ArrayList에 경우는 듣던대로 For문이 좀 더 빠르긴 했습니다만 제가 시행한 테스트에서는 거의 차이가 없었습니다. (듣기로는 ArrayList의 For문은 For-each문 보다 3배 가량 빠르다고 합니다.)
+
+
+3. Array(배열)
+ArrayList가 아마도 인덱스가 존재하기 때문에 For문이 더 빠른건 아닐까 하는 생각에 배열로도 테스트를 진행 해보았습니다.
+
+for-each문 = 14,661.95 ns
+일반 for문 = 10,319.81 ns
+
+Array에 경우도 일반 for문이 약 1.4배 더 빠르게 나왔습니다.
+
+- 결론- (성능을 고려한다면) ArrayList와 Array는 For문을 사용하고, LinnkedList는 For-each문을 사용하자!
