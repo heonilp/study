@@ -53,3 +53,43 @@
 
 - Amdahl's Law : 코어는 무조건 많을수록 좋은가? , 병렬처리안하면 무조건 좋다고할수 없다.
 
+
+## 08. 멀티쓰레딩: Chapter 4. Thread & Concurrency (Part 2)
+
+- 두개의 스레드 타입
+
+1. 유저 스레드 : Green thread-> native thread
+
+2. 커널 스레드 : OS 입장에서는 코어로 관리 , OS
+
+- 유저 스레드는 OS 커널 위에서 supported
+
+- 커널스레드는 os 직접 관리하는 것
+
+- 유저, 커널 스레드의 연관성
+
+1. Many to One Model
+
+2. One to One Model
+
+3. Many to Many Medel
+
+- 스레드는 라이브러리로 제공, API, 스레드 매니징
+
+- POSIX Pthreads
+
+- Windows thread
+
+- JAVA thread
+
+- The Strategy Implicit Threading : concurrent and parallel applications
+
+1. Thread Pools : 여러개의 스레드들을 풀에 저장
+
+2. Fork & Join
+
+- explicit threading but an excellent candidate for implicit threading
+
+3. OpenMP
+
+4. GCD 
