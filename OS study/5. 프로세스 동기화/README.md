@@ -23,4 +23,22 @@
 2. 점유대기(Hold and wait) : 프로세스가 할당된 자원을 가진 상태에서 다른 자원을 기다린다.
 
 3. 비선점(No preemption) : 프로세스가 어떤 자원의 사용을 끝낼 때까지 그 자원을 뺏을 수 없다.
+
 4. 순환대기(Circular wait) : 각 프로세스는 순환적으로 다음 프로세스가 요구하는 자원을 가지고 있다.
+
+
+## 12. 동기화 문제의 해결책: Chapter 6. Synchronization Tools (Part 2)
+
+- Bakery 알고리즘(베이커리 알아서 찾아보기)
+
+- Peterson's 알고리즘 / 임계구역 해결 , 제대로 동작할 겔런티가없음, load and store에서 발생한문제, 기계어 구조로 생각하면 해결할수가 없음. 상호배제, 데드락이 걸리지않는다. 기아도 발생하지않는다.
+
+- 원자성, Atomicity
+
+- and atomic operation is one uninterruptible unit of operation.
+
+- lock , 글로벌변수 0 bool
+
+- Atomic variable : count++ <->count-- single variable with race condition
+
+- 동기화 : 1.상호배제, 2.progress(데드락) 3. bounded waiting (기아, 한정적 대기)
