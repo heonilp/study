@@ -47,7 +47,7 @@
 
 - higher-level software tools to solve the CSP
 
-- 뮤텍스락 : the simplest tools for 동기화
+- 뮤텍스락 : the simplest tools for 동기화, pthread에 포함
 
 - 세마포어 : more robust, convenient and effective tool
 
@@ -63,6 +63,34 @@
 
 - 하지만 계속 도는 스핀락도 장점이 있음, cpu 코어가 많으면 장점이됨, context switch하는 것에 대한 장점
 
+- 세마포어 : 신호장치, 신호기, n개짜리 프로세스, two standard atomic operations.
+
+- wait(), signal() or P() and V() , atomic 하게 구현해야함
+
+- 바이러니 세마포어 : 0, 1로 바꿈 - 뮤텍스렉이랑 똑같음
+
+- 카운팅 세마포어 : a finite number of instances.
+
+- wait() : 감소 count, signal, 증가 cnout , 0인상태는 모든 프로세스가 사용되기 때문에 블락, waiting queue, ready queue , wakeup ? - busy wating 극복?
+
+
+## 14. 모니터와 자바 동기화: Chapter 6. Synchronization Tools (Part 4)
+
+- 모니터 : as high-level language constructs
+
+- 세마포어나 뮤텍스는 timing error, 프로그래밍에러 발생, wait, signal 문제
+
+- 모니터 타입 : synchronized , ADT 클래스?, condition 타입을 넣음
+
+- sysnchroized keyword : 임계영역 해당하는 코드블록을 선언을 할때 사용하는 자바 키워드, 해당 코드 블록에는 모니터락을 획득해야 진입가능, 모니터락을 가진 객체 인스턴스를 지정할 수 있음
+
+- wait()-> P() notify ->V() 스레드가 어떤객체 wait() 메소드를 호출하면 해당 객체의 모니터락을 호기득하기 위해서 대기상태로 진입함, 스레드가 어떤 객체의 notify() 메소를 호출하면 해당객체 모니터에 대기중인 스레드 하나를 깨움, notify() 대신에 notifyAll() 호출하면 모니터에 대기중인 스레드를 모두깨움.
+
+- Liveness - progress, bounded waiting 고칠려고함
+
+- 데드락 : 두개이상의 프로세스가 기다려야할때 
+
+- priority Inversion : priority-ingeritance protocol.
 
 
 
