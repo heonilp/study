@@ -55,5 +55,14 @@
 
 - Liveness :ensures for processes to make progress
 
-- 뮤텍스락 : mutex mutal exclustion , race confition 예방, Lock(열쇠)를 들어갈때 획득 , 나올때 반납
+- 뮤텍스락 : mutex mutal exclustion , race confition 예방, Lock(열쇠)를 들어갈때 획득 , 나올때 반납, acquire(), release(), atomically 하게 실행
+
+- 뮤텍스의 단점 :Busy waiting acquire를 하기위해서 무한루프를 돌아야함
+
+- 스핀락 : the type of mutex lock using the method of busy waiting
+
+- 하지만 계속 도는 스핀락도 장점이 있음, cpu 코어가 많으면 장점이됨, context switch하는 것에 대한 장점
+
+
+
 
