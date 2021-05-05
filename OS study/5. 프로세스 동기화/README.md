@@ -42,3 +42,18 @@
 - Atomic variable : count++ <->count-- single variable with race condition
 
 - 동기화 : 1.상호배제, 2.progress(데드락) 3. bounded waiting (기아, 한정적 대기)
+
+## 13. 뮤텍스와 세마포어: Chapter 6. Synchronization Tools (Part 3)
+
+- higher-level software tools to solve the CSP
+
+- 뮤텍스락 : the simplest tools for 동기화
+
+- 세마포어 : more robust, convenient and effective tool
+
+- 모니터 : overcoms the demerts of 뮤텍스 or 세마포어 / wait , notify
+
+- Liveness :ensures for processes to make progress
+
+- 뮤텍스락 : mutex mutal exclustion , race confition 예방, Lock(열쇠)를 들어갈때 획득 , 나올때 반납
+
