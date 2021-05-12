@@ -50,3 +50,48 @@
 - Copy -on Write : copy a shared page only when a process writes to a shared page.
 
 
+## 22. 페이지 교체 알고리즘: Chapter 10. Virtual Memory (Part 2)
+
+- no free frames - ex 40 frames and run 6 processes, 10 pages but, 5pages
+
+- page Replacement , if no frame is free, find one that is not currently being used and free it.
+
+- vicime -> page out victim page - change to invalid - page in desired page - reset page table for new page.
+
+- Frame-allocation algorithm - how many frames allocated to each process?
+
+- page replacement algorithm / select the frames that are to be replaced
+
+- reference string :the number of page faults (minimize it!)
+
+- FIFO page replacement  : the oldest page - replace
+
+- Belady's Anomaly : The page-fault rate may increase /as the number of allocated frames increases.
+
+- Optimal Page Replacement : lowst page falut rate  / OPT or MIN  가장쓸일이없는걸 교체하자. future knowledge - 98%자랑한다 99%자랑한다.
+
+- Recall the Shortest-Job-First CPU scheduler 미래와 과거를 보자
+
+- looking backeward : brought in?
+
+- looing forward : used?
+
+- LRU Page Replacement: Least Recently Used 사용될 가능성없는걸 victim으로 하자(합리적)
+
+- LRU policy : 자주사용, 프레임이 언제마지막에 사용됐는지 알아야함, counter 이용방법: 레퍼런스 할때마다 counter를 복사한다. 값이 가장 된걸(가장오래된걸)로 교체해야한다. 스택이용방법 : 페이지의번호를 스택에넣음, 중간에 빠져나간다. (그래서 더블링크드리스트로 구현하라)
+
+- reference bit 
+
+- Second-Change Algorith : FIFO algo 0->replace / 1-> second change
+
+- equal vs proportional 
+
+- global vs local 
+
+- Thrashing (스레싱) - 프로세스가 페이지 in out할때 바뻐서 지일을 못함
+
+- 하나의 프로세스가 어느 정도의 충분한 프레임을 갖고 있지 않다면 페이지 부재가 발생하여 프레임 안에 있는 사용중인 어떤 페이지를 교체해야 하는데, 이러한 페이지 부재가 계속 발생하여 프로세스가 수행되는 시간보다 페이지에 교체되는 시간이 더 많아지는 경우
+
+- the degree of multiprogramming
+
+- woring-set model : working set window / 최근 page / 워킹셋만 로딩하게해줌
