@@ -1,7 +1,5 @@
 ##  24. 운영체제의 보안: Chapter 16-17. Security & Protection
 
-
-
 - 보안
 
 - Security : 인증(authentication) <-> data, code, physical resources
